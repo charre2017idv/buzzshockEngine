@@ -1,0 +1,107 @@
+/**
+ * @brief COVERAGE
+ */
+
+ // <! Warning > 
+ // ( ) Change the std::sqrt for the Math::sqrt
+
+ // Basic Classes
+ // ( ) buMath.h 
+ // ( ) buPlatformMath.h - This is for the basic math 
+ // ( ) Degrees
+ // ( ) Radians
+ // (x) Vector2I
+ // (x) Vector2f
+ // (x) Vector3I
+ // (x) Vector3f
+ // (x) Vector4I
+ // (x) Vector4f
+ // ( ) Matrix4x4
+ // ( ) Quaternions - Need to check what other classes need to work
+ // ( ) Shapes - Is the father of the next classes
+ // ( ) Rectangle
+ // ( ) Box
+ // ( ) Planes
+ // ( ) Spheres
+ // ( ) Rays
+ // ( ) Frustrum
+
+ // BASIC MATH
+ // ( ) Add
+ // ( ) Sub
+ // ( ) Mul
+ // ( ) Div
+
+ // VECTORS 
+ // (x) VECTORI2D
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Div
+ //   (x) dot
+ //   (x) cross
+ //   (x) magnitude
+ //   (x) normalize
+ // (x) VECTORF2D
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Div
+ //   (x) dot
+ //   (x) cross
+ //   (x) magnitude
+ //   (x) normalize
+ // (x) VECTORI3D
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Div
+ //   (x) dot
+ //   (x) cross
+ //   (x) magnitude
+ //   (x) normalize
+ // (x) VECTORF3D
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Div
+ //   (x) dot
+ //   (x) cross
+ //   (x) magnitude
+ //   (x) normalize
+ // (x) VECTORI4D
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Div
+ //   (x) dot
+ //   (x) magnitude
+ //   (x) normalize
+ // (x) VECTORF4D
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Div
+ //   (x) dot
+ //   (x) magnitude
+ //   (x) normalize
+
+ // MATRIX
+ //   ( ) Add
+ //   ( ) Sub
+ //   ( ) Mul
+ //   ( ) Div
+
+ // Queaternions
+
+ // SHAPES
+ // ( ) Rectangle
+ // ( ) Box
+ // ( ) Planes
+ // ( ) Spheres
+ // ( ) Rays
+ // ( ) Frustrum
+
+ // Classes
+ // ( ) Degrees
+ // ( ) Radians

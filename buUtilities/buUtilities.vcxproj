@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\personal\Documents\GitHub\buzzshockEngine\buUtilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,10 +141,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\buPlatformDefines.h" />
+    <ClInclude Include="include\buPlatformMath.h" />
     <ClInclude Include="include\buPlatformTypes.h" />
     <ClInclude Include="include\buPrerequisitesUtil.h" />
     <ClInclude Include="include\buStdHeaders.h" />
     <ClInclude Include="include\buString.h" />
+    <ClInclude Include="include\buVector2I.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\buPlatformMath.cpp" />
+    <ClCompile Include="src\buVector2I.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

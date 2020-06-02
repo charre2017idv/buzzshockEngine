@@ -30,5 +30,19 @@
     <ClInclude Include="include\buString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\buPlatformMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\buVector2I.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\buPlatformMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\buVector2I.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
