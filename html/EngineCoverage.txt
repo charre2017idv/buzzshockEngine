@@ -6,7 +6,7 @@
  // ( ) Change the std::sqrt for the Math::sqrt
 
  // Basic Classes
- // ( ) buMath.h 
+ // (/) buMath.h 
  // ( ) buPlatformMath.h - This is for the basic math 
  // ( ) Degrees
  // ( ) Radians
