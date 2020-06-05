@@ -3,7 +3,7 @@
 #include "buMath.h"
 
 namespace buEngineSDK {
-	class buVector4F
+	class BU_UTILITY_EXPORT buVector4F
 	{
 	public:
 		/**

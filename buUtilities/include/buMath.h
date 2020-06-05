@@ -6,7 +6,7 @@ namespace buEngineSDK {
 	/**
 		 * @brief
 		 */
-	template<class T>
+	/*template<class T>
 	T
 		abs(const T A) {
 		return (A >= (T)0) ? A : -A;
@@ -16,14 +16,11 @@ namespace buEngineSDK {
 	float
 		abs<float>(const float A) {
 		return static_cast<float>(std::fabsf(A));
-	}
+	}*/
 
 	class buMath
 	{
-	public:
-		buMath();
-		~buMath();
-
+	 public:
 		/**
 		* @brief Method that returns an pow value from the std function
 		* @param Base
@@ -220,11 +217,11 @@ namespace buEngineSDK {
 		* @return Return the absolute of value.
 		* @bug None. 
 		*/
-		template<class T>
+		/*template<class T>
 		static T
 		abs(const T A) {
-			return geEngineSDK::abs<T>(A);
-		}
+			return buEngineSDK::abs<T>(A);
+		}*/
 
 
 	private:

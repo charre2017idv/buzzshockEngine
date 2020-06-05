@@ -38,7 +38,7 @@ namespace buEngineSDK {
     z -= _v.z;
   }
 
-  buVector3I buVector3I::operator-=(const buVector3I& _v) const
+  buVector3I buVector3I::operator-(const buVector3I& _v) const
   {
     return buVector3I(x - _v.x, y - _v.y, z - _v.z);
   }
@@ -50,7 +50,7 @@ namespace buEngineSDK {
     z *= _a;
   }
 
-  buVector3I buVector3I::operator*=(const int32 _a) const
+  buVector3I buVector3I::operator*(const int32 _a) const
   {
     return buVector3I(_a * x, _a * y, _a * z);
   }
@@ -62,7 +62,7 @@ namespace buEngineSDK {
     z = z / _a;
   }
 
-  buVector3I buVector3I::operator/=(const int32 _a) const
+  buVector3I buVector3I::operator/(const int32 _a) const
   {
     return buVector3I(x / _a, y / _a, z / _a);
   }

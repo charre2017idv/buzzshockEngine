@@ -3,7 +3,7 @@
 #include "buMath.h"
 
 namespace buEngineSDK {
-	class buVector3F
+	class BU_UTILITY_EXPORT buVector3F
 	{
 	public:
 		/**
@@ -75,7 +75,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector3F
-		operator-=(const buVector3F& _v) const;
+		operator-(const buVector3F& _v) const;
 		/**
 		* @brief Method that multiply a vector with a scalar number
 		* @param
@@ -92,7 +92,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector3F 
-		operator*=(const float _a) const;
+		operator*(const float _a) const;
 		/**
 		* @brief Method that devides a vector with a scalar number.
 		* @param
@@ -109,7 +109,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector3F
-		operator/=(const float _a) const;
+		operator/(const float _a) const;
 		/**
 		* @brief Method that return a scalar from the multiplication of two vectors.
 		* @param

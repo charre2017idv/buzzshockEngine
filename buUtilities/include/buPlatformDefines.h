@@ -42,7 +42,7 @@
 #   define BU_CDECL _attribute__((cdecl))
 #   define BU_FALLTHROUGH __attribute__((fallthrough))
 #elif defined(_MSC_VER)
-#   define BU_COMPILER GE_COMPILER_MSC
+#   define BU_COMPILER BU_COMPILER_MSVC
 #   define BU_COMP_VER _MSC_VER
 #   define BU_THREADLOCAL __declspec(thread)
 #   define BU_STDCALL _stdcall

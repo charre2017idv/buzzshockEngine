@@ -16,37 +16,7 @@ namespace buEngineSDK {
 		buPlatformMath();
 		~buPlatformMath();
 
-		/**
-		 * @brief Add method template
-		 */
-		template<typename T>
-		T Add(const T A, const T B) {
-			return (A + B);
-		}
-
-		/**
-		 * @brief Sub method template
-		 */
-		template<typename T>
-		T Sub(const T A, const T B) {
-			return (A - B);
-		}
-
-		/**
-		 * @brief Multiply method template
-		 */
-		template<typename T>
-		T Mul(const T A, const T B) {
-			return (A * B);
-		}
-
-		/**
-		 * @brief Division method template
-		 */
-		template<typename T>
-		T Div(const T A, const T B) {
-			return (A / B);
-		}
+		
 
 	};
 

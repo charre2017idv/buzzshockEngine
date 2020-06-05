@@ -1,10 +1,6 @@
 #include "buPlane.h"
 
 namespace buEngineSDK {
-	buPlane::buPlane()
-	{
-	}
-
 	buPlane::buPlane(const buVector4F& V) 
 		: x(V.x), y(V.y), z(V.z), w(V.w) { }
 

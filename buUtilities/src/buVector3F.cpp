@@ -38,7 +38,7 @@ namespace buEngineSDK {
     z -= _v.z;
   }
 
-  buVector3F buVector3F::operator-=(const buVector3F& _v) const
+  buVector3F buVector3F::operator-(const buVector3F& _v) const
   {
     return buVector3F(x - _v.x, y - _v.y, z - _v.z);
   }
@@ -50,7 +50,7 @@ namespace buEngineSDK {
     z *= _a;
   }
 
-  buVector3F buVector3F::operator*=(const float _a) const
+  buVector3F buVector3F::operator*(const float _a) const
   {
     return buVector3F(_a * x, _a * y, _a * z);
   }
@@ -62,7 +62,7 @@ namespace buEngineSDK {
     z = z / _a;
   }
 
-  buVector3F buVector3F::operator/=(const float _a) const
+  buVector3F buVector3F::operator/(const float _a) const
   {
     return buVector3F(x / _a, y / _a, z / _a);
   }
@@ -98,7 +98,7 @@ namespace buEngineSDK {
 
   float buVector3F::mag()
   {
-    float magnitude = std::sqrt(x * x + y * y + z * z);
+    float magnitude = buEngineSDK::buMath::sqrt(x * x + y * y + z * z);
     return magnitude;
   }
 

@@ -35,7 +35,7 @@ namespace buEngineSDK {
     y -= _v.y;
   }
 
-  buVector2I buVector2I::operator-=(const buVector2I& _v) const
+  buVector2I buVector2I::operator-(const buVector2I& _v) const
   {
     return buVector2I(x - _v.x, y - _v.y);
   }
@@ -46,7 +46,7 @@ namespace buEngineSDK {
     y *= _a;
   }
 
-  buVector2I buVector2I::operator*=(const int32 _a) const
+  buVector2I buVector2I::operator*(const int32 _a) const
   {
     return buVector2I(_a*x,_a*y);
   }
@@ -57,7 +57,7 @@ namespace buEngineSDK {
     y = y / _a;
   }
 
-  buVector2I buVector2I::operator/=(const int32 _a) const
+  buVector2I buVector2I::operator/(const int32 _a) const
   {
     return buVector2I(x / _a, y / _a);
   }
@@ -91,14 +91,14 @@ namespace buEngineSDK {
 
   int32 buVector2I::mag()
   {
-    int32 magnitude = std::sqrt(x * x + y * y);
+    int32 magnitude = buEngineSDK::buMath::sqrt(x * x + y * y);
     return magnitude;
   }
 
   void buVector2I::normalize()
   {
     int32 magnitude = std::sqrt(x * x + y * y);
-    if (magnitude>0.0f) {
+    if (magnitude > 0) {
       int32 oneOverMag = 1.0f / magnitude;
       x = x * oneOverMag;
       y = y * oneOverMag;

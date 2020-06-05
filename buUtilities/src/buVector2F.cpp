@@ -36,7 +36,7 @@ namespace buEngineSDK {
     y -= _v.y;
   }
 
-  buVector2F buVector2F::operator-=(const buVector2F& _v) const
+  buVector2F buVector2F::operator-(const buVector2F& _v) const
   {
     return buVector2F(x - _v.x, y - _v.y);
   }
@@ -47,7 +47,7 @@ namespace buEngineSDK {
     y *= _a;
   }
 
-  buVector2F buVector2F::operator*=(const float _a) const
+  buVector2F buVector2F::operator*(const float _a) const
   {
     return buVector2F(_a * x, _a * y);
   }
@@ -58,7 +58,7 @@ namespace buEngineSDK {
     y = y / _a;
   }
 
-  buVector2F buVector2F::operator/=(const float _a) const
+  buVector2F buVector2F::operator/(const float _a) const
   {
     return buVector2F(x / _a, y / _a);
   }
