@@ -1,3 +1,11 @@
+/**
+* @file buVector3I.h
+* @version 1.0
+* @date 05/06/2020
+* @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
+* @brief Class in charge of providing a 3D vector.
+* @bug None.
+*/
 #pragma once
 #include "buPrerequisitesUtil.h"
 #include "buMath.h"
@@ -12,7 +20,7 @@ namespace buEngineSDK {
 		* @return
 		* @bug
 		*/
-		buVector3I();
+		buVector3I() = default;
 		/**
 		* @brief Constructor in charge of reciving two points for the vector.
 		* @param
@@ -111,23 +119,6 @@ namespace buEngineSDK {
 		buVector3I 
 		operator/(const int32 _a) const;
 		/**
-		* @brief Method that return a scalar from the multiplication of two vectors.
-		* @param
-		* @return
-		* @bug
-		*/
-		int32 
-		dot(const buVector3I& _v) const;
-		/**
-		* @brief Method that return a scalar from the multiplication of two vectors
-		* directly.
-		* @param
-		* @return
-		* @bug
-		*/
-		int32 
-		operator*(const buVector3I& _v) const;
-		/**
 		* @brief Method that return a vector from the cross product of two vectors.
 		* @param
 		* @return
@@ -152,23 +143,6 @@ namespace buEngineSDK {
 		*/
 		buVector3I
 		operator%(const buVector3I& _v) const;
-		/**
-		* @brief Method that return a scalar from the current vector.
-		* @param
-		* @return
-		* @bug
-		*/
-		int32
-		mag();
-		/**
-		* @brief Method that normalize the current vector.
-		* @param
-		* @return
-		* @bug
-		*/
-		void 
-		normalize();
-
 
 	private:
 

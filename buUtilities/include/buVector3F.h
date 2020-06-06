@@ -12,7 +12,7 @@ namespace buEngineSDK {
 		* @return
 		* @bug
 		*/
-		buVector3F();
+		buVector3F() = default;
 		/**
 		* @brief Constructor in charge of reciving two points for the vector.
 		* @param

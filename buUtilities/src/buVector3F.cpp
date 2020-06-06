@@ -3,8 +3,6 @@
 namespace buEngineSDK {
   const buVector3F buVector3F::Zero = buVector3F(0.0f, 0.0f, 0.0f);
 
-  buVector3F::buVector3F() { }
-
   buVector3F::buVector3F(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
 
   buVector3F::~buVector3F() { }

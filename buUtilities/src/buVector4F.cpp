@@ -43,7 +43,7 @@ namespace buEngineSDK {
     w -= _v.w;
   }
 
-  buVector4F buVector4F::operator-=(const buVector4F& _v) const
+  buVector4F buVector4F::operator-(const buVector4F& _v) const
   {
     return buVector4F(x - _v.x, y - _v.y, z - _v.z, w - _v.w);
   }
@@ -56,7 +56,7 @@ namespace buEngineSDK {
     w *= _a;
   }
 
-  buVector4F buVector4F::operator*=(const float _a) const
+  buVector4F buVector4F::operator*(const float _a) const
   {
     return buVector4F(_a * x, _a * y, _a * z, _a * w);
   }
@@ -69,38 +69,10 @@ namespace buEngineSDK {
     w = w / _a;
   }
 
-  buVector4F buVector4F::operator/=(const float _a) const
+  buVector4F buVector4F::operator/(const float _a) const
   {
     return buVector4F(x / _a, y / _a, z / _a, w / _a);
   }
-
-  float buVector4F::dot(const buVector4F& _v) const
-  {
-    return x * _v.x + y * _v.y + z * _v.z + w * _v.w;
-  }
-
-  float buVector4F::operator*(const buVector4F& _v) const
-  {
-    return x * _v.x + y * _v.y + z * _v.z + w * _v.w;
-  }
-
-  float buVector4F::mag()
-  {
-    float magnitude = std::sqrt(x * x + y * y + z * z + w * w);
-    return magnitude;
-  }
-
-  void buVector4F::normalize()
-  {
-    float magnitude = std::sqrt(x * x + y * y + z * z + w * w);
-    if (magnitude > 0.0f) {
-      float oneOverMag = 1.0f / magnitude;
-      x = x * oneOverMag;
-      y = y * oneOverMag;
-      z = z * oneOverMag;
-    }
-  }
-
 
 
 }

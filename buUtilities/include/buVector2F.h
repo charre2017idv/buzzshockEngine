@@ -1,3 +1,11 @@
+/**
+* @file buVector2F.h
+* @version 1.0
+* @date 05/06/2020
+* @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
+* @brief This class in charge of providing a 2D vector with float values.
+* @bug None.
+*/
 #pragma once
 #include "buPrerequisitesUtil.h"
 #include "buMath.h"
@@ -12,7 +20,7 @@ namespace buEngineSDK {
 		* @return
 		* @bug
 		*/
-		buVector2F();
+		buVector2F() = default;
 		/**
 		* @brief Constructor in charge of reciving two points for the vector.
 		* @param

@@ -1,4 +1,13 @@
+/**
+* @file buVector4I.h 
+* @version 1.0
+* @date 05/06/2020
+* @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
+* @brief Class in charge of providing a 4D int vector
+* @bug None.
+*/
 #pragma once
+
 #include "buPrerequisitesUtil.h"
 #include "buMath.h"
 
@@ -12,7 +21,7 @@ namespace buEngineSDK {
 		* @return
 		* @bug
 		*/
-		buVector4I();
+		buVector4I() = default;
 		/**
 		* @brief Constructor in charge of reciving two points for the vector.
 		* @param
@@ -75,7 +84,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector4I 
-		operator-=(const buVector4I& _v) const;
+		operator-(const buVector4I& _v) const;
 		/**
 		* @brief Method that multiply a vector with a scalar number
 		* @param
@@ -92,7 +101,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector4I 
-		operator*=(const int32 _a) const;
+		operator*(const int32 _a) const;
 		/**
 		* @brief Method that devides a vector with a scalar number.
 		* @param
@@ -109,41 +118,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector4I 
-		operator/=(const int32 _a) const;
-		/**
-		* @brief Method that return a scalar from the multiplication of two vectors.
-		* @param
-		* @return
-		* @bug
-		*/
-		int32 
-		dot(const buVector4I& _v) const;
-		/**
-		* @brief Method that return a scalar from the multiplication of two vectors
-		* directly.
-		* @param
-		* @return
-		* @bug
-		*/
-		int32 
-		operator*(const buVector4I& _v) const;
-		/**
-		* @brief Method that return a scalar from the current vector.
-		* @param
-		* @return
-		* @bug
-		*/
-		int32 
-		mag();
-		/**
-		* @brief Method that normalize the current vector.
-		* @param
-		* @return
-		* @bug
-		*/
-		void 
-		normalize();
-
+		operator/(const int32 _a) const;
 
 	private:
 

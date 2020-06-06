@@ -45,16 +45,13 @@
     <ClInclude Include="include\buVector3F.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\buVector4I.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\buVector4F.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\buMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\buPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\buVector4I.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

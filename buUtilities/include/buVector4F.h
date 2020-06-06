@@ -75,7 +75,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector4F 
-		operator-=(const buVector4F& _v) const;
+		operator-(const buVector4F& _v) const;
 		/**
 		* @brief Method that multiply a vector with a scalar number
 		* @param
@@ -92,7 +92,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector4F 
-		operator*=(const float _a) const;
+		operator*(const float _a) const;
 		/**
 		* @brief Method that devides a vector with a scalar number.
 		* @param
@@ -109,41 +109,7 @@ namespace buEngineSDK {
 		* @bug
 		*/
 		buVector4F 
-		operator/=(const float _a) const;
-		/**
-		* @brief Method that return a scalar from the multiplication of two vectors.
-		* @param
-		* @return
-		* @bug
-		*/
-		float
-		dot(const buVector4F& _v) const;
-		/**
-		* @brief Method that return a scalar from the multiplication of two vectors
-		* directly.
-		* @param
-		* @return
-		* @bug
-		*/
-		float
-		operator*(const buVector4F& _v) const;
-		/**
-		* @brief Method that return a scalar from the current vector.
-		* @param
-		* @return
-		* @bug
-		*/
-		float 
-		mag();
-		/**
-		* @brief Method that normalize the current vector.
-		* @param
-		* @return
-		* @bug
-		*/
-		void 
-		normalize();
-
+		operator/(const float _a) const;
 
 	private:
 
