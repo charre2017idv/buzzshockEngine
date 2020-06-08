@@ -36,7 +36,40 @@ namespace buEngineSDK {
 	buMatrix4x4::~buMatrix4x4()
 	{
 	}
+
+	void buMatrix4x4::operator+=(const buMatrix4x4& _mat)
+	{
+		// Addition of column x
+		m_x0 += _mat.m_x0;
+		m_x1 += _mat.m_x1;
+		m_x2 += _mat.m_x2;
+		m_x3 += _mat.m_x3;
+		// Addition of column y
+		m_y0 += _mat.m_y0;
+		m_y1 += _mat.m_y1;
+		m_y2 += _mat.m_y2;
+		m_y3 += _mat.m_y3;
+		// Addition of column z
+		m_z0 += _mat.m_z0;
+		m_z1 += _mat.m_z1;
+		m_z2 += _mat.m_z2;
+		m_z3 += _mat.m_z3;
+		// Addition of column w
+		m_w0 += _mat.m_w0;
+		m_w1 += _mat.m_w1;
+		m_w2 += _mat.m_w2;
+		m_w3 += _mat.m_w3;
+	}
 	
+	buMatrix4x4 buMatrix4x4::operator+(const buMatrix4x4& _mat) const
+	{
+		return buMatrix4x4(
+			m_x0 + _mat.m_x0, m_y0 + _mat.m_y0, m_z0 + _mat.m_z0, m_w0 + _mat.m_w0,
+			m_x1 + _mat.m_x1, m_y1 + _mat.m_y1, m_z1 + _mat.m_z1, m_w1 + _mat.m_w1,
+			m_x2 + _mat.m_x2, m_y2 + _mat.m_y2, m_z2 + _mat.m_z2, m_w2 + _mat.m_w2,
+			m_x3 + _mat.m_x3, m_y3 + _mat.m_y3, m_z3 + _mat.m_z3, m_w3 + _mat.m_w3);
+	}
+
 	float buMatrix4x4::det()
 	{
 		// Get the basic matrix
@@ -61,15 +94,11 @@ namespace buEngineSDK {
 		buVector4F V1(tmpMat2.m_x2, tmpMat2.m_y2, tmpMat2.m_z2, tmpMat2.m_w2);
 		buVector4F V3(tmpMat2.m_x3, tmpMat2.m_y3, tmpMat2.m_z3, tmpMat2.m_w3);
 
-		//buMatrix4x4 MatStep2(V0, V2, V1, V3);
 		// Third Step - v2 -> v2 - pow3(v0)
 		buVector4F ThreeV0 = (V0 + V0) + V0;
 		buVector4F newV2 = V2 - ThreeV0;
 
 		buMatrix4x4 tmpMatrix3(V0, V1, newV2, V3);
-
-
-		//*this = tmpMatrix3;
 
 		return (tmpMatrix3.m_x0 - tmpMatrix3.m_y1 - tmpMatrix3.m_z2 - tmpMatrix3.m_w3);
 	}

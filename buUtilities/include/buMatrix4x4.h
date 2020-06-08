@@ -42,12 +42,30 @@ namespace buEngineSDK {
 		 * @brief Destructor
 		 */
 		~buMatrix4x4();
-		
+
+		/**
+		* @brief Method for addition of another matrix, 
+		* Take inspiration from this site: https://ncalculators.com/matrix/4x4-matrix-addition-subtraction-calculator.htm
+		* @param const BuMatrix4x4& _mat Matrix.
+		* @return None.
+		* @bug None.
+		*/
+		void
+		operator+=(const buMatrix4x4& _mat);
+		/**
+		* @brief  Method that return a third matrix representing the addition of
+		* two 4x4 matrix.
+		* @param const BuMatrix4x4& _mat Matrix.
+		* @return A matrix.
+		* @bug None.
+		*/
+		buMatrix4x4
+		operator+(const buMatrix4x4& _mat) const;
 		 /**
-		 * @brief 
-		 * @param 
-		 * @return 
-		 * @bug 
+		 * @brief Method that provides the determinant value of the matrix.
+		 * @param None.
+		 * @return None.
+		 * @bug None.
 		 */
 		float 
 		det();

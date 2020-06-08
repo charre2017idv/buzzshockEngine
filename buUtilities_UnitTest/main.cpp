@@ -389,12 +389,53 @@ TEST(buUtilities, Vector4F_Test) {
  * @bug 
  */
 TEST(buUtilities, Matrix4x4_Test) {
-  buMatrix4x4 A(
+  // ARRANGE - Matrix determinant
+  buMatrix4x4 detMat(
     1.0f, 3.0f, 1.0f, 4.0f, 
     3.0f, 9.0f, 5.0f, 15.0f,
     0.0f, 2.0f, 1.0f, 1.0f, 
     0.0f, 4.0f, 2.0f, 3.0f);
+  // ARRANGE - Matrix Addition
+  buMatrix4x4 A(
+    5.0f, 7.0f,  9.0f, 10.0f,
+    2.0f, 3.0f,  3.0f, 8.0f,
+    8.0f, 10.0f, 2.0f, 3.0f,
+    3.0f, 3.0f,  4.0f, 8.0f);
 
-  float determinant = A.det();
+  buMatrix4x4 B(
+    3.0f,  10.0f, 12.0f, 18.0f,
+    12.0f, 1.0f,  4.0f,  9.0f,
+    9.0f,  10.0f, 12.0f, 2.0f,
+    3.0f,  12.0f, 4.0f,  10.0f);
+
+  // ACT - Matrix determinant
+  float determinant = detMat.det();
+  
+  // ACT - Matrix addition
+   buMatrix4x4 matrixAdd = A + B;
+
+
+  // ASSERT - Matrix determinant
   EXPECT_FLOAT_EQ(-4, determinant);
+
+  // ASSERT - Matrix addition
+  EXPECT_FLOAT_EQ(8,  matrixAdd.m_x0);
+  EXPECT_FLOAT_EQ(14, matrixAdd.m_x1);
+  EXPECT_FLOAT_EQ(17, matrixAdd.m_x2);
+  EXPECT_FLOAT_EQ(6,  matrixAdd.m_x3);
+
+  EXPECT_FLOAT_EQ(17, matrixAdd.m_y0);
+  EXPECT_FLOAT_EQ(4,  matrixAdd.m_y1);
+  EXPECT_FLOAT_EQ(20, matrixAdd.m_y2);
+  EXPECT_FLOAT_EQ(15, matrixAdd.m_y3);
+
+  EXPECT_FLOAT_EQ(21, matrixAdd.m_z0);
+  EXPECT_FLOAT_EQ(7,  matrixAdd.m_z1);
+  EXPECT_FLOAT_EQ(14, matrixAdd.m_z2);
+  EXPECT_FLOAT_EQ(8,  matrixAdd.m_z3);
+  
+  EXPECT_FLOAT_EQ(28,  matrixAdd.m_w0);
+  EXPECT_FLOAT_EQ(17,  matrixAdd.m_w1);
+  EXPECT_FLOAT_EQ(5,   matrixAdd.m_w2);
+  EXPECT_FLOAT_EQ(18,  matrixAdd.m_w3);
 }
