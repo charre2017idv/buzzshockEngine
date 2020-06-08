@@ -26,11 +26,6 @@
  // ( ) Rays
  // ( ) Frustrum
 
- // BASIC MATH
- // ( ) Add
- // ( ) Sub
- // ( ) Mul
- // ( ) Div
 
  // VECTORS 
  // (x) VECTORI2D

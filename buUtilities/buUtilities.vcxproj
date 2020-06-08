@@ -190,6 +190,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\buMath.h" />
+    <ClInclude Include="include\buMatrix4x4.h" />
     <ClInclude Include="include\buPlane.h" />
     <ClInclude Include="include\buPlatformDefines.h" />
     <ClInclude Include="include\buPlatformMath.h" />
@@ -206,6 +207,7 @@
   <ItemGroup>
     <ClCompile Include="include\Source.cpp" />
     <ClCompile Include="src\buMath.cpp" />
+    <ClCompile Include="src\buMatrix4x4.cpp" />
     <ClCompile Include="src\buPlane.cpp" />
     <ClCompile Include="src\buPlatformMath.cpp" />
     <ClCompile Include="src\buVector2F.cpp" />

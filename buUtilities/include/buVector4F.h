@@ -1,3 +1,11 @@
+/**
+* @file buVector4F.h 
+* @version 1.0
+* @date 05/06/2020
+* @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
+* @brief Class in charge of providing a 4D float vector.
+* @bug None.
+*/
 #pragma once
 #include "buPrerequisitesUtil.h"
 #include "buMath.h"

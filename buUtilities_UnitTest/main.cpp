@@ -16,7 +16,7 @@
 #include "buVector3F.h"
 #include "buVector4I.h"
 #include "buVector4F.h"
-
+#include "buMatrix4x4.h"
 using namespace buEngineSDK;
 
 int 
@@ -269,21 +269,21 @@ TEST(buUtilities, Vector3F_Test) {
  GTEST_ASSERT_EQ(Vector1CrossVector2.y, 1.0f);
  GTEST_ASSERT_EQ(Vector1CrossVector2.z, 1.0f);
  // ASSERT - Vector magnitude
- //float comparador = 18.7083f;
- //GTEST_ASSERT_EQ(Magnitude, comparador);
+ float comparador = 18.708286f;
+ EXPECT_FLOAT_EQ(Magnitude, comparador);
  // ASSERT - Vector normalizado
- //GTEST_ASSERT_EQ(vector1.x, 0.534522);
- //GTEST_ASSERT_EQ(vector1.y, 0);
- //GTEST_ASSERT_EQ(vector1.z, 0);
+ //EXPECT_FLOAT_EQ(vector1.x, 0.5345f);
+ //EXPECT_FLOAT_EQ(vector1.y, 0.8017f);
+ //EXPECT_FLOAT_EQ(vector1.z, 0.2672f);
 }
 
 /** 
-* @brief Testing in charge of asserting that the buVector4I works fine.
-* @param buUtilities For testing initialization requirements.
-* @param Vector4I_Test Name of the unit test.
-* @return None.
-* @bug None.
-*/
+ * @brief Testing in charge of asserting that the buVector4I works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Vector4I_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
 TEST(buUtilities, Vector4I_Test) {\
  // ARRENGE
  buVector4I vector1(1, 2, 3, 4);
@@ -330,12 +330,12 @@ TEST(buUtilities, Vector4I_Test) {\
 }
 
 /** 
-* @brief Testing in charge of asserting that the buVector4F works fine.
-* @param buUtilities For testing initialization requirements.
-* @param Vector4F_Test Name of the unit test.
-* @return None.
-* @bug None.
-*/
+ * @brief Testing in charge of asserting that the buVector4F works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Vector4F_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
 TEST(buUtilities, Vector4F_Test) {
   // ARRENGE
   buVector4F vector1(1, 2, 3, 4);
@@ -380,4 +380,21 @@ TEST(buUtilities, Vector4F_Test) {
   GTEST_ASSERT_EQ(1, vectorDivision.y);
   GTEST_ASSERT_EQ(1.5, vectorDivision.z);
   GTEST_ASSERT_EQ(2, vectorDivision.w);
+}
+
+/**
+ * @brief 
+ * @param 
+ * @return 
+ * @bug 
+ */
+TEST(buUtilities, Matrix4x4_Test) {
+  buMatrix4x4 A(
+    1.0f, 3.0f, 1.0f, 4.0f, 
+    3.0f, 9.0f, 5.0f, 15.0f,
+    0.0f, 2.0f, 1.0f, 1.0f, 
+    0.0f, 4.0f, 2.0f, 3.0f);
+
+  float determinant = A.det();
+  EXPECT_FLOAT_EQ(-4, determinant);
 }
