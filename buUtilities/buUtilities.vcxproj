@@ -196,6 +196,7 @@
     <ClInclude Include="include\buPlatformMath.h" />
     <ClInclude Include="include\buPlatformTypes.h" />
     <ClInclude Include="include\buPrerequisitesUtil.h" />
+    <ClInclude Include="include\buQuaternion.h" />
     <ClInclude Include="include\buStdHeaders.h" />
     <ClInclude Include="include\buString.h" />
     <ClInclude Include="include\buVector2F.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="src\buMatrix4x4.cpp" />
     <ClCompile Include="src\buPlane.cpp" />
     <ClCompile Include="src\buPlatformMath.cpp" />
+    <ClCompile Include="src\buQuaternion .cpp" />
     <ClCompile Include="src\buVector2F.cpp" />
     <ClCompile Include="src\buVector2I.cpp" />
     <ClCompile Include="src\buVector3F.cpp" />

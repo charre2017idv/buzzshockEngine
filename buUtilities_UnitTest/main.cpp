@@ -17,6 +17,7 @@
 #include "buVector4I.h"
 #include "buVector4F.h"
 #include "buMatrix4x4.h"
+#include "buQuaternion.h"
 using namespace buEngineSDK;
 
 int 
@@ -383,10 +384,11 @@ TEST(buUtilities, Vector4F_Test) {
 }
 
 /**
- * @brief 
- * @param 
- * @return 
- * @bug 
+ * @brief Testing in charge of asserting that the Matrix4x4 works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Matrix4x4_Test Name of the unit test.
+ * @return None.
+ * @bug None.
  */
 TEST(buUtilities, Matrix4x4_Test) {
   // ARRANGE - Matrix determinant
@@ -515,4 +517,17 @@ TEST(buUtilities, Matrix4x4_Test) {
   EXPECT_FLOAT_EQ(0, matrixT.m_w1);
   EXPECT_FLOAT_EQ(0, matrixT.m_w2);
   EXPECT_FLOAT_EQ(1, matrixT.m_w3);
+}
+
+TEST(buUtilities, Quaternion_Test) {
+  // ARRENGE - Initialization
+  buVector3F axis(1, 0, 0);
+  buQuaternion q(90, axis);
+  // ACT
+
+  // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(1, q.m_axis.x);
+  EXPECT_FLOAT_EQ(0, q.m_axis.y);
+  EXPECT_FLOAT_EQ(0, q.m_axis.z);
+  EXPECT_FLOAT_EQ(90, q.m_val);
 }

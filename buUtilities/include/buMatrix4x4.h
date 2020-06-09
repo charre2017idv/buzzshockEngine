@@ -9,6 +9,7 @@
  * @bugs None.
  */
 #pragma once
+#include "buPrerequisitesUtil.h"
 #include "buVector4F.h"
 
 namespace buEngineSDK {
