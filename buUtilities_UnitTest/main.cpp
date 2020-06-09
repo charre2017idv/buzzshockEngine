@@ -395,7 +395,7 @@ TEST(buUtilities, Matrix4x4_Test) {
     3.0f, 9.0f, 5.0f, 15.0f,
     0.0f, 2.0f, 1.0f, 1.0f, 
     0.0f, 4.0f, 2.0f, 3.0f);
-  // ARRANGE - Matrix Addition
+  // ARRANGE - Matrix Addition + Matrix subtraction
   buMatrix4x4 A(
     5.0f, 7.0f,  9.0f, 10.0f,
     2.0f, 3.0f,  3.0f, 8.0f,
@@ -408,12 +408,26 @@ TEST(buUtilities, Matrix4x4_Test) {
     9.0f,  10.0f, 12.0f, 2.0f,
     3.0f,  12.0f, 4.0f,  10.0f);
 
+  buMatrix4x4 matrixT(
+    10, 20, 10, 2,
+    4,  5,  6,  3,
+    2,  3,  5,  4,
+    0,  0,  0,  1);
+
   // ACT - Matrix determinant
   float determinant = detMat.det();
   
   // ACT - Matrix addition
    buMatrix4x4 matrixAdd = A + B;
 
+  // ACT - Matrix subtraction
+   buMatrix4x4 matrixSub = A - B;
+
+   // ACT - Matrix multiplication
+   buMatrix4x4 matrixMul = A * B;
+
+   // ACT - Matrix transpose
+   matrixT.transpose();
 
   // ASSERT - Matrix determinant
   EXPECT_FLOAT_EQ(-4, determinant);
@@ -438,4 +452,67 @@ TEST(buUtilities, Matrix4x4_Test) {
   EXPECT_FLOAT_EQ(17,  matrixAdd.m_w1);
   EXPECT_FLOAT_EQ(5,   matrixAdd.m_w2);
   EXPECT_FLOAT_EQ(18,  matrixAdd.m_w3);
+
+  // ASSERT - Matrix subtraction
+  EXPECT_FLOAT_EQ(2,   matrixSub.m_x0);
+  EXPECT_FLOAT_EQ(-10, matrixSub.m_x1);
+  EXPECT_FLOAT_EQ(-1,  matrixSub.m_x2);
+  EXPECT_FLOAT_EQ(0,   matrixSub.m_x3);
+
+  EXPECT_FLOAT_EQ(-3,  matrixSub.m_y0);
+  EXPECT_FLOAT_EQ(2,   matrixSub.m_y1);
+  EXPECT_FLOAT_EQ(0,   matrixSub.m_y2);
+  EXPECT_FLOAT_EQ(-9,  matrixSub.m_y3);
+
+  EXPECT_FLOAT_EQ(-3,  matrixSub.m_z0);
+  EXPECT_FLOAT_EQ(-1,  matrixSub.m_z1);
+  EXPECT_FLOAT_EQ(-10, matrixSub.m_z2);
+  EXPECT_FLOAT_EQ(0,   matrixSub.m_z3);
+
+  EXPECT_FLOAT_EQ(-8,  matrixSub.m_w0);
+  EXPECT_FLOAT_EQ(-1,  matrixSub.m_w1);
+  EXPECT_FLOAT_EQ(1,   matrixSub.m_w2);
+  EXPECT_FLOAT_EQ(-2,  matrixSub.m_w3);
+
+  // ASSERT - Matrix multiplication
+  EXPECT_FLOAT_EQ(210.0f, matrixMul.m_x0);
+  EXPECT_FLOAT_EQ(93.0f,  matrixMul.m_x1);
+  EXPECT_FLOAT_EQ(171.0f, matrixMul.m_x2);
+  EXPECT_FLOAT_EQ(105.0f, matrixMul.m_x3);
+
+  EXPECT_FLOAT_EQ(267.0f, matrixMul.m_y0);
+  EXPECT_FLOAT_EQ(149.0f, matrixMul.m_y1);
+  EXPECT_FLOAT_EQ(146.0f, matrixMul.m_y2);
+  EXPECT_FLOAT_EQ(169.0f, matrixMul.m_y3);
+
+  EXPECT_FLOAT_EQ(236.0f, matrixMul.m_z0);
+  EXPECT_FLOAT_EQ(104.0f, matrixMul.m_z1);
+  EXPECT_FLOAT_EQ(172.0f, matrixMul.m_z2);
+  EXPECT_FLOAT_EQ(128.0f, matrixMul.m_z3);
+
+  EXPECT_FLOAT_EQ(271.0f, matrixMul.m_w0);
+  EXPECT_FLOAT_EQ(149.0f, matrixMul.m_w1);
+  EXPECT_FLOAT_EQ(268.0f, matrixMul.m_w2);
+  EXPECT_FLOAT_EQ(169.0f, matrixMul.m_w3);
+
+  // ASSERT - Matrix Traspose
+  EXPECT_FLOAT_EQ(10, matrixT.m_x0);
+  EXPECT_FLOAT_EQ(20, matrixT.m_x1);
+  EXPECT_FLOAT_EQ(10, matrixT.m_x2);
+  EXPECT_FLOAT_EQ(2,  matrixT.m_x3);
+                  
+  EXPECT_FLOAT_EQ(4, matrixT.m_y0);
+  EXPECT_FLOAT_EQ(5, matrixT.m_y1);
+  EXPECT_FLOAT_EQ(6, matrixT.m_y2);
+  EXPECT_FLOAT_EQ(3, matrixT.m_y3);
+                     
+  EXPECT_FLOAT_EQ(2, matrixT.m_z0);
+  EXPECT_FLOAT_EQ(3, matrixT.m_z1);
+  EXPECT_FLOAT_EQ(5, matrixT.m_z2);
+  EXPECT_FLOAT_EQ(4, matrixT.m_z3);
+                     
+  EXPECT_FLOAT_EQ(0, matrixT.m_w0);
+  EXPECT_FLOAT_EQ(0, matrixT.m_w1);
+  EXPECT_FLOAT_EQ(0, matrixT.m_w2);
+  EXPECT_FLOAT_EQ(1, matrixT.m_w3);
 }

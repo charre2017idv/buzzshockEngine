@@ -70,6 +70,98 @@ namespace buEngineSDK {
 			m_x3 + _mat.m_x3, m_y3 + _mat.m_y3, m_z3 + _mat.m_z3, m_w3 + _mat.m_w3);
 	}
 
+	void buMatrix4x4::operator-=(const buMatrix4x4& _mat)
+	{
+		// Subtraction of column x
+		m_x0 -= _mat.m_x0;
+		m_x1 -= _mat.m_x1;
+		m_x2 -= _mat.m_x2;
+		m_x3 -= _mat.m_x3;
+		// Subtraction of column y
+		m_y0 -= _mat.m_y0;
+		m_y1 -= _mat.m_y1;
+		m_y2 -= _mat.m_y2;
+		m_y3 -= _mat.m_y3;
+		// Subtraction of column z
+		m_z0 -= _mat.m_z0;
+		m_z1 -= _mat.m_z1;
+		m_z2 -= _mat.m_z2;
+		m_z3 -= _mat.m_z3;
+		// Subtraction of column w
+		m_w0 -= _mat.m_w0;
+		m_w1 -= _mat.m_w1;
+		m_w2 -= _mat.m_w2;
+		m_w3 -= _mat.m_w3;
+	}
+
+	buMatrix4x4 buMatrix4x4::operator-(const buMatrix4x4& _mat) const
+	{
+		return buMatrix4x4(
+			m_x0 - _mat.m_x0, m_y0 - _mat.m_y0, m_z0 - _mat.m_z0, m_w0 - _mat.m_w0,
+			m_x1 - _mat.m_x1, m_y1 - _mat.m_y1, m_z1 - _mat.m_z1, m_w1 - _mat.m_w1,
+			m_x2 - _mat.m_x2, m_y2 - _mat.m_y2, m_z2 - _mat.m_z2, m_w2 - _mat.m_w2,
+			m_x3 - _mat.m_x3, m_y3 - _mat.m_y3, m_z3 - _mat.m_z3, m_w3 - _mat.m_w3);
+	}
+
+	void buMatrix4x4::operator*=(const buMatrix4x4& _mat)
+	{
+		// Row 0
+		float x0 = (m_x0 * _mat.m_x0) + (m_y0 * _mat.m_x1) + (m_z0 * _mat.m_x2) + (m_w0 * _mat.m_x3);
+		float y0 = (m_x0 * _mat.m_y0) + (m_y0 * _mat.m_y1) + (m_z0 * _mat.m_y2) + (m_w0 * _mat.m_y3);
+		float z0 = (m_x0 * _mat.m_z0) + (m_y0 * _mat.m_z1) + (m_z0 * _mat.m_z2) + (m_w0 * _mat.m_z3);
+		float w0 = (m_x0 * _mat.m_w0) + (m_y0 * _mat.m_w1) + (m_z0 * _mat.m_w2) + (m_w0 * _mat.m_w3);
+		// Row 1
+		float x1 = (m_x1 * _mat.m_x0) + (m_y1 * _mat.m_x1) + (m_z1 * _mat.m_x2) + (m_w1 * _mat.m_x3);
+		float y1 = (m_x1 * _mat.m_y0) + (m_y1 * _mat.m_y1) + (m_z1 * _mat.m_y2) + (m_w1 * _mat.m_y3);
+		float z1 = (m_x1 * _mat.m_z0) + (m_y1 * _mat.m_z1) + (m_z1 * _mat.m_z2) + (m_w1 * _mat.m_z3);
+		float w1 = (m_x1 * _mat.m_w0) + (m_y1 * _mat.m_w1) + (m_z1 * _mat.m_w2) + (m_w1 * _mat.m_w3);
+		// Row 2
+		float x2 = (m_x2 * _mat.m_x0) + (m_y2 * _mat.m_x1) + (m_z2 * _mat.m_x2) + (m_w2 * _mat.m_x3);
+		float y2 = (m_x2 * _mat.m_y0) + (m_y2 * _mat.m_y1) + (m_z2 * _mat.m_y2) + (m_w2 * _mat.m_y3);
+		float z2 = (m_x2 * _mat.m_z0) + (m_y2 * _mat.m_z1) + (m_z2 * _mat.m_z2) + (m_w2 * _mat.m_z3);
+		float w2 = (m_x2 * _mat.m_w0) + (m_y2 * _mat.m_w1) + (m_z2 * _mat.m_w2) + (m_w2 * _mat.m_w3);
+		// Row 3
+		float x3 = (m_x3 * _mat.m_x0) + (m_y3 * _mat.m_x1) + (m_z3 * _mat.m_x2) + (m_w3 * _mat.m_x3);
+		float y3 = (m_x3 * _mat.m_y0) + (m_y3 * _mat.m_y1) + (m_z3 * _mat.m_y2) + (m_w3 * _mat.m_y3);
+		float z3 = (m_x3 * _mat.m_z0) + (m_y3 * _mat.m_z1) + (m_z3 * _mat.m_z2) + (m_w3 * _mat.m_z3);
+		float w3 = (m_x3 * _mat.m_w0) + (m_y3 * _mat.m_w1) + (m_z3 * _mat.m_w2) + (m_w3 * _mat.m_w3);
+
+		buMatrix4x4 tmpMat( x0,y0,z0,w0,
+										    x1,y1,z1,w1,
+										    x2,y2,z2,w2,
+										    x3,y3,z3,w3);
+		*this = tmpMat;
+	}
+
+	buMatrix4x4 buMatrix4x4::operator*(const buMatrix4x4& _mat) const
+	{
+		// Row 0
+		float x0 = (m_x0 * _mat.m_x0) + (m_y0 * _mat.m_x1) + (m_z0 * _mat.m_x2) + (m_w0 * _mat.m_x3);
+		float y0 = (m_x0 * _mat.m_y0) + (m_y0 * _mat.m_y1) + (m_z0 * _mat.m_y2) + (m_w0 * _mat.m_y3);
+		float z0 = (m_x0 * _mat.m_z0) + (m_y0 * _mat.m_z1) + (m_z0 * _mat.m_z2) + (m_w0 * _mat.m_z3);
+		float w0 = (m_x0 * _mat.m_w0) + (m_y0 * _mat.m_w1) + (m_z0 * _mat.m_w2) + (m_w0 * _mat.m_w3);
+		// Row 1
+		float x1 = (m_x1 * _mat.m_x0) + (m_y1 * _mat.m_x1) + (m_z1 * _mat.m_x2) + (m_w1 * _mat.m_x3);
+		float y1 = (m_x1 * _mat.m_y0) + (m_y1 * _mat.m_y1) + (m_z1 * _mat.m_y2) + (m_w1 * _mat.m_y3);
+		float z1 = (m_x1 * _mat.m_z0) + (m_y1 * _mat.m_z1) + (m_z1 * _mat.m_z2) + (m_w1 * _mat.m_z3);
+		float w1 = (m_x1 * _mat.m_w0) + (m_y1 * _mat.m_w1) + (m_z1 * _mat.m_w2) + (m_w1 * _mat.m_w3);
+		// Row 2
+		float x2 = (m_x2 * _mat.m_x0) + (m_y2 * _mat.m_x1) + (m_z2 * _mat.m_x2) + (m_w2 * _mat.m_x3);
+		float y2 = (m_x2 * _mat.m_y0) + (m_y2 * _mat.m_y1) + (m_z2 * _mat.m_y2) + (m_w2 * _mat.m_y3);
+		float z2 = (m_x2 * _mat.m_z0) + (m_y2 * _mat.m_z1) + (m_z2 * _mat.m_z2) + (m_w2 * _mat.m_z3);
+		float w2 = (m_x2 * _mat.m_w0) + (m_y2 * _mat.m_w1) + (m_z2 * _mat.m_w2) + (m_w2 * _mat.m_w3);
+		// Row 3
+		float x3 = (m_x3 * _mat.m_x0) + (m_y3 * _mat.m_x1) + (m_z3 * _mat.m_x2) + (m_w3 * _mat.m_x3);
+		float y3 = (m_x3 * _mat.m_y0) + (m_y3 * _mat.m_y1) + (m_z3 * _mat.m_y2) + (m_w3 * _mat.m_y3);
+		float z3 = (m_x3 * _mat.m_z0) + (m_y3 * _mat.m_z1) + (m_z3 * _mat.m_z2) + (m_w3 * _mat.m_z3);
+		float w3 = (m_x3 * _mat.m_w0) + (m_y3 * _mat.m_w1) + (m_z3 * _mat.m_w2) + (m_w3 * _mat.m_w3);
+
+		return buMatrix4x4(x0, y0, z0, w0,
+			x1, y1, z1, w1,
+			x2, y2, z2, w2,
+			x3, y3, z3, w3);
+	}
+
 	float buMatrix4x4::det()
 	{
 		// Get the basic matrix
@@ -101,5 +193,34 @@ namespace buEngineSDK {
 		buMatrix4x4 tmpMatrix3(V0, V1, newV2, V3);
 
 		return (tmpMatrix3.m_x0 - tmpMatrix3.m_y1 - tmpMatrix3.m_z2 - tmpMatrix3.m_w3);
+	}
+
+	void buMatrix4x4::transpose()
+	{
+		buMatrix4x4 tmpMatrix = *this;
+		// | x0 | x1 | x2 | x3 |T    | A1 | B1 | C1 | D1 |
+	  // | y0 | y1 | y2 | y3 |     | A2 | B2 | C2 | D2 |
+	  // | z0 | z1 | z2 | z3 |  =  | A3 | B3 | C3 | D3 |
+	  // | w0 | w1 | w2 | z3 |     | A4 | B4 | C4 | D4 |
+		// Addition of column x
+		m_x0 = tmpMatrix.m_x0;
+		m_x1 = tmpMatrix.m_y0;
+		m_x2 = tmpMatrix.m_z0;
+		m_x3 = tmpMatrix.m_w0;
+		// Addition of column y
+		m_y0 = tmpMatrix.m_x1;
+		m_y1 = tmpMatrix.m_y1;
+		m_y2 = tmpMatrix.m_z1;
+		m_y3 = tmpMatrix.m_w1;
+		// Addition of column z
+		m_z0 = tmpMatrix.m_x2;
+		m_z1 = tmpMatrix.m_y2;
+		m_z2 = tmpMatrix.m_z2;
+		m_z3 = tmpMatrix.m_w2;
+		// Addition of column w
+		m_w0 = tmpMatrix.m_x3;
+		m_w1 = tmpMatrix.m_y3;
+		m_w2 = tmpMatrix.m_z3;
+		m_w3 = tmpMatrix.m_w3;
 	}
 }
