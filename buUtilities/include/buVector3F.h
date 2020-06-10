@@ -1,6 +1,6 @@
 #pragma once
 #include "buPrerequisitesUtil.h"
-#include "buMath.h"
+#include "buPlatformMath.h"
 
 namespace buEngineSDK {
 	class BU_UTILITY_EXPORT buVector3F

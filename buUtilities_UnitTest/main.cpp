@@ -523,11 +523,52 @@ TEST(buUtilities, Quaternion_Test) {
   // ARRENGE - Initialization
   buVector3F axis(1, 0, 0);
   buQuaternion q(90, axis);
-  // ACT
+  buQuaternion q2(10, axis);
+  buQuaternion q3(20, axis);
+
+  // ACT - Add quaternions
+  buQuaternion quaternionAdd = q + q2;
+  // ACT - Sub quaternions
+  buQuaternion quaternionSub = q - q2;
+  // ACT - Mul quaternions
+  buQuaternion quaternionMul = q * q2;
+  // ACT - Mag of quaternion
+  float quaternionMag = q.mag();
+  // ACT - Multiply quaternion with a scalar
+  buQuaternion quaternionMulByScalar = q * 2;
+  // ACT - Normalize a quaternion
+  q3.normalize();
 
   // ASSERT - Initialization
   EXPECT_FLOAT_EQ(1, q.m_axis.x);
   EXPECT_FLOAT_EQ(0, q.m_axis.y);
   EXPECT_FLOAT_EQ(0, q.m_axis.z);
   EXPECT_FLOAT_EQ(90, q.m_val);
+  // ASSERT - Add quaternion
+  EXPECT_FLOAT_EQ(2, quaternionAdd.m_axis.x);
+  EXPECT_FLOAT_EQ(0, quaternionAdd.m_axis.y);
+  EXPECT_FLOAT_EQ(0, quaternionAdd.m_axis.z);
+  EXPECT_FLOAT_EQ(100, quaternionAdd.m_val);
+  // ASSERT - Sub quaternion
+  EXPECT_FLOAT_EQ(0, quaternionSub.m_axis.x);
+  EXPECT_FLOAT_EQ(0, quaternionSub.m_axis.y);
+  EXPECT_FLOAT_EQ(0, quaternionSub.m_axis.z);
+  EXPECT_FLOAT_EQ(80, quaternionSub.m_val);
+  // ASSERT - Mul quaternion
+  EXPECT_FLOAT_EQ(100, quaternionMul.m_axis.x);
+  EXPECT_FLOAT_EQ(0, quaternionMul.m_axis.y);
+  EXPECT_FLOAT_EQ(0, quaternionMul.m_axis.z);
+  EXPECT_FLOAT_EQ(899, quaternionMul.m_val);
+  // ASSERT - Mag of quaternion
+  EXPECT_FLOAT_EQ(90.00555538409837, quaternionMag);
+  // ASSERT - Multiply quaternion with a scalar 
+  EXPECT_FLOAT_EQ(2, quaternionMulByScalar.m_axis.x);
+  EXPECT_FLOAT_EQ(0, quaternionMulByScalar.m_axis.y);
+  EXPECT_FLOAT_EQ(0, quaternionMulByScalar.m_axis.z);
+  EXPECT_FLOAT_EQ(180, quaternionMulByScalar.m_val);
+  // ASSERT - Normalize a quaternion
+  EXPECT_FLOAT_EQ(0.049937617, q3.m_axis.x);
+  EXPECT_FLOAT_EQ(0, q3.m_axis.y);
+  EXPECT_FLOAT_EQ(0, q3.m_axis.z);
+  EXPECT_FLOAT_EQ(0.99875236, q3.m_val);
 }

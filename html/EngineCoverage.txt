@@ -3,11 +3,11 @@
  */
 
  // <! Warning > 
- // ( ) Change the std::sqrt for the Math::sqrt
+ // (x) Change the std::sqrt for the Math::sqrt
 
  // Basic Classes
- // (/) buMath.h 
- // ( ) buPlatformMath.h - This is for the basic math 
+ // ( ) buMath.h 
+ // (x) buPlatformMath.h - This is for the basic math 
  // ( ) Degrees
  // ( ) Radians
  // (x) Vector2I - Unit testing implemented
@@ -17,14 +17,14 @@
  // (x) Vector4I - Unit testing implemented
  // (x) Vector4f - Unit testing implemented
  // (x) Matrix4x4
- // ( ) Quaternions - Need to check what other classes need to work
+ // (x) Quaternions - Need to check what other classes need to work
  // ( ) Shapes - Is the father of the next classes
- // ( ) Rectangle
- // ( ) Box
- // ( ) Planes
- // ( ) Spheres
- // ( ) Rays
- // ( ) Frustrum
+ //   ( ) Rectangle
+ //   ( ) Box
+ //   ( ) Planes
+ //   ( ) Spheres
+ //   ( ) Rays
+ //   ( ) Frustrum
 
 
  // VECTORS 
@@ -88,7 +88,17 @@
  //   (/) Div
  //   (x) Det
  //   (x) transpose
+
  // Queaternions
+ //   (x) Add
+ //   (x) Sub
+ //   (x) Mul
+ //   (x) Mag
+ //   (x) Normalize
+ //   (/) Rotate
+ //   (x) Inverse
+ //   (x) Conjugate
+  
 
  // SHAPES
  // ( ) Rectangle

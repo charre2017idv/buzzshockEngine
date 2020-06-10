@@ -96,7 +96,7 @@ namespace buEngineSDK {
 
   float buVector3F::mag()
   {
-    float magnitude = buEngineSDK::buMath::sqrt(x * x + y * y + z * z);
+    float magnitude = buEngineSDK::buPlatformMath::sqrt(x * x + y * y + z * z);
     return magnitude;
   }
 
