@@ -17,9 +17,9 @@
  // (x) Vector4I - Unit testing implemented
  // (x) Vector4f - Unit testing implemented
  // (x) Matrix4x4 - Unit testing implemented
- // (x) Quaternions - Need to check what other classes need to work
- // ( ) Shapes - Is the father of the next classes
- //   ( ) Rectangle
+ // (x) Quaternions - Unit testing implemented - Need to check what other classes need to work
+ // (/) Shapes - Is the father of the next classes
+ //   (x) Rectangle - Unit testing implemented
  //   (x) Box - Unit testing implemented
  //   (x) Planes - Unit testing implemented
  //   (x) Spheres - Unit testing implemented - Need to check equation. 
@@ -101,7 +101,7 @@
   
 
  // SHAPES
- // ( ) Rectangle
+ // (x) Rectangle
  // (x) Box
  // (x) Planes
  // (x) Spheres
@@ -112,7 +112,7 @@
  // ( ) Degrees
  // ( ) Radians
 
- -- Trigonometry
+ // Trigonometry
  // Series de teilor
  // fast cos, sin, tan, cot
  // Factor de impresicion

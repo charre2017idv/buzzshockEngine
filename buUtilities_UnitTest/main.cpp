@@ -21,6 +21,7 @@
 #include "buRay.h"
 #include "buSphere.h"
 #include "buBox.h"
+#include "buRectangle.h"
 using namespace buEngineSDK;
 
 int 
@@ -649,4 +650,30 @@ TEST(buUtilities, Box_Test) {
   EXPECT_FLOAT_EQ(5, b.m_length);
   // ASSERT - box volume
   EXPECT_FLOAT_EQ(125, volume);
+}
+
+/**
+ * @brief Testing in charge of asserting that the rectangle works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Rectangle_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
+TEST(buUtilities, Rectangle_Test) {
+  // ARRANGE - Initialization
+  buRectangle r(5, 3);
+  
+  // ACT - Area of rectangle
+  float area = r.getArea();
+  // ACT - Perimeter of rectangle
+  float perimeter = r.getPerimeter();
+
+  // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(5, r.m_width);
+  EXPECT_FLOAT_EQ(3, r.m_lenght);
+  // ASSERT - Area of rectangle
+  EXPECT_FLOAT_EQ(15, area);
+  // ASSERT - Perimeter of rectangle
+  EXPECT_FLOAT_EQ(34, perimeter);
+
 }
