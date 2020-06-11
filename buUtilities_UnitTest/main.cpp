@@ -18,6 +18,9 @@
 #include "buVector4F.h"
 #include "buMatrix4x4.h"
 #include "buQuaternion.h"
+#include "buRay.h"
+#include "buSphere.h"
+#include "buBox.h"
 using namespace buEngineSDK;
 
 int 
@@ -519,6 +522,13 @@ TEST(buUtilities, Matrix4x4_Test) {
   EXPECT_FLOAT_EQ(1, matrixT.m_w3);
 }
 
+/** 
+ * @brief Testing in charge of asserting that the Quaternion works fine. 
+ * @param buUtilities For testing initialization requirements.
+ * @param Quaternion_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
 TEST(buUtilities, Quaternion_Test) {
   // ARRENGE - Initialization
   buVector3F axis(1, 0, 0);
@@ -571,4 +581,72 @@ TEST(buUtilities, Quaternion_Test) {
   EXPECT_FLOAT_EQ(0, q3.m_axis.y);
   EXPECT_FLOAT_EQ(0, q3.m_axis.z);
   EXPECT_FLOAT_EQ(0.99875236, q3.m_val);
+}
+
+/**
+ * @brief Testing in charge of asserting that the Ray works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Ray_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
+TEST(buUtilities, Ray_Test) {
+  // ARRANGE Initialization
+  buVector3F origin(0, 0, 0);
+  buVector3F direction(1, 1, 0);
+  buRay r1(origin, direction, 10);
+
+  // ACT - Get ray point
+  buVector3F point = r1.Ray(direction, 10);
+
+  // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(10, r1.m_distance);
+  EXPECT_FLOAT_EQ(0, r1.m_origin.x);
+  EXPECT_FLOAT_EQ(0, r1.m_origin.y);
+  EXPECT_FLOAT_EQ(0, r1.m_origin.z);
+  // ASSERT - Get ray point
+  EXPECT_FLOAT_EQ(11, point.x);
+  EXPECT_FLOAT_EQ(11, point.y);
+  EXPECT_FLOAT_EQ(10, point.z);
+}
+
+/**
+ * @brief Testing in charge of asserting that the sphere works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Sphere_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
+TEST(buUtilities, Sphere_Test) {
+  // ARRANGE - Initialization
+  buVector3F center(5,5,5);
+  buSphere s(center, 30);
+
+  // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(5, s.m_center.x);
+  EXPECT_FLOAT_EQ(5, s.m_center.y);
+  EXPECT_FLOAT_EQ(5, s.m_center.z);
+  EXPECT_FLOAT_EQ(30, s.m_radius);
+}
+
+/**
+ * @brief Testing in charge of asserting that the box works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param Box_Test Name of the unit test.
+ * @return None.
+ * @bug None.
+ */
+TEST(buUtilities, Box_Test) {
+  // ARRANGE - Initialization
+  buBox b(5, 5, 5);
+
+  // ACT - box volume
+  float volume = b.getVolume();
+
+  // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(5, b.m_width);
+  EXPECT_FLOAT_EQ(5, b.m_height);
+  EXPECT_FLOAT_EQ(5, b.m_length);
+  // ASSERT - box volume
+  EXPECT_FLOAT_EQ(125, volume);
 }

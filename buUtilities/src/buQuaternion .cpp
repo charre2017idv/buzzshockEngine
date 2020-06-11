@@ -85,6 +85,7 @@ namespace buEngineSDK {
 		);
 		return magnitude;
 	}
+
 	void buQuaternion::normalize()
 	{
 		if (mag() != 0)
@@ -95,6 +96,7 @@ namespace buEngineSDK {
 			m_axis *= normValue;
 		}
 	}
+
 	buQuaternion buQuaternion::conjugate()
 	{
 		float scalar = m_val;
@@ -102,6 +104,7 @@ namespace buEngineSDK {
 
 		return buQuaternion(scalar, imaginary);
 	}
+
 	buQuaternion buQuaternion::inverse()
 	{
 		float absoluteValue = mag();

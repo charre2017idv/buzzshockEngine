@@ -4,7 +4,7 @@
 * @date 01/06/2020
 * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
 * @brief Class in charge of setting the basic mathematic
-* @bugs
+* @bugs None.
 */
 #pragma once
 #include "buPrerequisitesUtil.h"

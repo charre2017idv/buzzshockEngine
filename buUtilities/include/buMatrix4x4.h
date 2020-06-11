@@ -85,7 +85,7 @@ namespace buEngineSDK {
 		 * @return None.
 		 * @bug None.
 		 */
-		void
+		buMatrix4x4&
 		operator*=(const buMatrix4x4& _mat);
 		/**
 		 * @brief Method that return a third matrix representing the multplication of

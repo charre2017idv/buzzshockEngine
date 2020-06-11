@@ -1,3 +1,11 @@
+/**
+* @file buPlane.h
+* @version 1.0
+* @date 06/06/2020
+* @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
+* @brief Class in charge of providing a plane.
+* @bug None.
+*/
 #pragma once
 #include "buPrerequisitesUtil.h"
 #include "buVector4F.h"
@@ -9,82 +17,67 @@ namespace buEngineSDK {
 	{
 	public:
 		/**
-		* @brief Default constructor (no initialization)
-		* @param None.
-		* @return None.
-		* @bug None.
-		*/
+		 * @brief Default constructor
+		 */
 		buPlane() = default;
 		/**
-		* @brief Constructor
-		* @param V 4D vector to set up a plane.
-		* @return None.
-		* @bug None.
-		*/
+		 * @brief Constructor 
+		 */
 		buPlane(const buVector4F& V);
 	  /**
-	  * @brief Constructor
-	  * @param X coefficient
-	  * @param Y coefficient
-	  * @param Z coefficient
-	  * @param W coefficient
-	  * @return None.
-	  * @bug None.
-	  */
+		 * @brief Constructor 
+		 */
 		buPlane(float X, float Y, float Z, float W);
 		/**
-		* @brief Constructor
-		* @param A First point in the plane.
-		* @param B Second point in the plane.
-		* @param C Third point in the plane.
-		* @return None.
-		* @bug None. 
-		*/
-		buPlane(const buVector3F& A, const buVector3F& B, const buVector3F& C);
+		 * @brief Constructor
+		 * @param _v1 First point in the plane.
+		 * @param _v2 Second point in the plane.
+		 * @param _v3 Third point in the plane.
+		 * @return None.
+		 * @bug None. 
+		 */
+		buPlane(const buVector3F& _v1, const buVector3F& _v2, const buVector3F& _v3);
 		/**
-		* @brief 
-		* @param 
-		* @return 
-		* @bug 
-		*/
+		 * @brief Destructor
+		 */
 		~buPlane();
 		/**
-		* @brief Calculates distance between plan and a point in the space.
-		* @param V Represents the other point
-		* @return A positive number if it is in front of the plane and 
-		* a negative number if it is behind the plane.
-		* @bug None.
-		*/
+		 * @brief Calculates distance between plan and a point in the space.
+		 * @param V Represents the other point
+		 * @return A positive number if it is in front of the plane and 
+		 * a negative number if it is behind the plane.
+		 * @bug None.
+		 */
 		float
 		planDot(const buVector3F& V) const;
 		/**
-		* @brief Method that returns a inverse plane.
-		* @param None.
-		* @return A flip plane.
-		* @bug None.
-		*/
+		 * @brief Method that returns a inverse plane.
+		 * @param None.
+		 * @return A flip plane.
+		 * @bug None.
+		 */
 		buPlane
 	  flip() const;
 	private:
 
 	public:
 		/**
-		 * @brief Member in charge of storing the point of the x - coordinate.
+		 * @brief Member in charge of storing the point of the x.
 		 */
 		float x;
 
 		/**
-		 * @brief Member in charge of storing the point of the y - coordinate.
+		 * @brief Member in charge of storing the point of the y.
 		 */
 		float y;
 
 		/**
-		 * @brief Member in charge of storing the point of the z - coordinate.
+		 * @brief Member in charge of storing the point of the z.
 		 */
 		float z;
 
 		/**
-		 * @brief Member in charge of storing the point of the w - coordinate.
+		 * @brief Member in charge of storing the point of the w.
 		 */
 		float w;
 	};
