@@ -181,11 +181,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\buUtilities\src\buDegrees.cpp" />
+    <ClCompile Include="..\buUtilities\src\buRadians.cpp" />
     <ClCompile Include="..\buUtilities\src\buRectangle.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\buUtilities\include\buDegrees.h" />
+    <ClInclude Include="..\buUtilities\include\buRadians.h" />
     <ClInclude Include="..\buUtilities\include\buRectangle.h" />
+    <ClInclude Include="..\buUtilities\include\Plugger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

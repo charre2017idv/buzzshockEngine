@@ -4,7 +4,7 @@
 * @date 28/0t5/2020
 * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
 * @brief This file includes the most common and required libraries
-* @bugs
+* @bugs None.
 */
 #pragma once
 
@@ -72,7 +72,7 @@ extern "C" {
   // Undefined min & max
 #undef min
 #undef max
-
+#include <Windows.h>
 #if !defined(NOMINMAX)&& defined(_MSC_VER)
 #  define NOMINMAX  // Rquired to stop windows.h messing up std::min
 #endif

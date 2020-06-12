@@ -6,10 +6,11 @@
  // (x) Change the std::sqrt for the Math::sqrt
 
  // Basic Classes
- // ( ) buMath.h 
+ // (/) buMath.h 
  // (x) buPlatformMath.h - This is for the basic math 
- // ( ) Degrees
- // ( ) Radians
+ // (x) Plugger
+ // (x) Degrees
+ // (x) Radians
  // (x) Vector2I - Unit testing implemented
  // (x) Vector2f - Unit testing implemented
  // (x) Vector3I - Unit testing implemented
@@ -109,8 +110,8 @@
  // ( ) Frustrum
 
  // Classes
- // ( ) Degrees
- // ( ) Radians
+ // (x) Degrees
+ // (x) Radians
 
  // Trigonometry
  // Series de teilor

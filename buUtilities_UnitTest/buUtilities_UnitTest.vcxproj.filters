@@ -21,9 +21,24 @@
     <ClCompile Include="..\buUtilities\src\buRectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\buUtilities\src\buRadians.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\buUtilities\src\buDegrees.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\buUtilities\include\buRectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\buUtilities\include\buRadians.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\buUtilities\include\buDegrees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\buUtilities\include\Plugger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
