@@ -22,6 +22,10 @@
 #include "buSphere.h"
 #include "buBox.h"
 #include "buRectangle.h"
+#include "buRadians.h"
+#include "buDegrees.h"
+#include "buPlugger.h"
+
 using namespace buEngineSDK;
 
 int 

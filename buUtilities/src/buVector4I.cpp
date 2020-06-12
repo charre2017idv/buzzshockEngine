@@ -20,12 +20,10 @@ namespace buEngineSDK {
     return *this;
   }
 
-  void buVector4I::operator+=(const buVector4I& _v)
+  buVector4I& buVector4I::operator+=(const buVector4I& _v)
   {
-    x += _v.x;
-    y += _v.y;
-    z += _v.z;
-    w += _v.w;
+    *this = *this + _v;
+    return *this;
   }
 
   buVector4I buVector4I::operator+(const buVector4I& _v) const
@@ -33,12 +31,10 @@ namespace buEngineSDK {
     return buVector4I(x + _v.x, y + _v.y, z + _v.z, w + _v.w);
   }
 
-  void buVector4I::operator-=(const buVector4I& _v)
+  buVector4I& buVector4I::operator-=(const buVector4I& _v)
   {
-    x -= _v.x;
-    y -= _v.y;
-    z -= _v.z;
-    w -= _v.w;
+    *this = *this - _v;
+    return *this;
   }
 
   buVector4I buVector4I::operator-(const buVector4I& _v) const

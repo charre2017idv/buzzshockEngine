@@ -16,10 +16,10 @@ namespace buEngineSDK {
     return *this;
   }
 
-  void buVector2I::operator+=(const buVector2I& _v)
+  buVector2I& buVector2I::operator+=(const buVector2I& _v)
   {
-    x += _v.x;
-    y += _v.y;
+    *this = *this + _v;
+    return *this;
   }
 
   buVector2I buVector2I::operator+(const buVector2I& _v) const
@@ -27,10 +27,10 @@ namespace buEngineSDK {
     return buVector2I(x + _v.x, y + _v.y);
   }
 
-  void buVector2I::operator-=(const buVector2I& _v)
+  buVector2I& buVector2I::operator-=(const buVector2I& _v)
   {
-    x -= _v.x;
-    y -= _v.y;
+    *this = *this - _v;
+    return *this;
   }
 
   buVector2I buVector2I::operator-(const buVector2I& _v) const

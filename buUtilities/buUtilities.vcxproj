@@ -190,6 +190,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\buBox.h" />
+    <ClInclude Include="include\buDegrees.h" />
     <ClInclude Include="include\buMath.h" />
     <ClInclude Include="include\buMatrix4x4.h" />
     <ClInclude Include="include\buModule.h" />
@@ -197,9 +198,12 @@
     <ClInclude Include="include\buPlatformDefines.h" />
     <ClInclude Include="include\buPlatformMath.h" />
     <ClInclude Include="include\buPlatformTypes.h" />
+    <ClInclude Include="include\buPlugger.h" />
     <ClInclude Include="include\buPrerequisitesUtil.h" />
     <ClInclude Include="include\buQuaternion.h" />
+    <ClInclude Include="include\buRadians.h" />
     <ClInclude Include="include\buRay.h" />
+    <ClInclude Include="include\buRectangle.h" />
     <ClInclude Include="include\buSphere.h" />
     <ClInclude Include="include\buStdHeaders.h" />
     <ClInclude Include="include\buString.h" />
@@ -212,12 +216,15 @@
   <ItemGroup>
     <ClCompile Include="include\Source.cpp" />
     <ClCompile Include="src\buBox.cpp" />
+    <ClCompile Include="src\buDegrees.cpp" />
     <ClCompile Include="src\buMath.cpp" />
     <ClCompile Include="src\buMatrix4x4.cpp" />
     <ClCompile Include="src\buPlane.cpp" />
     <ClCompile Include="src\buPlatformMath.cpp" />
     <ClCompile Include="src\buQuaternion .cpp" />
+    <ClCompile Include="src\buRadians.cpp" />
     <ClCompile Include="src\buRay.cpp" />
+    <ClCompile Include="src\buRectangle.cpp" />
     <ClCompile Include="src\buSphere.cpp" />
     <ClCompile Include="src\buVector2F.cpp" />
     <ClCompile Include="src\buVector2I.cpp" />

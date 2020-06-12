@@ -57,7 +57,7 @@ namespace buEngineSDK {
 		* @return
 		* @bug
 		*/
-		void 
+		buVector4I& 
 		operator+=(const buVector4I& _v);
 		/**
 		* @brief  Method that return a third vector representing the addition of
@@ -74,7 +74,7 @@ namespace buEngineSDK {
 		* @return
 		* @bug
 		*/
-		void 
+		buVector4I& 
 		operator-=(const buVector4I& _v);
 		/**
 		* @brief Method that return a third vector representing the substraction of
