@@ -211,6 +211,7 @@
     <ClInclude Include="include\buVector2I.h" />
     <ClInclude Include="include\buVector3F.h" />
     <ClInclude Include="include\buVector3I.h" />
+    <ClInclude Include="include\buVector4F.h" />
     <ClInclude Include="include\buVector4I.h" />
   </ItemGroup>
   <ItemGroup>

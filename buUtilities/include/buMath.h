@@ -2,12 +2,11 @@
 #include "buPrerequisitesUtil.h"
 
 namespace buEngineSDK {
-	class buMath
-	{
-	public:
-
-	private:
-		
-
-	};
+  class buMath
+  {
+   public:
+   
+   private:
+   	
+  };
 }

@@ -24,7 +24,7 @@
 #include "buRectangle.h"
 #include "buRadians.h"
 #include "buDegrees.h"
-#include "buPlugger.h"
+#include "buPluggin.h"
 
 using namespace buEngineSDK;
 
@@ -425,7 +425,7 @@ TEST(buUtilities, Matrix4x4_Test) {
     0,  0,  0,  1);
 
   // ACT - Matrix determinant
-  float determinant = detMat.det();
+  float determinant = detMat.determinant();
   
   // ACT - Matrix addition
    buMatrix4x4 matrixAdd = A + B;
@@ -643,12 +643,14 @@ TEST(buUtilities, Sphere_Test) {
  */
 TEST(buUtilities, Box_Test) {
   // ARRANGE - Initialization
-  buBox b(5, 5, 5);
+  buBox b(2, 3, 5, 5, 5);
 
   // ACT - box volume
   float volume = b.getVolume();
 
   // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(2, b.m_x);
+  EXPECT_FLOAT_EQ(3, b.m_y);
   EXPECT_FLOAT_EQ(5, b.m_width);
   EXPECT_FLOAT_EQ(5, b.m_height);
   EXPECT_FLOAT_EQ(5, b.m_length);
@@ -665,7 +667,7 @@ TEST(buUtilities, Box_Test) {
  */
 TEST(buUtilities, Rectangle_Test) {
   // ARRANGE - Initialization
-  buRectangle r(5, 3);
+  buRectangle r(0, 0, 5, 3);
   
   // ACT - Area of rectangle
   float area = r.getArea();
@@ -673,6 +675,8 @@ TEST(buUtilities, Rectangle_Test) {
   float perimeter = r.getPerimeter();
 
   // ASSERT - Initialization
+  EXPECT_FLOAT_EQ(0, r.m_x);
+  EXPECT_FLOAT_EQ(0, r.m_y);
   EXPECT_FLOAT_EQ(5, r.m_width);
   EXPECT_FLOAT_EQ(3, r.m_lenght);
   // ASSERT - Area of rectangle

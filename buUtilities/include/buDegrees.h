@@ -10,38 +10,52 @@
 #include "buPrerequisitesUtil.h"
 
 namespace buEngineSDK {
-	class BU_UTILITY_EXPORT buDegrees
-	{
-	public:
-		/**
-		 * @brief Default constructor
-		 */
-		buDegrees() = default;
-		/**
-		 * @brief Constructor 
-		 */
-		buDegrees(float _d);
-		/**
-		 * @brief Copy constructor
-		 */
-		buDegrees(const buDegrees& _d);
-		/**
-		 * @brief Constructor 
-		 */
-		~buDegrees();
-		/**
-		 * @brief Method that returns the radian of the value.
-		 * @param None.
-		 * @return Radian value.
-		 * @bug None.
-		 */
-		float
-		getRadians();
-	public:
-		/**
-		 * @brief Degrees value.
-		 */
-		float m_degrees;
-	};
-	
+  class BU_UTILITY_EXPORT buDegrees
+  {
+  public:
+   /**
+    * @brief Default constructor
+    */
+   buDegrees() = default;
+
+   /**
+    * @brief Constructor
+    */
+   buDegrees(float _d);
+
+   /**
+    * @brief Copy constructor
+    */
+   buDegrees(const buDegrees& _d);
+
+   /**
+    * @brief Constructor
+    */
+   ~buDegrees();
+
+   /**
+    * @brief Method that returns the radian of the value.
+    * @param None.
+    * @return Radian value.
+    * @bug None.
+    */
+   float
+   getRadians();
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   float
+   getDegrees();
+
+  public:
+   /**
+    * @brief Degrees value.
+    */
+   float m_degrees;
+
+  };
 }

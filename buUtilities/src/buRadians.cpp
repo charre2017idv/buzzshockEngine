@@ -18,4 +18,8 @@ namespace buEngineSDK {
 	{
 		return m_radians * (3.1415926535f / 180.0f);
 	}
+	float buRadians::getRadians()
+	{
+		return m_radians;
+	}
 }

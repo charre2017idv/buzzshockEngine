@@ -101,87 +101,99 @@ extern "C" {
 #endif
 
 namespace buEngineSDK {
-  
-  /**
-   * @brief
-   */
-  template<typename T, size_t N>
-  using Array = std::array<T, N>;
-  /**
-   * @brief Dynamically sized array that stores element contiguously
-   */
-  template<typename T, typename A = std::allocator<T>>
-  using Vector = std::vector<T, A>;
-  /**
-   * @brief
-   */
-  template<typename T, typename A = std::allocator<T>>
-  using Deque = std::deque<T, A>;
-  /**
-   * @brief Container that supports constant time insertion and removal, but
-   */
-  template<typename T, typename A = std::allocator<T>>
-  using List = std::list<T, A>;
-  /**
-   * @brief
-   */
-  template<typename T, typename A = std::allocator<T>>
-  using ForwardList = std::forward_list<T, A>;
-  /**
-   * @brief
-   */
-  template<
-    typename T, 
-    typename Compare = std::less<T>, 
-    typename A = std::allocator<T>>
-  using Set = std::set<T, Compare, A>;
-  /**
-   * @brief
-   */
-  template<
-    typename K, 
-    typename T, 
-    typename C = std::less<K>,
-    typename A = std::allocator<std::pair<const K, T>>>
-  using Map = std::map<K, T, C, A >;
-  /**
-   * @brief
-   */
-  template<
-    typename K,
-    typename H = std::hash<K>,
-    typename P = std::equal_to<K>,
-    typename A = std::allocator<K>>
-  using UnorderedSet = std::unordered_set<K, H, P, A>;
-  /**
-   * @brief
-   */
-  template<
-    typename K,
-    typename T,
-    typename H = std::hash<K>,
-    typename P = std::equal_to<K>,
-    typename A = std::allocator<std::pair<const K, T>>>
-  using UnorderedMap = std::unordered_map<K, T, H, P, A>;
-  /**
-   * @brief
-   */
-  template<typename T, typename Container = std::deque<T>>
-  using Stack = std::stack<T, Container>;
-  /**
-   * @brief
-   */
-  template<typename T, typename Container = std::deque<T>>
-  using Queue = std::queue<T, Container>;
-  /**
-   * @brief
-   */
-  template <typename T>
-  using SPtr = std::shared_ptr<T>;
-  /**
-   * @brief
-   */
-  template <typename T>
-  using WeakSPtr = std::weak_ptr<T>;
+ 
+ /**
+  * @brief
+  */
+ template<typename T, size_t N>
+ using Array = std::array<T, N>;
 
+ /**
+  * @brief Dynamically sized array that stores element contiguously
+  */
+ template<typename T, typename A = std::allocator<T>>
+ using Vector = std::vector<T, A>;
+
+ /**
+  * @brief
+  */
+ template<typename T, typename A = std::allocator<T>>
+ using Deque = std::deque<T, A>;
+
+ /**
+  * @brief Container that supports constant time insertion and removal, but
+  */
+ template<typename T, typename A = std::allocator<T>>
+ using List = std::list<T, A>;
+
+ /**
+  * @brief
+  */
+ template<typename T, typename A = std::allocator<T>>
+ using ForwardList = std::forward_list<T, A>;
+
+ /**
+  * @brief
+  */
+ template<
+   typename T, 
+   typename Compare = std::less<T>, 
+   typename A = std::allocator<T>>
+ using Set = std::set<T, Compare, A>;
+
+ /**
+  * @brief
+  */
+ template<
+   typename K, 
+   typename T, 
+   typename C = std::less<K>,
+   typename A = std::allocator<std::pair<const K, T>>>
+ using Map = std::map<K, T, C, A >;
+
+ /**
+  * @brief
+  */
+ template<
+   typename K,
+   typename H = std::hash<K>,
+   typename P = std::equal_to<K>,
+   typename A = std::allocator<K>>
+ using UnorderedSet = std::unordered_set<K, H, P, A>;
+
+ /**
+  * @brief
+  */
+ template<
+   typename K,
+   typename T,
+   typename H = std::hash<K>,
+   typename P = std::equal_to<K>,
+   typename A = std::allocator<std::pair<const K, T>>>
+ using UnorderedMap = std::unordered_map<K, T, H, P, A>;
+
+ /**
+  * @brief
+  */
+ template<typename T, typename Container = std::deque<T>>
+ using Stack = std::stack<T, Container>;
+
+ /**
+  * @brief
+  */
+ template<typename T, typename Container = std::deque<T>>
+ using Queue = std::queue<T, Container>;
+
+ /**
+  * @brief
+  */
+ template <typename T>
+ using SPtr = std::shared_ptr<T>;
+
+ /**
+  * @brief
+  */
+ template <typename T>
+ using WeakSPtr = std::weak_ptr<T>;
+ 
 }

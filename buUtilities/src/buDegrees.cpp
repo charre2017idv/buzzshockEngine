@@ -18,4 +18,8 @@ namespace buEngineSDK {
 	{
 		return m_degrees * (3.1415926535f / 180.0f);
 	}
+	float buDegrees::getDegrees()
+	{
+		return m_degrees;
+	}
 }

@@ -84,6 +84,9 @@
     <ClInclude Include="include\buPlugger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\buVector4F.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\buPlatformMath.cpp">

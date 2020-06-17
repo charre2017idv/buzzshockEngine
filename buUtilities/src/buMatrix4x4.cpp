@@ -1,12 +1,12 @@
 #include "buMatrix4x4.h"
 
 namespace buEngineSDK {
-	const buMatrix4x4 buMatrix4x4::Zero = buMatrix4x4(0.0f, 0.0f, 0.0f, 0.0f,
+	const buMatrix4x4 buMatrix4x4::ZERO = buMatrix4x4(0.0f, 0.0f, 0.0f, 0.0f,
 																										0.0f, 0.0f, 0.0f, 0.0f, 
 																										0.0f, 0.0f, 0.0f, 0.0f, 
 																										0.0f, 0.0f, 0.0f, 0.0f);
 
-	const buMatrix4x4 buMatrix4x4::Identity = buMatrix4x4(1.0f, 0.0f, 0.0f, 0.0f,
+	const buMatrix4x4 buMatrix4x4::IDENTITY = buMatrix4x4(1.0f, 0.0f, 0.0f, 0.0f,
 																												0.0f, 1.0f, 0.0f, 0.0f,
 																												0.0f, 0.0f, 1.0f, 0.0f,
 																												0.0f, 0.0f, 0.0f, 1.0f);
@@ -37,28 +37,10 @@ namespace buEngineSDK {
 	{
 	}
 
-	void buMatrix4x4::operator+=(const buMatrix4x4& _mat)
+	buMatrix4x4& buMatrix4x4::operator+=(const buMatrix4x4& _mat)
 	{
-		// Addition of column x
-		m_x0 += _mat.m_x0;
-		m_x1 += _mat.m_x1;
-		m_x2 += _mat.m_x2;
-		m_x3 += _mat.m_x3;
-		// Addition of column y
-		m_y0 += _mat.m_y0;
-		m_y1 += _mat.m_y1;
-		m_y2 += _mat.m_y2;
-		m_y3 += _mat.m_y3;
-		// Addition of column z
-		m_z0 += _mat.m_z0;
-		m_z1 += _mat.m_z1;
-		m_z2 += _mat.m_z2;
-		m_z3 += _mat.m_z3;
-		// Addition of column w
-		m_w0 += _mat.m_w0;
-		m_w1 += _mat.m_w1;
-		m_w2 += _mat.m_w2;
-		m_w3 += _mat.m_w3;
+		*this = *this + _mat;
+		return *this;
 	}
 	
 	buMatrix4x4 buMatrix4x4::operator+(const buMatrix4x4& _mat) const
@@ -70,28 +52,10 @@ namespace buEngineSDK {
 			m_x3 + _mat.m_x3, m_y3 + _mat.m_y3, m_z3 + _mat.m_z3, m_w3 + _mat.m_w3);
 	}
 
-	void buMatrix4x4::operator-=(const buMatrix4x4& _mat)
+	buMatrix4x4& buMatrix4x4::operator-=(const buMatrix4x4& _mat)
 	{
-		// Subtraction of column x
-		m_x0 -= _mat.m_x0;
-		m_x1 -= _mat.m_x1;
-		m_x2 -= _mat.m_x2;
-		m_x3 -= _mat.m_x3;
-		// Subtraction of column y
-		m_y0 -= _mat.m_y0;
-		m_y1 -= _mat.m_y1;
-		m_y2 -= _mat.m_y2;
-		m_y3 -= _mat.m_y3;
-		// Subtraction of column z
-		m_z0 -= _mat.m_z0;
-		m_z1 -= _mat.m_z1;
-		m_z2 -= _mat.m_z2;
-		m_z3 -= _mat.m_z3;
-		// Subtraction of column w
-		m_w0 -= _mat.m_w0;
-		m_w1 -= _mat.m_w1;
-		m_w2 -= _mat.m_w2;
-		m_w3 -= _mat.m_w3;
+		*this = *this - _mat;
+		return *this;
 	}
 
 	buMatrix4x4 buMatrix4x4::operator-(const buMatrix4x4& _mat) const
@@ -138,7 +102,7 @@ namespace buEngineSDK {
 			x3, y3, z3, w3);
 	}
 
-	float buMatrix4x4::det()
+	float buMatrix4x4::determinant()
 	{
 		// Get the basic matrix
 		buMatrix4x4 tmpMat = *this;
