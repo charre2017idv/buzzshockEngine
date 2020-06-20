@@ -114,6 +114,6 @@
  // (x) Radians
 
  // Trigonometry
- // Series de teilor
+ // (x) Series de teilor
  // fast cos, sin, tan, cot
  // Factor de impresicion

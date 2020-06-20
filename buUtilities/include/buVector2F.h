@@ -178,13 +178,22 @@ namespace buEngineSDK {
   operator%(const buVector2F& _v) const;
   
   /**
+   * @brief
+   * @param
+   * @return
+   * @bug
+   */
+  FORCEINLINE float
+  sqrMagnitude();
+
+  /**
   * @brief Method that return a scalar from the current vector.
   * @param
   * @return
   * @bug
   */
   float 
-  mag();
+  magnitude();
   
   /**
   * @brief Method that normalize the current vector.

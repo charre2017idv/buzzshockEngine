@@ -10,7 +10,7 @@
 #pragma once
 #include "buPrerequisitesUtil.h"
 #include "buVector3F.h"
-#include "buPlatformMath.h"
+#include "buMath.h"
 
 namespace buEngineSDK {
  class BU_UTILITY_EXPORT buQuaternion
@@ -132,8 +132,17 @@ namespace buEngineSDK {
    * @return A magnitude value.
    * @bug None.
    */
-  float
-  mag();
+  FORCEINLINE float
+  magnitude();
+
+  /** 
+   * @brief 
+   * @param 
+   * @return 
+   * @bug 
+   */
+  FORCEINLINE float
+  sqrMagnitude();
 
   /** 
    * @brief Method that normalize a quaternion.

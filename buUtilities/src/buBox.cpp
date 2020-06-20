@@ -1,14 +1,8 @@
 #include "buBox.h"
 
 namespace buEngineSDK {
-	buBox::buBox(float _x, float _y, float _width, float _height, float _lenght)
-	{
-		m_x = _x;
-		m_y = _y;
-		m_width = _width;
-		m_height = _height;
-		m_length = _lenght;
-	}
+	buBox::buBox(float _x, float _y, float _width, float _height, float _lenght) : 
+		m_x(_x), m_y(_y), m_width(_width), m_height(_height), m_length(_lenght) { }
 
 	buBox::buBox(float _x, float _y, const buVector3F& _v)
 	{

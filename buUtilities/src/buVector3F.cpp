@@ -92,23 +92,29 @@ namespace buEngineSDK {
       x * _v.y - y * _v.x);
   }
 
-  float buVector3F::mag()
+  float buVector3F::magnitude()
   {
-    float magnitude = buEngineSDK::buPlatformMath::sqrt(x * x + y * y + z * z);
-    return magnitude;
+    return buMath::sqrt(sqrMagnitude());
+  }
+
+  float buVector3F::sqrMagnitude()
+  {
+    return buMath::sqr(x) + buMath::sqr(y) + buMath::sqr(z);
   }
 
   void buVector3F::normalize()
   {
-    float magnitude = std::sqrt(x * x + y * y + z * z);
-    if (magnitude > 0.0f) {
-      float oneOverMag = 1.0f / magnitude;
-      x = x * oneOverMag;
-      y = y * oneOverMag;
-      z = z * oneOverMag;
+    float sqrMag = sqrMagnitude();
+
+    if (0.0f == sqrMag) {
+      return;
     }
+
+    float normValue = buMath::invSqrt(sqrMag);
+    x = x * normValue;
+    y = y * normValue;
+    z = z * normValue;
+    
   }
-
-
 
 }

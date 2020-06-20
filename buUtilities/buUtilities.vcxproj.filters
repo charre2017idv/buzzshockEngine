@@ -15,15 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\buPlatformDefines.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\buPlatformTypes.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\buPrerequisitesUtil.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\buStdHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -81,10 +72,19 @@
     <ClInclude Include="include\buRectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\buPlugger.h">
+    <ClInclude Include="include\buVector4F.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\buVector4F.h">
+    <ClInclude Include="include\buPluggin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\buPlatformDefines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\buPlatformTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\buPrerequisitesUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

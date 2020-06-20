@@ -1,6 +1,6 @@
 #pragma once
 #include "buPrerequisitesUtil.h"
-#include "buPlatformMath.h"
+#include "buMath.h"
 
 namespace buEngineSDK {
  class BU_UTILITY_EXPORT buVector3F
@@ -177,7 +177,16 @@ namespace buEngineSDK {
    * @bug
    */
   float
-  mag();
+  magnitude();
+
+  /**
+   * @brief
+   * @param
+   * @return
+   * @bug
+   */
+  FORCEINLINE float
+  sqrMagnitude();
 
   /**
    * @brief Method that normalize the current vector.

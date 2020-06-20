@@ -209,3 +209,13 @@
 # define BU_DEBUG_ONLY(x)
 # define BU_ASSERT(x)
 #endif
+
+/**
+ * @brief Disable some compiler warnings
+ */
+#if BU_COMPILER == BU_COMPILER_MSVC
+# define _CRT_SECURE_NO_WARNINGS        
+# pragma warning(disable:4201)          // Ignore structures without name
+# pragma warning(disable: 4251)         // Ingore the DLL interface
+# pragma warning(disable: 4503)         // Delete warnigns of long names
+#endif

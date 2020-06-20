@@ -50,32 +50,22 @@ namespace buEngineSDK {
    /**
     * @brief Position in x coordinate
     */
-   float m_x;
+   float m_x = 0.0f;
 
    /**
     * @brief Position in y coordinate
     */
-   float m_y;
+   float m_y = 0.0f;
 
   /**
    * @brief Width value of the rectangle.
    */
-  float m_width;
+  float m_width = 0.0f;
   
   /**
    * @brief Lenght of the rectangle.
    */
-  float m_lenght;
-  
-  /**
-   * @brief Area of the rectangle.
-   */
-  float m_area;
-  
-  /**
-   * @brief Perimeter of the rectangle.
-   */
-  float m_perimeter;
+  float m_lenght = 0.0f;
 
  };
 }

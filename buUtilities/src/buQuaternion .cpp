@@ -76,25 +76,30 @@ namespace buEngineSDK {
 		buVector3F imaginary = m_axis * value;
 		return buQuaternion(scalar, imaginary);
 	}
-	
-	float buQuaternion::mag()
+
+	float buQuaternion::magnitude()
 	{
-		float magnitude = buEngineSDK::buPlatformMath::sqrt
-		(
-			m_val * m_val + m_axis.x * m_axis.x + m_axis.y * m_axis.y + m_axis.z * m_axis.z
-		);
-		return magnitude;
+		return buMath::sqrt(sqrMagnitude());
+	}
+
+	float buQuaternion::sqrMagnitude()
+	{
+		return buMath::sqr(m_val) + buMath::sqr(m_axis.x) +
+			     buMath::sqr(m_axis.y) + buMath::sqr(m_axis.z);
 	}
 
 	void buQuaternion::normalize()
 	{
-		if (mag() != 0)
-		{
-			float normValue = 1 / mag();
+		float sqrMag = sqrMagnitude();
 
-			m_val *= normValue;
-			m_axis *= normValue;
+		if (0.0f == sqrMag) {
+			return;
 		}
+
+		float normValue = buMath::invSqrt(sqrMag);
+
+		m_val *= normValue;
+		m_axis *= normValue;
 	}
 
 	buQuaternion buQuaternion::conjugate()
@@ -107,7 +112,7 @@ namespace buEngineSDK {
 
 	buQuaternion buQuaternion::inverse()
 	{
-		float absoluteValue = mag();
+		float absoluteValue = magnitude();
 		absoluteValue *= absoluteValue;
 		absoluteValue = 1 / absoluteValue;
 

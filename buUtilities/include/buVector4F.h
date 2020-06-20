@@ -20,7 +20,7 @@ namespace buEngineSDK {
    * @return
    * @bug
    */
-  buVector4F();
+  buVector4F() = default;
 
   /**
    * @brief Constructor in charge of reciving two points for the vector.
@@ -135,22 +135,22 @@ namespace buEngineSDK {
   /**
    * @brief Member in charge of storing the point of the x - coordinate.
    */
-  float x;
+  float x = 0.0f;
   
   /**
    * @brief Member in charge of storing the point of the y - coordinate.
    */
-  float y;
+  float y = 0.0f;
   
   /**
    * @brief Member in charge of storing the point of the z - coordinate.
    */
-  float z;
+  float z = 0.0f;
   
   /**
    * @brief Member in charge of storing the point of the w - coordinate.
    */
-  float w;
+  float w = 0.0f;
   
   /**
    * @brief Member in charge of giving an integer point with zero values.

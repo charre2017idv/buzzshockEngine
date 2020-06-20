@@ -10,6 +10,7 @@
 #define GTEST_USE_OWN_TR1_TUPLE 0
 #include <gtest/gtest.h>
 #include<buPrerequisitesUtil.h>
+#include "buMath.h"
 #include "buVector2I.h"
 #include "buVector2F.h"
 #include "buVector3I.h"
@@ -119,7 +120,7 @@ TEST(buUtilities, Vector2F_Test) {
  // ACT - Vector Cross Product
  buVector2F Vector1CrossVector2 = vector1.cross(vector2);
  // ACT - Vector magnitude
- float Magnitude = vector1.mag();
+ float Magnitude = vector1.magnitude();
  // ACT - Vector normalized
  vector1.normalize();
 
@@ -242,7 +243,7 @@ TEST(buUtilities, Vector3F_Test) {
  // ACT - Vector Cross Product
  buVector3F Vector1CrossVector2 = vector1.cross(vector2);
  // ACT - Vector magnitude
- float Magnitude = E.mag();
+ float Magnitude = E.magnitude();
  // ACT - Vector normalized
  vector1.normalize();
 
@@ -548,7 +549,7 @@ TEST(buUtilities, Quaternion_Test) {
   // ACT - Mul quaternions
   buQuaternion quaternionMul = q * q2;
   // ACT - Mag of quaternion
-  float quaternionMag = q.mag();
+  float quaternionMag = q.magnitude();
   // ACT - Multiply quaternion with a scalar
   buQuaternion quaternionMulByScalar = q * 2;
   // ACT - Normalize a quaternion
@@ -575,17 +576,17 @@ TEST(buUtilities, Quaternion_Test) {
   EXPECT_FLOAT_EQ(0, quaternionMul.m_axis.z);
   EXPECT_FLOAT_EQ(899, quaternionMul.m_val);
   // ASSERT - Mag of quaternion
-  EXPECT_FLOAT_EQ(90.00555538409837, quaternionMag);
+  EXPECT_FLOAT_EQ(90.00555538409837f, quaternionMag);
   // ASSERT - Multiply quaternion with a scalar 
   EXPECT_FLOAT_EQ(2, quaternionMulByScalar.m_axis.x);
   EXPECT_FLOAT_EQ(0, quaternionMulByScalar.m_axis.y);
   EXPECT_FLOAT_EQ(0, quaternionMulByScalar.m_axis.z);
   EXPECT_FLOAT_EQ(180, quaternionMulByScalar.m_val);
   // ASSERT - Normalize a quaternion
-  EXPECT_FLOAT_EQ(0.049937617, q3.m_axis.x);
+  EXPECT_FLOAT_EQ(0.049937617f, q3.m_axis.x);
   EXPECT_FLOAT_EQ(0, q3.m_axis.y);
   EXPECT_FLOAT_EQ(0, q3.m_axis.z);
-  EXPECT_FLOAT_EQ(0.99875236, q3.m_val);
+  EXPECT_FLOAT_EQ(0.99875236f, q3.m_val);
 }
 
 /**
@@ -684,4 +685,22 @@ TEST(buUtilities, Rectangle_Test) {
   // ASSERT - Perimeter of rectangle
   EXPECT_FLOAT_EQ(34, perimeter);
 
+}
+
+/**
+ * @brief Testing in charge of asserting that the talyor works fine.
+ * @param buUtilities For testing initialization requirements.
+ * @param TaylorSeries_Test Name of the unit test.
+ */
+TEST(buUtilities, TaylorSeries_Test) {
+  // ARRANGE
+
+  // ACT - cos taylor 
+  double cos = buMath::cosTaylor(8, 1.0f);
+  // ACT - sin taylor 
+  double sin = buMath::sinTaylor(8, 1.0f);
+  // ASSERT - cos taylor
+  EXPECT_NEAR(0.540302, cos, .1);
+  // ASSERT - sin taylor
+  EXPECT_NEAR(0.841471, sin, .1);
 }

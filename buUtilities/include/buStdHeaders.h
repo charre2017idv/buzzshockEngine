@@ -72,7 +72,6 @@ extern "C" {
   // Undefined min & max
 #undef min
 #undef max
-#include <Windows.h>
 #if !defined(NOMINMAX)&& defined(_MSC_VER)
 #  define NOMINMAX  // Rquired to stop windows.h messing up std::min
 #endif
