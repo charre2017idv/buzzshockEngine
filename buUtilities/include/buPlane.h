@@ -13,7 +13,7 @@
 
 
 namespace buEngineSDK {
-  class buPlane
+  class BU_UTILITY_EXPORT buPlane
   {
   public:
    /**

@@ -165,12 +165,13 @@ namespace buEngineSDK {
     * @param _angle Angle value.
     * @return A sin value.
     */
-   static double 
+   static float 
    sinTaylor(int _number, float _angle) {
-     double sin = 0;
+     float sin = 0.0f;
 
-     for (int k = 0; k < _number; k++) {
-       sin = sin + pow(-1, k) * pow(_angle, 2 * k + 1) / factorial(2 * k + 1);
+     for (int k = 0; k < _number; ++k) {
+       sin = sin + pow(-1.0f, (float)k) * pow(_angle, 2.0f * (float)k + 1.0f) /
+                                   factorial(2 * k + 1 );
      }
      return sin;
    }
@@ -181,12 +182,12 @@ namespace buEngineSDK {
     * @param _angle Angle value.
     * @return A cos value.
     */
-   static double 
+   static float 
    cosTaylor(int _number, float _angle) {
-     double cos = 0;
+     float cos = 0.0f;
 
-     for (int k = 0; k < _number; k++) {
-       cos = cos + pow(-1, k) * pow(_angle, 2 * k) / factorial(2 * k);
+     for (int k = 0; k < _number; ++k) {
+       cos = cos + pow(-1.0f, (float)k) * pow(_angle, 2.0f * (float)k) / factorial(2 * k);
      }
      return cos;
    }

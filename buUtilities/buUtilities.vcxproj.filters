@@ -87,6 +87,9 @@
     <ClInclude Include="include\buPrerequisitesUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\buFrustrum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\buPlatformMath.cpp">
@@ -141,6 +144,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\buRectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\buFrustrum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

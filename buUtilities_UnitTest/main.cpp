@@ -538,9 +538,9 @@ TEST(buUtilities, Matrix4x4_Test) {
 TEST(buUtilities, Quaternion_Test) {
   // ARRENGE - Initialization
   buVector3F axis(1, 0, 0);
-  buQuaternion q(90, axis);
-  buQuaternion q2(10, axis);
-  buQuaternion q3(20, axis);
+  buQuaternion q(90.0f, axis);
+  buQuaternion q2(10.0f, axis);
+  buQuaternion q3(20.0f, axis);
 
   // ACT - Add quaternions
   buQuaternion quaternionAdd = q + q2;
@@ -556,10 +556,10 @@ TEST(buUtilities, Quaternion_Test) {
   q3.normalize();
 
   // ASSERT - Initialization
-  EXPECT_FLOAT_EQ(1, q.m_axis.x);
-  EXPECT_FLOAT_EQ(0, q.m_axis.y);
-  EXPECT_FLOAT_EQ(0, q.m_axis.z);
-  EXPECT_FLOAT_EQ(90, q.m_val);
+  EXPECT_FLOAT_EQ(1.0f, q.m_axis.x);
+  EXPECT_FLOAT_EQ(0.0f, q.m_axis.y);
+  EXPECT_FLOAT_EQ(0.0f, q.m_axis.z);
+  EXPECT_FLOAT_EQ(90.0f, q.m_val);
   // ASSERT - Add quaternion
   EXPECT_FLOAT_EQ(2, quaternionAdd.m_axis.x);
   EXPECT_FLOAT_EQ(0, quaternionAdd.m_axis.y);
@@ -696,11 +696,11 @@ TEST(buUtilities, TaylorSeries_Test) {
   // ARRANGE
 
   // ACT - cos taylor 
-  double cos = buMath::cosTaylor(8, 1.0f);
+  float cos = buMath::cosTaylor(8, 1.0f);
   // ACT - sin taylor 
-  double sin = buMath::sinTaylor(8, 1.0f);
+  float sin = buMath::sinTaylor(8, 1.0f);
   // ASSERT - cos taylor
-  EXPECT_NEAR(0.540302, cos, .1);
+  EXPECT_FLOAT_EQ(0.5403022f, cos);
   // ASSERT - sin taylor
-  EXPECT_NEAR(0.841471, sin, .1);
+  EXPECT_FLOAT_EQ(0.841471f, sin);
 }

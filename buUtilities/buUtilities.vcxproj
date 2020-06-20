@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="include\buBox.h" />
     <ClInclude Include="include\buDegrees.h" />
+    <ClInclude Include="include\buFrustrum.h" />
     <ClInclude Include="include\buMath.h" />
     <ClInclude Include="include\buMatrix4x4.h" />
     <ClInclude Include="include\buModule.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="include\Source.cpp" />
     <ClCompile Include="src\buBox.cpp" />
     <ClCompile Include="src\buDegrees.cpp" />
+    <ClCompile Include="src\buFrustrum.cpp" />
     <ClCompile Include="src\buMath.cpp" />
     <ClCompile Include="src\buMatrix4x4.cpp" />
     <ClCompile Include="src\buPlane.cpp" />
