@@ -117,3 +117,62 @@
  // (x) Series de teilor
  // fast cos, sin, tan, cot
  // Factor de impresicion
+
+
+
+  // Parcial 2
+  // ( ) Lib "buCore" -> .lib - > Any system that doesnt need to be related with game -> it has graphics api that derivates from dxAPI graphics api
+  //  ( ) Virtual functions from graphics api of DXAPI
+  //  ( ) buCamera
+  //  ( ) buTransform
+  // This is for the initializations of resources of DX without getting the DX format to CREATE or PROVIDE 
+  //  ( ) Graphics_API
+  //   ( ) buDevice 
+  //   ( ) buDevice Context
+  //   ( ) buSwapchain
+  //   ( ) buDepth Stencil View
+  //   ( ) Buffers
+  //     ( ) buBuffer -> (Parent)
+  //     ( ) buConstBuffer
+  //     ( ) buVertexBuffer
+  //     ( ) buPixelBuffer
+  //   ( ) buInputLayout
+  //   ( ) buVertexShader
+  //   ( ) buPixelShader
+  //   ( ) buRasterizer
+  //   ( ) buTexture
+  //   ( ) buViewport
+  //   ( ) buSampler
+  //   ( ) buWindow
+  //   ( ) Texture
+  //     ( ) buTexture2D
+  //     ( ) buRenderTarget
+  //     ( ) buDepth Stencil
+
+  // ( ) Lib "buCoreUnitTest" -> For unit testing
+
+  // ( ) lib for DXAPI called graphics api
+  //  ( ) buDevice 
+  //  ( ) buDevice Context
+  //  ( ) buSwapchain
+  //  ( ) buDepth Stencil View
+  //  ( ) Buffers
+  //    ( ) buBuffer -> (Parent)
+  //    ( ) buConstBuffer
+  //    ( ) buVertexBuffer
+  //    ( ) buPixelBuffer
+  //  ( ) buInputLayout
+  //  ( ) buVertexShader
+  //  ( ) buPixelShader
+  //  ( ) buRasterizer
+  //  ( ) buTexture
+  //  ( ) buViewport
+  //  ( ) buSampler
+  //  ( ) buWindow
+  //  ( ) Texture
+  //    ( ) buTexture2D
+  //    ( ) buRenderTarget
+  //    ( ) buDepth Stencil
+
+
+  // ( ) lib for DXAPI_UnitTest called graphics api
