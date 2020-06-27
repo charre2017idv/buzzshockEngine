@@ -109,7 +109,7 @@ namespace buEngineSDK {
      */
     static bool 
       isStarted() {
-      return isStardedUp() && !isDestroyed();
+      return isStartedUp() && !isDestroyed();
     }
 
   protected:

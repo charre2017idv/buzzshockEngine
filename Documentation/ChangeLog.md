@@ -1,5 +1,15 @@
 # Change log
 
+## v1.0.0 Jun. 27, 2020
+Engine configurations for the Core and the Direct X API
+
+
+## v1.0.0 Jun. 26, 2020
+Core Class initialization.
+
+**Added:**
+- "buCoreGraphicsAPI" - Class
+
 ## v1.0.0 Jun. 25, 2020
 
 Core project initializations
