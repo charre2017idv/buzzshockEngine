@@ -10,6 +10,8 @@
 
 #include <buPrerequisitesCore.h>
 #include <buModule.h>
+#include <buCoreViewport.h>
+
 namespace buEngineSDK {
 
  class BU_CORE_EXPORT buCoreGraphicsAPI : public buModule<buCoreGraphicsAPI>
@@ -22,7 +24,14 @@ namespace buEngineSDK {
   /**
    * @brief Destructor
    */
-  ~buCoreGraphicsAPI() {};
+  ~buCoreGraphicsAPI() = default;
+  /**
+   * @brief Instances of this class
+   */
+  FORCEINLINE void 
+  setObject(buCoreGraphicsAPI* _api) {
+    buCoreGraphicsAPI::_instance() = _api;
+  }
   
   /** 
    * @brief 
@@ -31,20 +40,21 @@ namespace buEngineSDK {
    * @bug 
    */
   virtual void 
-  testFunc() {};
-
+  testFunc() {}
   /** 
    * @brief 
    * @param 
    * @return 
    * @bug 
    */
+  virtual SPtr<buCoreViewport>
+  createViewport() { return nullptr; }
+ private:
 
-  private:
- 
  };
 
  BU_CORE_EXPORT buCoreGraphicsAPI&
  g_graphicsAPI();
 
+ using fnGraphicsAPIProt = buCoreGraphicsAPI * (*)();
 }

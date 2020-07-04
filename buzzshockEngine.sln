@@ -26,12 +26,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "buDX_API", "buDX_API\buDX_A
 		{C6653C66-D271-48EB-BE64-7837131389A6} = {C6653C66-D271-48EB-BE64-7837131389A6}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "buDX_API_UnitTest", "buDX_API_UnitTest\buDX_API_UnitTest.vcxproj", "{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C6653C66-D271-48EB-BE64-7837131389A6} = {C6653C66-D271-48EB-BE64-7837131389A6}
-		{8156C16F-10A3-481E-9DDB-C70526EC9E84} = {8156C16F-10A3-481E-9DDB-C70526EC9E84}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -80,14 +74,6 @@ Global
 		{8156C16F-10A3-481E-9DDB-C70526EC9E84}.Release|x64.Build.0 = Release|x64
 		{8156C16F-10A3-481E-9DDB-C70526EC9E84}.Release|x86.ActiveCfg = Release|Win32
 		{8156C16F-10A3-481E-9DDB-C70526EC9E84}.Release|x86.Build.0 = Release|Win32
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Debug|x64.ActiveCfg = Debug|x64
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Debug|x64.Build.0 = Debug|x64
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Debug|x86.ActiveCfg = Debug|Win32
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Debug|x86.Build.0 = Debug|Win32
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Release|x64.ActiveCfg = Release|x64
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Release|x64.Build.0 = Release|x64
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Release|x86.ActiveCfg = Release|Win32
-		{72B3D0E8-D6C6-40B3-AFDE-81AD4368A159}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

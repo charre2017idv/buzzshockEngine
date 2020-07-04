@@ -13,6 +13,27 @@ namespace buEngineSDK {
   class buPlatformMath
   {
   public:
+   /** 
+    * @brief Method that return a quick sqrt value.
+    * @param _v Value.
+    * @return quick sqrt.
+    */
+   static FORCEINLINE float
+     Q_rsqrt(float _v) {
+     long i;
+     float x2, y;
+     const float threehalfs = 1.5F;
+
+     x2 = _v * 0.5f;
+     y = _v;
+     i = *(long*)&y;
+     i = 0x5f3759df - (i >> 1);
+     y = *(float*)&i;
+     y = y * (threehalfs - (x2 * y * y));
+
+     return y;
+   }
+
    /**
     * @brief Method that return the sqrt value from the std library.
     * @param Value

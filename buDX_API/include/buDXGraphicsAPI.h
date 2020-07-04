@@ -1,6 +1,7 @@
 #pragma once
 #include <buCoreGraphicsAPI.h>
-
+#include <d3d11.h>
+#include <memory>
 namespace buEngineSDK {
  class buDXGraphicsAPI : public buCoreGraphicsAPI
  {
@@ -13,13 +14,20 @@ namespace buEngineSDK {
     */
    void
    testFunc() override;
-   
+   /**
+   * @brief
+   * @param
+   * @return
+   * @bug
+   */
+   SPtr<buCoreViewport>
+   createViewport() override;
   private:
   
  };
  
  /** 
-  * @brief Pluggin exportation data method. 
+  * @brief Plugging exportation data method. 
   * @return Instance of DX.
   */
  extern "C" BU_PLUGIN_EXPORT buDXGraphicsAPI *

@@ -3,6 +3,12 @@
 ## v1.0.0 Jun. 27, 2020
 Engine configurations for the Core and the Direct X API
 
+**Added:**
+- Properties for the "buCore"
+- Properties for the "buCore_UnitTest"
+- Properties for the "buDXAPI"
+- Properties for the "buDXAPI_UnitTest"
+- Initialization of the first test of the core. (This test is for the plugging of the graphics API)
 
 ## v1.0.0 Jun. 26, 2020
 Core Class initialization.

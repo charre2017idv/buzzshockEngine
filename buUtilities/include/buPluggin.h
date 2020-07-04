@@ -36,28 +36,61 @@ namespace buEngineSDK {
      * @bug None.
      */
     bool
-      CreatePluggin(LPCSTR _dllName);
+    createPluggin(const String& _dllName);
+
+    void* 
+    getProcedureByName(const String& _name);
+
+    /**
+     * @brief 
+     * @param 
+     * @return 
+     * @bug 
+     */
+    void
+    destroy();
 
   public:
-    HINSTANCE m_instance;
+    void* m_instance;
   };
 
   buPluggin::~buPluggin() { }
 
-  inline bool buPluggin::CreatePluggin(LPCSTR _dllName)
+  inline bool buPluggin::createPluggin(const String& _dllName)
   {
     m_instance = LoadLibraryExA(
-      _dllName,
+      _dllName.c_str(),
       nullptr,
       LOAD_WITH_ALTERED_SEARCH_PATH);
 
     // Check that the instances isnt null
     if (!m_instance) {
+      destroy();
       return false;
     }
 
-    // Realese the library.
-    FreeLibrary(m_instance);
+    
+
     return true;
+  }
+
+
+  inline void* buPluggin::getProcedureByName(const String& _name)
+  {
+    auto createFunction = GetProcAddress(reinterpret_cast<HINSTANCE>(m_instance),
+                                         _name.c_str());
+
+    if (!createFunction) {
+      std::cout << "auto createFunction not Initialized!" << std::endl;
+     // return ;
+    }
+
+    return createFunction;
+  }
+
+  inline void buPluggin::destroy()
+  {
+    // Realese the library.
+    FreeLibrary((reinterpret_cast<HINSTANCE>(m_instance)));
   }
 };
