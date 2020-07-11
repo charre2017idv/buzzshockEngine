@@ -12,8 +12,8 @@
 namespace buEngineSDK {
   /**
    * @brief Represents one engine module. Essentially it is a specialized type 
-   * of singleton. Module must be manually started up and shut down befor and
-   * adter use.
+   * of singleton. Module must be manually started up and shut down before and
+   * after use.
    */
   template<class T>
 	class buModule
@@ -21,7 +21,7 @@ namespace buEngineSDK {
   public:
     /**
      * @brief Returns a reference to the module instance. Module has to have
-     * been starteed up first otherwise an exception will be thrown.
+     * been started up first otherwise an exception will be thrown.
      */
     static T&
     instance() {
@@ -45,7 +45,7 @@ namespace buEngineSDK {
         // Throw exception: Trying to access a module but it hasn't been started.
       }
       if (isDestroyed()) {
-        // Throw exception: Trying to acces a destroyed module.
+        // Throw exception: Trying to access a destroyed module.
       }
 
       return _instance();
@@ -58,7 +58,7 @@ namespace buEngineSDK {
     static void
     startUp(Args&& ...args) {
       if (isStartedUp()) {
-        // Throw exception : Trying to start an already starded module.
+        // Throw exception : Trying to start an already stared module.
       }
       _instance() = new T(std::forward<Args>(args)...);
       isStartedUp() = true;

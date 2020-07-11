@@ -1,5 +1,33 @@
 # Change log
 
+## v1.0.0 Jul. 10, 2020
+
+**Added:**
+- "BuCoreBuffer" Class
+- "BuDXBuffer" Class
+
+## v1.0.0 Jul. 09, 2020
+
+**Added:**
+- "buCoreInputLayout" class
+- "buDXInputLayout" class
+
+## v1.0.0 Jul. 08, 2020
+Engine initialization to render a triangle
+
+**Added:**
+- "buCoreTexture2D" Class
+- "buDXTexture2D" Class
+- "buCoreRenderTargetView" Class
+- "buDXRenderTargetView" Class
+- "buCoreViewport" Class
+- "buDXViewport" Class
+- "buCoreVertexShader" Class
+- "buDXVertexShader" Class
+- "buCorePixelShader" Class
+- "buDXPixelShader" Class
+- Rendering a basic triangle in Direct X 11 
+
 ## v1.0.0 Jun. 27, 2020
 Engine configurations for the Core and the Direct X API
 

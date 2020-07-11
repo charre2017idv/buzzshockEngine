@@ -1,9 +1,10 @@
 /**
- * @file 
- * @version 
- * @date 00/00/2020
+ * @file buCoreVieport.h
+ * @version 1.0
+ * @date 08/07/2020
  * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
- * @brief 
+ * @brief Class in charge of initialize the virtual methods for the buDXviewport
+ * class.
  * @bug
  */
 #pragma once
@@ -17,6 +18,11 @@ namespace buEngineSDK {
  	 * @brief 
  	 */
  	buCoreViewport() = default;
+  /**
+    * @brief
+    */
+  buCoreViewport(float width, float height, float minDepth, float maxDepth,
+                  float topLeftX, float topLeftY);
  	/**
  	 * @brief 
  	 */

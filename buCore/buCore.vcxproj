@@ -193,8 +193,14 @@
     <ClCompile Include="src\buCoreTexture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\buCoreBuffer.h" />
     <ClInclude Include="include\buCoreGraphicsAPI.h" />
+    <ClInclude Include="include\buCoreInputLayout.h" />
+    <ClInclude Include="include\buCorePixelShader.h" />
+    <ClInclude Include="include\buCoreRenderTargetView.h" />
+    <ClInclude Include="include\buCoreSwapchain.h" />
     <ClInclude Include="include\buCoreTexture2D.h" />
+    <ClInclude Include="include\buCoreVertexShader.h" />
     <ClInclude Include="include\buCoreViewport.h" />
     <ClInclude Include="include\buPrerequisitesCore.h" />
   </ItemGroup>

@@ -2,7 +2,4 @@
 
 namespace buEngineSDK {
 
-	buCoreTexture2D::~buCoreTexture2D()
-	{
-	}
 }

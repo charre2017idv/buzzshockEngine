@@ -181,12 +181,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\buDXBuffer.cpp" />
     <ClCompile Include="src\buDXGraphicsAPI.cpp" />
+    <ClCompile Include="src\buDXInputLayout.cpp" />
+    <ClCompile Include="src\buDXPixelShader.cpp" />
+    <ClCompile Include="src\buDXRenderTargetView.cpp" />
+    <ClCompile Include="src\buDXSwapchain.cpp" />
+    <ClCompile Include="src\buDXTexture2D.cpp" />
+    <ClCompile Include="src\buDXVertexShader.cpp" />
+    <ClCompile Include="src\buDXViewport.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\buDXBuffer.h" />
     <ClInclude Include="include\buDXDevice.h" />
     <ClInclude Include="include\buDXGraphicsAPI.h" />
+    <ClInclude Include="include\buDXInputLayout.h" />
+    <ClInclude Include="include\buDXPixelShader.h" />
+    <ClInclude Include="include\buDXRenderTargetView.h" />
+    <ClInclude Include="include\buDXSwapchain.h" />
+    <ClInclude Include="include\buDXTexture2D.h" />
+    <ClInclude Include="include\buDXVertexShader.h" />
+    <ClInclude Include="include\buDXViewport.h" />
     <ClInclude Include="include\buPrerequisitesDX.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,6 +33,7 @@ namespace buEngineSDK {
  /**
   * @brief Wide string used primarly for handling Unicode text.
   */
+ template<typename T>
  using WString = BasicString<UNICHAR>;
  
  /**
