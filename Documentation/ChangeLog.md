@@ -1,5 +1,13 @@
 # Change log
 
+## v1.0.0 Jun. 21, 2020
+
+**Added:**
+- Rendering the cube in App.
+- Added some math methods to the matrix class (Projection, lookAt and rotation)
+- New input lauput method and implementation
+- App creation class is initialized from app and created and executed in testAPP.
+
 ## v1.0.0 Jul. 10, 2020
 
 **Added:**
