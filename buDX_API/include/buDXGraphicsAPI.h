@@ -1,9 +1,21 @@
+/**
+ * @file buDXGraphicsAPI.h 
+ * @version 
+ * @date 00/00/2020
+ * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
+ * @brief 
+ * @bug
+ */
 #pragma once
 #include <buCoreGraphicsAPI.h>
 #include <d3d11.h>
 #include <d3dcompiler.h>
+#include <DDSTextureLoader.h> // External lib for loading textures
 #include <memory>
+#include <buVector2F.h>
 #include <buVector3F.h>
+#include <buVector4F.h>
+#include "buMatrix4x4.h"
 #include "buDXViewport.h"
 #include "buDXTexture2D.h"
 #include "buDXSwapchain.h"
@@ -12,11 +24,32 @@
 #include "buDXPixelShader.h"
 #include "buDXInputLayout.h"
 #include "buDXBuffer.h"
+#include "buDXDepthStencilView.h"
+#include "buDXSampler.h"
+// Assimp
+
 
 namespace buEngineSDK {
   struct SimpleVertex
   {
     buVector3F Pos;
+    buVector2F Tex;
+  };
+
+  struct CBNeverChanges
+  {
+    buMatrix4x4 mView;
+  };
+
+  struct CBChangeOnResize
+  {
+    buMatrix4x4 mProjection;
+  };
+
+  struct CBChangesEveryFrame
+  {
+    buMatrix4x4 mWorld;
+    buVector4F vMeshColor;
   };
 
  class buDXGraphicsAPI : public buCoreGraphicsAPI
@@ -40,21 +73,22 @@ namespace buEngineSDK {
    bool 
    init(WeakSPtr<buCoreViewport> _viewport, 
         WeakSPtr<buCoreTexture2D> _backBuffer,
+        WeakSPtr<buCoreTexture2D> _depthStencil,
+        WeakSPtr<buCoreDepthStencilView> _depthStencilView,
         WeakSPtr<buCoreRenderTargetView> _renderTargetView,
         WeakSPtr<buCoreVertexShader> _vertexShader,
         WeakSPtr<buCoreInputLayout> _inputLayout,
         WeakSPtr<buCorePixelShader> _pixelShader,
-        WeakSPtr<buCoreBuffer> _vertexBuffer) override;
+        WeakSPtr<buCoreBuffer> _vertexBuffer, 
+        WeakSPtr<buCoreBuffer> _indexBuffer, 
+        WeakSPtr<buCoreBuffer> _neverChanges, 
+        WeakSPtr<buCoreBuffer> _changeOnResize, 
+        WeakSPtr<buCoreBuffer> _ChangeEveryFrame, 
+        WeakSPtr<buCoreTexture2D> _meshTexture,
+        WeakSPtr<buCoreSampler> _sampler,
+        void* _window) override;
 
-   /**
-   * @brief
-   * @param
-   * @return
-   * @bug
-   */
-   bool
-   initWindow(void* hInstance, void* _wndProc) override;
-
+   
   /** 
    * @brief 
    * @param 
@@ -70,10 +104,45 @@ namespace buEngineSDK {
    * @return 
    * @bug 
    */
+  void
+  update() override;
+  
+  /** 
+   * @brief 
+   * @param 
+   * @return 
+   * @bug 
+   */
   void 
-  render(WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+  render(WeakSPtr<buCoreDepthStencilView> _depthStencilView, 
+         WeakSPtr<buCoreRenderTargetView> _renderTargetView,
          WeakSPtr<buCoreVertexShader> _vertexShader,
-         WeakSPtr<buCorePixelShader> _pixelShader) override;
+         WeakSPtr<buCoreInputLayout> _inputLayout,
+         WeakSPtr<buCorePixelShader> _pixelShader, 
+         WeakSPtr<buCoreBuffer> _neverChanges, 
+         WeakSPtr<buCoreBuffer> _changeOnResize, 
+         WeakSPtr<buCoreBuffer> _ChangeEveryFrame,
+         WeakSPtr<buCoreTexture2D> _meshTexture,
+         WeakSPtr<buCoreSampler> _sampler) override;
+
+  /**
+   * @brief 
+   */
+  void 
+  initialize(void* _window, int32 _width, int32 _height) override;
+
+  /**
+   * @brief 
+   */
+  bool 
+  createDeviceAndSwapChain(void* _window) override;
+
+  /**
+   * @brief Method that creates the backbuffer texture, this is a 
+   * very specific method for his implementation.
+   */
+  bool 
+  createTextureForBackBuffer(WeakSPtr<buCoreTexture2D> _backbuffer) override;
 
    /**
    * @brief
@@ -150,47 +219,249 @@ namespace buEngineSDK {
    /** 
     * @brief 
     * @param 
-    * @return  
+    * @return 
     * @bug 
     */
-   LRESULT CALLBACK WndProc(HWND Hw, UINT Msg, WPARAM wParam, LPARAM lParam);
-  private:
-    /**
-     * @brief 
-     */
-    ID3D11Device* m_device = NULL;
-    /**
-     * @brief 
-     */
-    ID3D11DeviceContext* m_deviceContext = NULL;
-    /**
-     * @brief 
-     */
-    IDXGISwapChain* m_swapchain = NULL;
-    /**
-     * @brief 
-     */
-    DXGI_SWAP_CHAIN_DESC m_swapchainDesc;
-    //--------------------------------------------------------------------------------------
-  // Structures
-  //--------------------------------------------------------------------------------------
-    
+   SPtr<buCoreDepthStencilView>
+   createDepthStencilView() override;
 
+   /**
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   SPtr<buCoreSampler>
+   createSampler() override;
 
-    //--------------------------------------------------------------------------------------
-    // Global Variables
-    //--------------------------------------------------------------------------------------
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void
+   setVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader) override;
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void
+   setInputLayout(WeakSPtr<buCoreInputLayout> _inputLayout) override;
+
+   /**
+    * @brief
+    * @param
+    * @return
+    * @bug
+    */
+   void
+   setPixelhader(WeakSPtr<buCorePixelShader> _pixelShader) override;
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void 
+   drawIndexed(uint32 _numVertices, 
+               uint32 _startIndexLocation, 
+               uint32 _baseVertexLocation) override;
    
-    void*               g_hInst;
-    HWND                    g_hWnd = NULL;
-    D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
-    D3D_FEATURE_LEVEL       g_featureLevel = D3D_FEATURE_LEVEL_11_0;
-    
-    
-    
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void
+   present(uint32 _syncInterval, uint32 _flag) override;
 
-    //ID3D11Buffer* g_pVertexBuffer = NULL;
- };
+   /**
+    * @brief Method that creates a texture from the graphics API 
+    * initialization. 
+    */
+   bool
+   createTexture(WeakSPtr<buCoreTexture2D> _texture) override;
+
+   /**
+    * @brief Method that creates the depth stencil texture from the 
+    * graphics API.
+    */
+   bool 
+   createDepthStencilView(WeakSPtr<buCoreTexture2D> _texture,
+                          WeakSPtr<buCoreDepthStencilView> _depthStencilView) 
+                          override;
+
+   /**
+    * @brief Method that creates the render target view.
+    */
+   bool
+   createRenderTargetView(WeakSPtr<buCoreTexture2D> _texture, 
+                          WeakSPtr<buCoreRenderTargetView> _renderTargetView)
+   override;
+
+   /**
+    * @brief Method that creates the vertex shader.
+    */
+   bool 
+   createVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader) override;
+
+   /**
+    * @brief Method that creates the input layout.
+    */
+   bool
+   createInputLayout(WeakSPtr<buCoreVertexShader> _vertexShader, 
+                     WeakSPtr<buCoreInputLayout> _inputLayout) override;
+
+   /**
+    * @brief Method that creates the vertex shader.
+    */
+   bool
+   createPixelShader(WeakSPtr<buCorePixelShader> _pixelShader) override;
+
+   /**
+    * @brief Method that creates a buffer.
+    */
+   bool
+   createBuffer(WeakSPtr<buCoreBuffer> _buffer) override;
+
+   /**
+    * @brief Method that creates the sampler state.
+    */
+   bool
+   createSamplerState(WeakSPtr<buCoreSampler> _sampler) override;
+
+   /**
+    * @brief Method that sets the vertex buffers.
+    */
+   void
+   setVertexBuffers(WeakSPtr<buCoreBuffer> _buffer) override;
+
+   /**
+    * @brief Method that sets the index buffers.
+    */
+   void
+   setIndexBuffer(WeakSPtr<buCoreBuffer> _buffer, 
+                  uint32 _format,
+                  uint32 _offset) override;
+
+   /*
+    * @brief Method that sets the viewport.
+    */
+   void
+   setViewport(WeakSPtr<buCoreViewport> _viewport) override;
+
+   /**
+    * @brief Method that sets the render target.
+    */
+   void
+   setRenderTargets(int32 _numViews,
+                    WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+                    WeakSPtr<buCoreDepthStencilView> _depthStencilView) override;
+
+   /**
+    * @brief Method that clears the render target view.
+    */
+   void
+   clearRenderTargetView(WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+                         float _color[4]) override;
+
+   /**
+    * @brief Method that clears the depth stencil view.
+    */
+   void
+   clearDepthStencilView(WeakSPtr<buCoreDepthStencilView> _depthStencilView, 
+                         uint32 _clearFlags, 
+                         float depth,
+                         int32 stencil) override;
+
+   /**
+    * @brief Method that sets the primitive topology of the object.
+    */
+   void
+   setPrimitiveTopology(uint32 _topology) override;
+
+   /**
+    * @brief Method that update the subresource of a buffer.
+    */
+   void
+   updateSubresource(WeakSPtr<buCoreBuffer> _buffer,
+                     uint32 DstSubresource,
+                     void *pDstBox,
+                     void *pSrcData,
+                     uint32 SrcRowPitch,
+                     uint32 SrcDepthPitch) override;
+
+   /**
+    * @brief Method that sets the vertex constant buffer.
+    */
+   void
+   VSsetConstantBuffers(WeakSPtr<buCoreBuffer> _buffer, 
+                        uint32 _startSlot,    
+                        uint32 _numBuffers) override;
+
+   /**
+    * @brief Method that sets the pixel constant buffer.
+    */
+   void
+   PSsetConstantBuffers(WeakSPtr<buCoreBuffer> _buffer, 
+                        uint32 _startSlot,    
+                        uint32 _numBuffers) override;
+
+   /**
+    * @brief  Method that sets the sampler.
+    */
+   void
+   PSsetSamplers(WeakSPtr<buCoreSampler> _sampler, 
+                 uint32 _startSlot,
+                 uint32 _numSamplers) override;
+
+  private:
+   /**
+    * @brief Device ID.
+    */
+   ID3D11Device* m_device;
+   
+   /**
+    * @brief Device Context ID.
+    */
+   ID3D11DeviceContext* m_deviceContext;
+   
+   /**
+    * @brief Swap Chain ID.
+    */
+   IDXGISwapChain* m_swapchain;
+   
+   /**
+    * @brief Swap Chain descriptor.
+    */
+   DXGI_SWAP_CHAIN_DESC m_swapchainDesc;
+   
+   /**
+    * @brief Member in charge of storing the driver type of the engine.
+    */
+   D3D_DRIVER_TYPE g_driverType = D3D_DRIVER_TYPE_NULL;
+   
+   /**
+    * @brief Member in charge of storing the feature level for the engine.
+    */
+   D3D_FEATURE_LEVEL g_featureLevel = D3D_FEATURE_LEVEL_11_0;
+   
+   /**
+    * @brief Member in charge of storing the screen width of the game.
+    */
+   int32 m_width;
+   
+   /**
+    * @brief Member in charge of storing the screen height of the game.
+    */
+   int32 m_height;
+};
  
  /** 
   * @brief Plugging exportation data method. 

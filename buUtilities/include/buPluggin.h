@@ -26,7 +26,7 @@ namespace buEngineSDK {
     /**
      * @brief Destructor
      */
-    ~buPluggin();
+    ~buPluggin() {};
 
     /**
      * @brief Method in charge of initialize a plug in from a extern dll.
@@ -36,7 +36,7 @@ namespace buEngineSDK {
      * @bug None.
      */
     bool
-    createPluggin(const String& _dllName);
+    loadPluggin(const String& _dllName);
 
     void* 
     getProcedureByName(const String& _name);
@@ -51,12 +51,13 @@ namespace buEngineSDK {
     destroy();
 
   public:
-    void* m_instance;
+    /**
+     * @brief 
+     */
+    void* m_instance = nullptr;
   };
 
-  buPluggin::~buPluggin() { }
-
-  inline bool buPluggin::createPluggin(const String& _dllName)
+  inline bool buPluggin::loadPluggin(const String& _dllName)
   {
     m_instance = LoadLibraryExA(
       _dllName.c_str(),

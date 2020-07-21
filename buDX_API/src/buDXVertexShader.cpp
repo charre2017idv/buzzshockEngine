@@ -13,14 +13,14 @@ buDXVertexShader::~buDXVertexShader()
   SAFE_RELEASE(m_vertexShader);
 }
 
-void buDXVertexShader::init(WString<WCHAR> _fileName, 
+void buDXVertexShader::init(WString _fileName, 
                                          String _entryPoint,
                                          String _shaderModel)
 {
   CompileShaderFromFile(_fileName, _entryPoint, _shaderModel, &m_compileVertexShader);
 }
 
-bool buDXVertexShader::CompileShaderFromFile(WString<WCHAR> szFileName, 
+bool buDXVertexShader::CompileShaderFromFile(WString szFileName, 
                                              String szEntryPoint,
                                              String szShaderModel,
                                              ID3DBlob** ppBlobOut)

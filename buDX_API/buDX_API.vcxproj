@@ -100,7 +100,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;$(DEVLIBS)directxtex/DDSTextureLoader/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -122,7 +122,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;$(DEVLIBS)directxtext/DDSTextureLoader/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -144,7 +144,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;$(DEVLIBS)directxtex/DDSTextureLoader/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -166,7 +166,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Include/;$(SolutionDir)buUtilities/Include/;$(SolutionDir)buCore/Include/;$(DEVLIBS)directxtext/DDSTextureLoader/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -181,6 +181,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\buDXDepthStencilView.cpp" />
+    <ClCompile Include="include\buDXSampler.cpp" />
     <ClCompile Include="src\buDXBuffer.cpp" />
     <ClCompile Include="src\buDXGraphicsAPI.cpp" />
     <ClCompile Include="src\buDXInputLayout.cpp" />
@@ -193,11 +195,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\buDXBuffer.h" />
+    <ClInclude Include="include\buDXDepthStencilView.h" />
     <ClInclude Include="include\buDXDevice.h" />
     <ClInclude Include="include\buDXGraphicsAPI.h" />
     <ClInclude Include="include\buDXInputLayout.h" />
     <ClInclude Include="include\buDXPixelShader.h" />
     <ClInclude Include="include\buDXRenderTargetView.h" />
+    <ClInclude Include="include\buDXSampler.h" />
     <ClInclude Include="include\buDXSwapchain.h" />
     <ClInclude Include="include\buDXTexture2D.h" />
     <ClInclude Include="include\buDXVertexShader.h" />

@@ -1,9 +1,9 @@
 /**
- * @file 
- * @version 
- * @date 00/00/2020
+ * @file buCoreVertexShader.h
+ * @version 1.0
+ * @date 13/07/2020
  * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
- * @brief 
+ * @brief Class in charge of providing virtual methods 
  * @bug
  */
 #pragma once
@@ -14,27 +14,18 @@ namespace buEngineSDK {
 	{
 	public:
 		/**
-		 * @brief 
+		 * @brief Default Constructor
 		 */
 		buCoreVertexShader() = default;
 		/**
-		 * @brief 
+		 * @brief Destructor
 		 */
 		~buCoreVertexShader() {};
 		/**
-		* @brief 
+		* @brief Virtual method that initialize the object.
 		*/
 		virtual void
-		init(WString<WCHAR> _fileName, String _entryPoint, String _shaderModel) = 0;
-		/**
-	   * @brief
-	   * @param
-	   * @return
-	   * @bug
-	   */
-		//virtual bool
-	  //CompileShaderFromFile(WString<WCHAR> szFileName, String szEntryPoint,
-		//											String szShaderModel, void** ppBlobOut) = 0;
+		init(WString _fileName, String _entryPoint, String _shaderModel) = 0;
 	private:
 
 	};

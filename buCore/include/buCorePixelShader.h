@@ -14,18 +14,20 @@ namespace buEngineSDK {
 	{
 	public:
 		/**
-		 * @brief 
+		 * @brief Default constructor
 		 */
 		buCorePixelShader() = default;
+		
 		/**
-		 * @brief 
+		 * @brief Destructor 
 		 */
 		~buCorePixelShader() {};
+
 		/**
-		* @brief 
+		* @brief Virtual method that initialize the object.
 		*/
 		virtual void
-		init(WString<WCHAR> _fileName, String _entryPoint, String _shaderModel) = 0;
+		init(WString _fileName, String _entryPoint, String _shaderModel) = 0;
 	private:
 
 	};

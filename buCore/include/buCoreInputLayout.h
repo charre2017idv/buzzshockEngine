@@ -12,25 +12,34 @@
 
 namespace buEngineSDK
 {
+	struct INPUT_LAYOUT_DESC
+	{
+		String semanticName;
+		uint32 semanticIndex;
+		uint32 format;
+		uint32 inputSlot;
+		uint32 alignedByteOffset;
+		uint32 inputSlotClass;
+		uint32 instanceDataStepRate;
+	};
 	class buCoreInputLayout
 	{
 	public:
 		/**
-		 * @brief 
+		 * @brief Default constructor
 		 */
 		buCoreInputLayout() = default;
+		
 		/**
-		 * @brief 
+		 * @brief Destructor
 		 */
 		~buCoreInputLayout() {};
+		
 		/** 
-		 * @brief 
-		 * @param 
-		 * @return 
-		 * @bug 
+		 * @brief Virtual method that initialize the object.
 		 */
 		virtual void 
-	  init() = 0;
+	  init(INPUT_LAYOUT_DESC* _descriptor, uint32 _numElements) = 0;
 	private:
 
 	};

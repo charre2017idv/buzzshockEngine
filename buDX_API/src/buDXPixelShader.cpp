@@ -12,13 +12,13 @@ namespace buEngineSDK {
     SAFE_RELEASE(m_pixelShader);
   }
 
-  void buDXPixelShader::init(WString<WCHAR> _fileName, 
+  void buDXPixelShader::init(WString _fileName, 
                              String _entryPoint,
                              String _shaderModel)
   {
     CompileShaderFromFile(_fileName, _entryPoint, _shaderModel, &m_compilePixelShader);
   }
-  bool buDXPixelShader::CompileShaderFromFile(WString<WCHAR> szFileName,
+  bool buDXPixelShader::CompileShaderFromFile(WString szFileName,
                                               String szEntryPoint,
                                               String szShaderModel, 
                                               ID3DBlob** ppBlobOut)

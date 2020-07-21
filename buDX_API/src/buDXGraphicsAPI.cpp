@@ -6,6 +6,7 @@ namespace buEngineSDK {
     m_swapchain = nullptr;
     m_device = nullptr;
     m_deviceContext = nullptr;
+    //g_hInst = nullptr;
   }
 
   buDXGraphicsAPI::~buDXGraphicsAPI()
@@ -22,247 +23,24 @@ namespace buEngineSDK {
 
   bool buDXGraphicsAPI::init(WeakSPtr<buCoreViewport> _viewport,
                              WeakSPtr<buCoreTexture2D> _backBuffer,
+                             WeakSPtr<buCoreTexture2D> _depthStencil,
+                             WeakSPtr<buCoreDepthStencilView> _depthStencilView,
                              WeakSPtr<buCoreRenderTargetView> _renderTargetView,
                              WeakSPtr<buCoreVertexShader> _vertexShader,
                              WeakSPtr<buCoreInputLayout> _inputLayout,
                              WeakSPtr<buCorePixelShader> _pixelShader,
-                             WeakSPtr<buCoreBuffer> _vertexBuffer)
+                             WeakSPtr<buCoreBuffer> _vertexBuffer,
+                             WeakSPtr<buCoreBuffer> _indexBuffer,
+                             WeakSPtr<buCoreBuffer> _neverChanges,
+                             WeakSPtr<buCoreBuffer> _changeOnResize,
+                             WeakSPtr<buCoreBuffer> _ChangeEveryFrame,
+                             WeakSPtr<buCoreTexture2D> _meshTexture,
+                             WeakSPtr<buCoreSampler> _sampler,
+                             void* _window)
   {
     HRESULT hr = S_OK;
 
-    RECT rc;
-    GetClientRect(g_hWnd, &rc);
-    UINT width = rc.right - rc.left;
-    UINT height = rc.bottom - rc.top;
-
-    UINT createDeviceFlags = 0;
-#ifdef _DEBUG
-    createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
-
-    Vector<D3D_DRIVER_TYPE> driverTypes = 
-    {
-      D3D_DRIVER_TYPE_HARDWARE,
-      D3D_DRIVER_TYPE_WARP,
-      D3D_DRIVER_TYPE_REFERENCE 
-    };
-
-    Vector<D3D_FEATURE_LEVEL> featureLevels =
-    {
-        D3D_FEATURE_LEVEL_11_0,
-        D3D_FEATURE_LEVEL_10_1,
-        D3D_FEATURE_LEVEL_10_0,
-    };
     
-    memset(&m_swapchainDesc, 0, sizeof(m_swapchainDesc));
-    m_swapchainDesc.BufferCount = 1;
-    m_swapchainDesc.BufferDesc.Width = width;
-    m_swapchainDesc.BufferDesc.Height = height;
-    m_swapchainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    m_swapchainDesc.BufferDesc.RefreshRate.Numerator = 60;
-    m_swapchainDesc.BufferDesc.RefreshRate.Denominator = 1;
-    m_swapchainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    m_swapchainDesc.OutputWindow = g_hWnd;
-    m_swapchainDesc.SampleDesc.Count = 1;
-    m_swapchainDesc.SampleDesc.Quality = 0;
-    m_swapchainDesc.Windowed = TRUE;
-
-    for (uint32 i = 0; i < driverTypes.size(); i++) {
-      g_driverType = driverTypes[i];
-      hr = D3D11CreateDeviceAndSwapChain(NULL, 
-                                         g_driverType,
-                                         NULL,
-                                         createDeviceFlags,
-                                         featureLevels.data(),
-                                         featureLevels.size(),
-                                         D3D11_SDK_VERSION, 
-                                         &m_swapchainDesc,
-                                         &m_swapchain,
-                                         &m_device, 
-                                         &g_featureLevel,
-                                         &m_deviceContext);
-      if (SUCCEEDED(hr)) {
-        break;
-      }
-    }
-    if (FAILED(hr)) {
-      return hr;
-    }
-
-    // Create back buffer
-    if (_backBuffer.expired()) {
-      return false;
-    }
-    auto bbObj = _backBuffer.lock();
-    auto tmpBB = reinterpret_cast<buDXTexture2D*>(bbObj.get());
-    //ID3D11Texture2D* pBackBuffer = NULL;
-    hr = m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&tmpBB->m_texture);
-    if (FAILED(hr)) {
-      return hr;
-    }
-
-    // Create a render target view
-    if (_renderTargetView.expired()) {
-      return false;
-    }
-    auto RTVObj = _renderTargetView.lock();
-    auto tmpRTV = reinterpret_cast<buDXRenderTargetView*>(RTVObj.get());
-
-    hr = m_device->CreateRenderTargetView(tmpBB->m_texture, NULL, 
-                                          &tmpRTV->m_renderTargetView);
-
-    tmpBB->m_texture->Release();
-    if (FAILED(hr)) {
-      return hr;
-    }
-
-    m_deviceContext->OMSetRenderTargets(1, &tmpRTV->m_renderTargetView, NULL);
-
-    // Setup the viewport
-    
-    if (_viewport.expired()) {
-      return false;
-    }
-    auto vpObj = _viewport.lock();
-    auto tmpvp = reinterpret_cast<buDXViewport*>(vpObj.get());
-    
-    m_deviceContext->RSSetViewports(1, &tmpvp->m_viewport);
-
-    // Compile the vertex shader
-    if (_vertexShader.expired()) {
-      return false;
-    }
-    auto vsObj = _vertexShader.lock();
-    auto tmpVS= reinterpret_cast<buDXVertexShader*>(vsObj.get());
-
-    // Create the vertex shader
-    hr = m_device->CreateVertexShader(tmpVS->m_compileVertexShader->GetBufferPointer(),
-                                      tmpVS->m_compileVertexShader->GetBufferSize(),
-                                      NULL, 
-                                      &tmpVS->m_vertexShader);
-    
-    if (FAILED(hr)) {
-      tmpVS->m_compileVertexShader->Release();
-      return hr;
-    }
-
-    // Define the input layout
-
-    if (_inputLayout.expired()) {
-      return false;
-    }
-    auto ILObj = _inputLayout.lock();
-    auto tmpIL = reinterpret_cast<buDXInputLayout*>(ILObj.get());
-
-    // Create the input layout
-    hr = m_device->CreateInputLayout(tmpIL->m_descriptor.data(),
-                                     tmpIL->m_descriptor.size(), 
-                                     tmpVS->m_compileVertexShader->GetBufferPointer(),
-                                     tmpVS->m_compileVertexShader->GetBufferSize(),
-                                     &tmpIL->m_inputLayout);
-
-    tmpVS->m_compileVertexShader->Release();
-    if (FAILED(hr)) {
-      return hr;
-    }
-
-    // Set the input layout
-    m_deviceContext->IASetInputLayout(tmpIL->m_inputLayout);
-
-    // Compile the pixel shader
-    if (_pixelShader.expired()) {
-      return false;
-    }
-    auto PSObj = _pixelShader.lock();
-    auto tmpPS = reinterpret_cast<buDXPixelShader*>(PSObj.get());
-
-    // Create the pixel shader
-    hr = m_device->CreatePixelShader(tmpPS->m_compilePixelShader->GetBufferPointer(),
-                                     tmpPS->m_compilePixelShader->GetBufferSize(),
-                                     NULL,
-                                     &tmpPS->m_pixelShader);
-    tmpPS->m_compilePixelShader->Release();
-
-    if (FAILED(hr)) {
-      return hr;
-    }
-
-    // Create vertex buffer
-    if (_vertexBuffer.expired()) {
-      return false;
-    }
-    auto VBObj = _vertexBuffer.lock();
-    auto tmpBV = reinterpret_cast<buDXBuffer*>(VBObj.get());
-
-    SimpleVertex vertices[] =
-    {
-        buVector3F(0.0f, 0.5f, 0.5f),
-        buVector3F(0.5f, -0.5f, 0.5f),
-        buVector3F(-0.5f, -0.5f, 0.5f),
-    };
-
-    tmpBV->init(D3D11_USAGE_DEFAULT,
-                sizeof(SimpleVertex) * 3,
-                D3D11_BIND_VERTEX_BUFFER,
-                0,
-                0,
-                1,
-                sizeof(SimpleVertex), 
-                0,
-                vertices);
-
-    hr = m_device->CreateBuffer(&tmpBV->m_descriptor,
-                                &tmpBV->m_subresourceData,
-                                &tmpBV->m_buffer);
-    if (FAILED(hr)) {
-      return hr;
-    }
-
-    // Set vertex buffer
-    m_deviceContext->IASetVertexBuffers(tmpBV->m_startSlot,
-                                        tmpBV->m_numBuffers,
-                                        &tmpBV->m_buffer, 
-                                        (UINT*)&tmpBV->m_stride,
-                                        (UINT*)&tmpBV->m_offset);
-
-    // Set primitive topology
-    m_deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    return S_OK;
-  }
-
-  bool buDXGraphicsAPI::initWindow(void* hInstance, void* _wndProc)
-  {
-    // Register class
-    WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = reinterpret_cast<WNDPROC>(_wndProc);
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = reinterpret_cast<HINSTANCE>(hInstance);
-    wcex.hIcon = LoadIcon(reinterpret_cast<HINSTANCE>(hInstance), (LPCTSTR)IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = "TutorialWindowClass";
-    wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_APPLICATION);
-    if (!RegisterClassEx(&wcex))
-      return E_FAIL;
-
-    // Create window
-    g_hInst = hInstance;
-    RECT rc = { 0, 0, 640, 480 };
-    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-    g_hWnd = CreateWindow("TutorialWindowClass", "Buzzshock Engine",
-      WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, reinterpret_cast<HINSTANCE>(hInstance),
-      NULL);
-    if (!g_hWnd)
-      return E_FAIL;
-
-    ShowWindow(g_hWnd, SW_SHOW);
-
     return S_OK;
   }
 
@@ -278,37 +56,99 @@ namespace buEngineSDK {
     SAFE_RELEASE(m_swapchain);
   }
 
-  void buDXGraphicsAPI::render(WeakSPtr<buCoreRenderTargetView> _renderTargetView,
-                               WeakSPtr<buCoreVertexShader> _vertexShader,
-                               WeakSPtr<buCorePixelShader> _pixelShader)
+  void buDXGraphicsAPI::update()
   {
-    // Clear the back buffer 
-    float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; // red,green,blue,alpha
-    if (_renderTargetView.expired()) {
-      return;
-    }
-    auto RTVObj = _renderTargetView.lock();
-    auto tmpRTV = reinterpret_cast<buDXRenderTargetView*>(RTVObj.get());
-    m_deviceContext->ClearRenderTargetView(tmpRTV->m_renderTargetView, ClearColor);
+    // Update our time
+  }
 
-    // Render a triangle
-    if (_vertexShader.expired()) {
-      return;
-    }
-    auto VSObj = _vertexShader.lock();
-    auto tmpVS = reinterpret_cast<buDXVertexShader*>(VSObj.get());
-    m_deviceContext->VSSetShader(tmpVS->m_vertexShader, NULL, 0);
+  void buDXGraphicsAPI::render(WeakSPtr<buCoreDepthStencilView> _depthStencilView, 
+                               WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+                               WeakSPtr<buCoreVertexShader> _vertexShader,
+                               WeakSPtr<buCoreInputLayout> _inputLayout,
+                               WeakSPtr<buCorePixelShader> _pixelShader,
+                               WeakSPtr<buCoreBuffer> _neverChanges,
+                               WeakSPtr<buCoreBuffer> _changeOnResize,
+                               WeakSPtr<buCoreBuffer> _ChangeEveryFrame,
+                               WeakSPtr<buCoreTexture2D> _meshTexture,
+                               WeakSPtr<buCoreSampler> _sampler)
+  {
+    
+  }
 
-    if (_pixelShader.expired()) {
-      return;
-    }
-    auto PSObj = _pixelShader.lock();
-    auto tmpPS = reinterpret_cast<buDXPixelShader*>(PSObj.get());
-    m_deviceContext->PSSetShader(tmpPS->m_pixelShader, NULL, 0);
-    m_deviceContext->Draw(3, 0);
+  void buDXGraphicsAPI::initialize(void* _window, int32 _width, int32 _height)
+  {
+    m_width = _width;
+    m_height = _height;
+    createDeviceAndSwapChain(_window);
+  }
 
-    // Present the information rendered to the back buffer to the front buffer (the screen)
-    m_swapchain->Present(0, 0);    
+  bool buDXGraphicsAPI::createDeviceAndSwapChain(void* _window)
+  {
+    bool hr;
+    UINT createDeviceFlags = 0;
+#ifdef _DEBUG
+    createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
+    Vector<D3D_DRIVER_TYPE> driverTypes =
+    {
+      D3D_DRIVER_TYPE_HARDWARE,
+      D3D_DRIVER_TYPE_WARP,
+      D3D_DRIVER_TYPE_REFERENCE
+    };
+
+    Vector<D3D_FEATURE_LEVEL> featureLevels =
+    {
+        D3D_FEATURE_LEVEL_11_0,
+        D3D_FEATURE_LEVEL_10_1,
+        D3D_FEATURE_LEVEL_10_0,
+    };
+
+
+    memset(&m_swapchainDesc, 0, sizeof(m_swapchainDesc));
+    m_swapchainDesc.BufferCount = 1;
+    m_swapchainDesc.BufferDesc.Width = m_width;
+    m_swapchainDesc.BufferDesc.Height = m_height;
+    m_swapchainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    m_swapchainDesc.BufferDesc.RefreshRate.Numerator = 60;
+    m_swapchainDesc.BufferDesc.RefreshRate.Denominator = 1;
+    m_swapchainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    m_swapchainDesc.OutputWindow = reinterpret_cast<HWND>(_window);
+    m_swapchainDesc.SampleDesc.Count = 1;
+    m_swapchainDesc.SampleDesc.Quality = 0;
+    m_swapchainDesc.Windowed = TRUE;
+
+    for (uint32 i = 0; i < driverTypes.size(); i++) {
+      g_driverType = driverTypes[i];
+      hr = D3D11CreateDeviceAndSwapChain(NULL,
+        g_driverType,
+        NULL,
+        createDeviceFlags,
+        featureLevels.data(),
+        featureLevels.size(),
+        D3D11_SDK_VERSION,
+        &m_swapchainDesc,
+        &m_swapchain,
+        &m_device,
+        &g_featureLevel,
+        &m_deviceContext);
+      if (SUCCEEDED(hr)) {
+        break;
+      }
+    }
+    return hr;
+  }
+
+  bool buDXGraphicsAPI::createTextureForBackBuffer(
+    WeakSPtr<buCoreTexture2D> _backbuffer)
+  {
+    if (_backbuffer.expired()) {
+      return false;
+    }
+    auto bbObj = _backbuffer.lock();
+    auto tmpBB = reinterpret_cast<buDXTexture2D*>(bbObj.get());
+    //ID3D11Texture2D* pBackBuffer = NULL;
+    return m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&tmpBB->m_texture);
   }
   
   SPtr<buCoreViewport> buDXGraphicsAPI::createViewport()
@@ -360,11 +200,348 @@ namespace buEngineSDK {
     return buffer;
   }
 
-  LRESULT buDXGraphicsAPI::WndProc(HWND Hw, UINT Msg, WPARAM wParam, LPARAM lParam)
+  SPtr<buCoreDepthStencilView> buDXGraphicsAPI::createDepthStencilView()
   {
-    switch (Msg)
-    {
-    default: return DefWindowProc(Hw, Msg, wParam, lParam);
+    auto depthStencilView = std::make_shared<buDXDepthStencilView>();
+    return depthStencilView;
+  }
+
+  SPtr<buCoreSampler> buDXGraphicsAPI::createSampler()
+  {
+    auto sampler = std::make_shared<buDXSampler>();
+    return sampler;
+  }
+
+  void buDXGraphicsAPI::setVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader)
+  {
+    if (_vertexShader.expired()) {
+      return;
+    }
+    auto VSObj = _vertexShader.lock();
+    auto tmpVS = reinterpret_cast<buDXVertexShader*>(VSObj.get());
+    m_deviceContext->VSSetShader(tmpVS->m_vertexShader, NULL, 0);
+  }
+
+  void buDXGraphicsAPI::setInputLayout(WeakSPtr<buCoreInputLayout> _inputLayout)
+  {
+    if (_inputLayout.expired()) {
+      return;
+    }
+    auto ILObj = _inputLayout.lock();
+    auto tmpIL = reinterpret_cast<buDXInputLayout*>(ILObj.get());
+    m_deviceContext->IASetInputLayout(tmpIL->m_inputLayout);
+  }
+
+  void buDXGraphicsAPI::setPixelhader(WeakSPtr<buCorePixelShader> _pixelShader)
+  {
+    if (_pixelShader.expired()) {
+      return;
+    }
+    auto PSObj = _pixelShader.lock();
+    auto tmpPS = reinterpret_cast<buDXPixelShader*>(PSObj.get());
+    m_deviceContext->PSSetShader(tmpPS->m_pixelShader, NULL, 0);
+  }
+
+  void buDXGraphicsAPI::drawIndexed(uint32 _numVertices, 
+                                    uint32 _startIndexLocation,
+                                    uint32 _baseVertexLocation)
+  {
+    m_deviceContext->DrawIndexed(_numVertices, _startIndexLocation, _baseVertexLocation);
+  }
+
+  void buDXGraphicsAPI::present(uint32 _syncInterval, uint32 _flag)
+  {
+    m_swapchain->Present(_syncInterval, _flag);
+  }
+
+  bool buDXGraphicsAPI::createTexture(WeakSPtr<buCoreTexture2D> _texture)
+  {
+    if (_texture.expired()) {
+      return false;
+    }
+    auto textureObj = _texture.lock();
+    auto texture = reinterpret_cast<buDXTexture2D*>(textureObj.get());
+    return m_device->CreateTexture2D(&texture->m_descriptor, NULL, &texture->m_texture);
+  }
+
+  bool buDXGraphicsAPI::createDepthStencilView(
+    WeakSPtr<buCoreTexture2D> _texture, 
+    WeakSPtr<buCoreDepthStencilView> _depthStencilView)
+  {
+    // Depth stencil
+    if (_texture.expired()) {
+      return false;
+    }
+    auto textureObj = _texture.lock();
+    auto texture = reinterpret_cast<buDXTexture2D*>(textureObj.get());
+    // Depth Stencil view
+    if (_depthStencilView.expired()) {
+      return false;
+    }
+    auto DSVObj = _depthStencilView.lock();
+    auto tmpDSV = reinterpret_cast<buDXDepthStencilView*>(DSVObj.get());
+    tmpDSV->init(texture->m_format, D3D11_DSV_DIMENSION_TEXTURE2D, 0);
+    return m_device->CreateDepthStencilView(texture->m_texture,
+      &tmpDSV->m_descriptor,
+      &tmpDSV->m_depthStencilView);
+  }
+
+  bool buDXGraphicsAPI::createRenderTargetView(WeakSPtr<buCoreTexture2D> _texture, 
+    WeakSPtr<buCoreRenderTargetView> _renderTargetView)
+  {
+    // Back buffer texture
+    if (_texture.expired()) {
+      return false;
+    }
+    auto textureObj = _texture.lock();
+    auto texture = reinterpret_cast<buDXTexture2D*>(textureObj.get());
+
+    // Render target view
+    if (_renderTargetView.expired()) {
+      return false;
+    }
+    auto RTVObj = _renderTargetView.lock();
+    auto tmpRTV = reinterpret_cast<buDXRenderTargetView*>(RTVObj.get());
+
+    return m_device->CreateRenderTargetView(texture->m_texture, NULL,
+      &tmpRTV->m_renderTargetView);
+  }
+
+  bool buDXGraphicsAPI::createVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader)
+  {
+    if (_vertexShader.expired()) {
+      return false;
+    }
+    auto vsObj = _vertexShader.lock();
+    auto tmpVS = reinterpret_cast<buDXVertexShader*>(vsObj.get());
+
+    // Create the vertex shader
+    return m_device->CreateVertexShader(tmpVS->m_compileVertexShader->GetBufferPointer(),
+      tmpVS->m_compileVertexShader->GetBufferSize(),
+      NULL,
+      &tmpVS->m_vertexShader);
+  }
+
+  bool buDXGraphicsAPI::createInputLayout(
+    WeakSPtr<buCoreVertexShader> _vertexShader,
+    WeakSPtr<buCoreInputLayout> _inputLayout)
+  {
+    // Vertex Shader
+    if (_vertexShader.expired()) {
+      return false;
+    }
+    auto vsObj = _vertexShader.lock();
+    auto tmpVS = reinterpret_cast<buDXVertexShader*>(vsObj.get());
+
+    // Input layout
+    if (_inputLayout.expired()) {
+      return false;
+    }
+    auto ILObj = _inputLayout.lock();
+    auto tmpIL = reinterpret_cast<buDXInputLayout*>(ILObj.get());
+
+    // Create the input layout
+    return m_device->CreateInputLayout(tmpIL->m_descriptor.data(),
+      tmpIL->m_descriptor.size(),
+      tmpVS->m_compileVertexShader->GetBufferPointer(),
+      tmpVS->m_compileVertexShader->GetBufferSize(),
+      &tmpIL->m_inputLayout);
+  }
+
+  bool buDXGraphicsAPI::createPixelShader(WeakSPtr<buCorePixelShader> _pixelShader)
+  {
+    if (_pixelShader.expired()) {
+      return false;
+    }
+    auto PSObj = _pixelShader.lock();
+    auto tmpPS = reinterpret_cast<buDXPixelShader*>(PSObj.get());
+
+    // Create the pixel shader
+    return m_device->CreatePixelShader(tmpPS->m_compilePixelShader->GetBufferPointer(),
+      tmpPS->m_compilePixelShader->GetBufferSize(),
+      NULL,
+      &tmpPS->m_pixelShader);
+  }
+
+  bool buDXGraphicsAPI::createBuffer(WeakSPtr<buCoreBuffer> _buffer)
+  {
+    if (_buffer.expired()) {
+      return false;
+    }
+    auto bufferObj = _buffer.lock();
+    auto tmpBuffer = reinterpret_cast<buDXBuffer*>(bufferObj.get());
+    if (nullptr == tmpBuffer->m_bufferData) {
+      return m_device->CreateBuffer(&tmpBuffer->m_descriptor,
+        nullptr,
+        &tmpBuffer->m_buffer);
+    }
+    else {
+      return m_device->CreateBuffer(&tmpBuffer->m_descriptor,
+        &tmpBuffer->m_subresourceData,
+        &tmpBuffer->m_buffer);
     }
   }
-}
+
+  bool buDXGraphicsAPI::createSamplerState(WeakSPtr<buCoreSampler> _sampler)
+  {
+    if (_sampler.expired()) {
+      return false;
+    }
+    auto SObj = _sampler.lock();
+    auto tmpS = reinterpret_cast<buDXSampler*>(SObj.get());
+    return m_device->CreateSamplerState(&tmpS->m_descriptor, &tmpS->m_sampler);
+  }
+
+  void buDXGraphicsAPI::setVertexBuffers(WeakSPtr<buCoreBuffer> _buffer)
+  {
+    if (_buffer.expired()) {
+      return;
+    }
+    auto bufferObj = _buffer.lock();
+    auto tmpBuffer = reinterpret_cast<buDXBuffer*>(bufferObj.get());
+    m_deviceContext->IASetVertexBuffers(tmpBuffer->m_startSlot,
+      tmpBuffer->m_numBuffers,
+      &tmpBuffer->m_buffer,
+      (UINT*)&tmpBuffer->m_stride,
+      (UINT*)&tmpBuffer->m_offset);
+  }
+
+  void buDXGraphicsAPI::setIndexBuffer(WeakSPtr<buCoreBuffer> _buffer, 
+                                       uint32 _format,
+                                       uint32 _offset)
+  {
+    if (_buffer.expired()) {
+      return;
+    }
+    auto bufferObj = _buffer.lock();
+    auto tmpBuffer = reinterpret_cast<buDXBuffer*>(bufferObj.get());
+    m_deviceContext->IASetIndexBuffer(tmpBuffer->m_buffer,
+                                      (DXGI_FORMAT)_format,
+                                      _offset);
+  }
+
+  void buDXGraphicsAPI::setViewport(WeakSPtr<buCoreViewport> _viewport)
+  {
+    if (_viewport.expired()) {
+      return;
+    }
+    auto vpObj = _viewport.lock();
+    auto tmpvp = reinterpret_cast<buDXViewport*>(vpObj.get());
+
+    m_deviceContext->RSSetViewports(1, &tmpvp->m_viewport);
+  }
+
+  void buDXGraphicsAPI::setRenderTargets(int32 _numViews,
+    WeakSPtr<buCoreRenderTargetView> _renderTargetView, 
+    WeakSPtr<buCoreDepthStencilView> _depthStencilView)
+  {
+    if (_depthStencilView.expired()) {
+      return;
+    }
+
+    auto DSVObj = _depthStencilView.lock();
+    auto tmpDSV = reinterpret_cast<buDXDepthStencilView*>(DSVObj.get());
+    if (_renderTargetView.expired()) {
+      return;
+    }
+    auto RTVObj = _renderTargetView.lock();
+    auto tmpRTV = reinterpret_cast<buDXRenderTargetView*>(RTVObj.get());
+    m_deviceContext->OMSetRenderTargets(1,
+      &tmpRTV->m_renderTargetView,
+      tmpDSV->m_depthStencilView);
+  }
+
+  void buDXGraphicsAPI::clearRenderTargetView(
+    WeakSPtr<buCoreRenderTargetView> _renderTargetView, float _color[4])
+  {
+    if (_renderTargetView.expired()) {
+      return;
+    }
+    auto RTVObj = _renderTargetView.lock();
+    auto tmpRTV = reinterpret_cast<buDXRenderTargetView*>(RTVObj.get());
+
+    m_deviceContext->ClearRenderTargetView(tmpRTV->m_renderTargetView, _color);
+  }
+
+  void buDXGraphicsAPI::clearDepthStencilView(
+    WeakSPtr<buCoreDepthStencilView> _depthStencilView, uint32 _clearFlags,
+    float depth, int32 stencil)
+  {
+    if (_depthStencilView.expired()) {
+      return;
+    }
+
+    auto DSVObj = _depthStencilView.lock();
+    auto tmpDSV = reinterpret_cast<buDXDepthStencilView*>(DSVObj.get());
+    m_deviceContext->ClearDepthStencilView(tmpDSV->m_depthStencilView,
+                                           _clearFlags,
+                                           depth, 
+                                           stencil);
+  }
+
+  void buDXGraphicsAPI::setPrimitiveTopology(uint32 _topology)
+  {
+    m_deviceContext->IASetPrimitiveTopology((D3D11_PRIMITIVE_TOPOLOGY)_topology);
+  }
+
+  void buDXGraphicsAPI::updateSubresource(WeakSPtr<buCoreBuffer> _buffer, 
+                                          uint32 DstSubresource,
+                                          void* pDstBox,
+                                          void* pSrcData,
+                                          uint32 SrcRowPitch, 
+                                          uint32 SrcDepthPitch)
+  {
+    if (_buffer.expired()) {
+      return;
+    }
+    auto bufferObj = _buffer.lock();
+    auto tmpbuffer = reinterpret_cast<buDXBuffer*>(bufferObj.get());
+    m_deviceContext->UpdateSubresource(tmpbuffer->m_buffer, 
+                                       DstSubresource,
+                                       NULL,
+                                       pSrcData,
+                                       SrcRowPitch,
+                                       SrcDepthPitch);
+  }
+
+  void buDXGraphicsAPI::VSsetConstantBuffers(WeakSPtr<buCoreBuffer> _buffer, 
+                                             uint32 _startSlot,
+                                             uint32 _numBuffers)
+  {
+    if (_buffer.expired()) {
+      return;
+    }
+    auto bufferObj = _buffer.lock();
+    auto tmpbuffer = reinterpret_cast<buDXBuffer*>(bufferObj.get());
+    m_deviceContext->VSSetConstantBuffers(_startSlot, 
+                                          _numBuffers, 
+                                          &tmpbuffer->m_buffer);
+  }
+
+  void buDXGraphicsAPI::PSsetConstantBuffers(WeakSPtr<buCoreBuffer> _buffer,
+                                             uint32 _startSlot,
+                                             uint32 _numBuffers)
+  {
+    if (_buffer.expired()) {
+      return;
+    }
+    auto bufferObj = _buffer.lock();
+    auto tmpbuffer = reinterpret_cast<buDXBuffer*>(bufferObj.get());
+    m_deviceContext->PSSetConstantBuffers(_startSlot, 
+                                          _numBuffers, 
+                                          &tmpbuffer->m_buffer);
+  }
+
+  void buDXGraphicsAPI::PSsetSamplers(WeakSPtr<buCoreSampler> _sampler, 
+                                      uint32 _startSlot, 
+                                      uint32 _numSamplers)
+  {
+    if (_sampler.expired()) {
+      return;
+    }
+    auto samplerObj = _sampler.lock();
+    auto tmpSampler = reinterpret_cast<buDXSampler*>(samplerObj.get());
+    m_deviceContext->PSSetSamplers(_startSlot, _numSamplers, &tmpSampler->m_sampler);
+  }
+
+}   

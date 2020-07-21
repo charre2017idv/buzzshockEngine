@@ -189,15 +189,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="src\buCoreGraphicsAPI.cpp" />
     <ClCompile Include="src\buCoreTexture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BaseApp.h" />
     <ClInclude Include="include\buCoreBuffer.h" />
+    <ClInclude Include="include\buCoreDepthStencilView.h" />
     <ClInclude Include="include\buCoreGraphicsAPI.h" />
     <ClInclude Include="include\buCoreInputLayout.h" />
     <ClInclude Include="include\buCorePixelShader.h" />
     <ClInclude Include="include\buCoreRenderTargetView.h" />
+    <ClInclude Include="include\buCoreSampler.h" />
     <ClInclude Include="include\buCoreSwapchain.h" />
     <ClInclude Include="include\buCoreTexture2D.h" />
     <ClInclude Include="include\buCoreVertexShader.h" />

@@ -31,51 +31,62 @@ namespace buEngineSDK {
 			 uint32 stride, uint32 offset, void* bufferData) override;
  public:
  	/**
- 	 * @brief 
+ 	 * @brief Buffer ID.
  	 */
  	ID3D11Buffer* m_buffer;
+
   /**
-   * @brief 
+   * @brief Buffer descriptor.
    */
   D3D11_BUFFER_DESC m_descriptor;
+  
   /*
-   * @brief 
+   * @brief Buffer subresource
    */
   D3D11_SUBRESOURCE_DATA m_subresourceData;
+  
   /**
-   * @brief 
+   * @brief Member that stores the usage.
    */
-  uint32 m_usage;
+  uint32 m_usage = 0;
+  
   /**
-   * @brief 
+   * @brief Member that stores the buffer byte width.
    */
-  uint32 m_byteWidth;
+  uint32 m_byteWidth = 0;
+
   /**
-   * @brief 
+   * @brief Member that stores the buffer bind flags.
    */
-  uint32 m_bindFlags;
+  uint32 m_bindFlags = 0;
+
   /**
-   * @brief 
+   * @brief Member that stores the CPU access flags.
    */
-  uint32 m_CPUAccessFlags;
+  uint32 m_CPUAccessFlags = 0;
+
   /**
-   * @brief 
+   * @brief Member that stores the start slot.
    */
-  uint32 m_startSlot;
+  uint32 m_startSlot = 0;
+
   /**
-   * @brief 
+   * @brief Member that stores the number of buffers.
    */
-  uint32 m_numBuffers;
+  uint32 m_numBuffers = 0;
+
   /**
-   * @brief 
+   * @brief Member that stores the stride of the buffer.
    */
-  uint32 m_stride; 
+  uint32 m_stride = 0; 
+
   /**
-   * @brief 
+   * @brief Member that stores the offset of the buffer.
    */
-  uint32 m_offset;
+  uint32 m_offset = 0;
+
   /**
-   * @brief 
+   * @brief Member that stores the buffer data.
    */
   void* m_bufferData;
  };

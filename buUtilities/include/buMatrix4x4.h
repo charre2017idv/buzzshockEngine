@@ -11,6 +11,7 @@
 #pragma once
 #include "buPrerequisitesUtil.h"
 #include "buVector4F.h"
+#include "buVector3F.h"
 
 namespace buEngineSDK {
   class BU_UTILITY_EXPORT buMatrix4x4
@@ -51,8 +52,6 @@ namespace buEngineSDK {
     * @brief Method for addition of another matrix, 
     * Take inspiration from this site: https://ncalculators.com/matrix/4x4-matrix-addition-subtraction-calculator.htm
     * @param const BuMatrix4x4& _mat Matrix.
-    * @return None.
-    * @bug None.
     */
    buMatrix4x4&
    operator+=(const buMatrix4x4& _mat);
@@ -62,7 +61,6 @@ namespace buEngineSDK {
     * two 4x4 matrix.
     * @param const BuMatrix4x4& _mat Matrix.
     * @return A matrix.
-    * @bug None.
     */
    buMatrix4x4
    operator+(const buMatrix4x4& _mat) const;
@@ -70,8 +68,6 @@ namespace buEngineSDK {
    /** 
     * @brief Method that subtracts another matrix 
     * @param const BuMatrix4x4& _mat Matrix.
-    * @return None.
-    * @bug None.
     */
    buMatrix4x4&
    operator-=(const buMatrix4x4& _mat);
@@ -81,7 +77,6 @@ namespace buEngineSDK {
     * two 4x4 matrix.
     * @param const BuMatrix4x4& _mat Matrix.
     * @return A matrix.
-    * @bug None.
     */
    buMatrix4x4
     operator-(const buMatrix4x4& _mat) const;
@@ -89,8 +84,6 @@ namespace buEngineSDK {
    /**
     * @brief Method that multiply another matrix
     * @param const BuMatrix4x4& _mat Matrix.
-    * @return None.
-    * @bug None.
     */
    buMatrix4x4&
    operator*=(const buMatrix4x4& _mat);
@@ -100,28 +93,52 @@ namespace buEngineSDK {
     * two 4x4 matrix.
     * @param const BuMatrix4x4& _mat Matrix.
     * @return A matrix.
-    * @bug None.
     */
    buMatrix4x4
    operator*(const buMatrix4x4& _mat) const;
 
    /**
     * @brief Method that provides the determinant value of the matrix.
-    * @param None.
-    * @return None.
-    * @bug None.
     */
    float 
    determinant();
 
    /** 
     * @brief Method in charge of transposing trhe current matrix.
-    * @param None.
-    * @return None.
-    * @bug None.
     */
    void
    transpose();
+
+   /**
+    * @brief Method in charge of providing a left handed projection matrix.
+    * @param _fovAngleY Field of view angle
+    * @param _aspectRatio Aspect radio from the width devided from the height.
+    * @param _nearZ Near value.
+    * @param _farZ Far value.
+    * @return A projection matrix.
+    */
+   buMatrix4x4&
+   perspectiveMatrixfovLH(float _fovAngleY, float _aspectRatio,
+                     float _nearZ, float _farZ);
+
+   /** 
+    * @brief Method in charge of initilize a left handed look at matrix.
+    * @param _eye Vector 
+    * @param _at Vector 
+    * @param _up Vector 
+    * @return A look at matrix.
+    */
+   buMatrix4x4&
+   lookAtMatrixLH(buVector3F& _eye, buVector3F& _at, buVector3F& up);
+
+   /** 
+   * @brief 
+   * @param 
+   * @return 
+   * @bug 
+   */
+   buMatrix4x4&
+   rotateMatrixY(float _angle);
 
   public:
    /**

@@ -8,7 +8,7 @@
  */
 #pragma once
 
-#include <buPrerequisitesCore.h>
+#include <buPrerequisitesCore.h> 
 #include <buModule.h>
 #include <buCoreViewport.h>
 #include <buCoreTexture2D.h>
@@ -18,6 +18,8 @@
 #include <buCorePixelShader.h>
 #include <buCoreInputLayout.h>
 #include <buCoreBuffer.h>
+#include <buCoreDepthStencilView.h>
+#include <buCoreSampler.h>
 
 namespace buEngineSDK {
 
@@ -28,12 +30,14 @@ namespace buEngineSDK {
    * @brief Default constructor
    */
   buCoreGraphicsAPI() = default;
+
   /**
    * @brief Destructor
    */
   ~buCoreGraphicsAPI() = default;
+
   /**
-   * @brief Instances of this class
+   * @brief Instances of this object.
    */
   FORCEINLINE void 
   setObject(buCoreGraphicsAPI* _api) {
@@ -41,53 +45,52 @@ namespace buEngineSDK {
   }
 
   /** 
-   * @brief 
-   * @param 
-   * @return 
-   * @bug 
+   * @brief Virtual method that works as a testing initialization for the plugin.
    */
   virtual void 
   testFunc() {}
 
   /** 
-   * @brief 
-   * @param 
-   * @return 
-   * @bug 
+   * @brief Virtual method that initialize the "buDXGraphicsAPI" class.
+   * @param _viewport Reference to a buCoreViewport object.
+   * @param _backBuffer Reference to a buCoreTexture2D object.
+   * @param _depthStencil Reference to a buCoreTexture2D object.
+   * @param _depthStencilView Reference to a buCoreDepthStencilView object.
+   * @param _renderTargetView Reference to a buCoreRenderTargetView object.
+   * @param _vertexShader Reference to a buCoreVertexShader object.
+   * @param _inputLayout Reference to a buCoreInputLayout object.
+   * @param _pixelShader Reference to a buCorePixelShader object.
+   * @param _vertexBuffer Reference to a buCoreBuffer object.
+   * @param _indexBuffer Reference to a buCoreBuffer object.
+   * @param _neverChanges Reference to a buCoreBuffer object.
+   * @param _changeOnResize Reference to a buCoreBuffer object.
+   * @param _ChangeEveryFrame Reference to a buCoreBuffer object.
+   * @param _meshTexture Reference to a buCoreTexture2D object.
+   * @param _sampler Reference to a buCoreSampler object.
+   * @param _window Reference to a pointer object that will be used as handle.
+   * @return A boolean.
    */
   virtual bool 
   init(WeakSPtr<buCoreViewport> _viewport,
        WeakSPtr<buCoreTexture2D> _backBuffer,
+       WeakSPtr<buCoreTexture2D> _depthStencil,
+       WeakSPtr<buCoreDepthStencilView> _depthStencilView,
        WeakSPtr<buCoreRenderTargetView> _renderTargetView,
        WeakSPtr<buCoreVertexShader> _vertexShader,
        WeakSPtr<buCoreInputLayout> _inputLayout,
        WeakSPtr<buCorePixelShader> _pixelShader,
-       WeakSPtr<buCoreBuffer> _vertexBuffer) { return false; }
+       WeakSPtr<buCoreBuffer> _vertexBuffer, 
+       WeakSPtr<buCoreBuffer> _indexBuffer, 
+       WeakSPtr<buCoreBuffer> _neverChanges,
+       WeakSPtr<buCoreBuffer> _changeOnResize,
+       WeakSPtr<buCoreBuffer> _ChangeEveryFrame,
+       WeakSPtr<buCoreTexture2D> _meshTexture,
+       WeakSPtr<buCoreSampler> _sampler,
+       void* _window) { return false; }
 
+ 
   /** 
-   * @brief 
-   * @param 
-   * @return 
-   * @bug 
-   */
-  virtual bool
-  initWindow(void* hInstance, void* _wndProc) { return false; };
-  
-  /** 
-   * @brief 
-   * @param 
-   * @return 
-   * @bug 
-   */
-  //virtual bool
-  //CompileShaderFromFile(const char* szFileName, String szEntryPoint,
-  //  String szShaderModel, void** ppBlobOut) { return false; }
-
-  /** 
-   * @brief 
-   * @param 
-   * @return 
-   * @bug 
+   * @brief Virtual method that clean the objects in the app.
    */
   virtual void 
   cleanUp() {};
@@ -98,88 +101,314 @@ namespace buEngineSDK {
    * @return 
    * @bug 
    */
-  virtual void 
-  render(WeakSPtr<buCoreRenderTargetView> _renderTargetView,
-         WeakSPtr<buCoreVertexShader> _vertexShader,
-         WeakSPtr<buCorePixelShader> _pixelShader) {};
+  virtual void
+  update() {};
 
   /** 
+   * @brief Virtual method that draw the render data on screen. 
+   * @param _depthStencilView Reference to a buCoreDepthStencilView object.
+   * @param _renderTargetView Reference to a buCoreRenderTargetView object.
+   * @param _vertexShader Reference to a buCoreVertexShader object.
+   * @param _inputLayout Reference to a buCoreInputLayout object.
+   * @param _pixelShader Reference to a buCorePixelShader object.
+   * @param _neverChanges Reference to a buCoreBuffer object.
+   * @param _changeOnResize Reference to a buCoreBuffer object.
+   * @param _ChangeEveryFrame Reference to a buCoreBuffer object.
+   * @param _meshTexture Reference to a buCoreTexture2D object.
+   * @param _sampler Reference to a buCoreSampler object.
+   */
+  virtual void 
+  render(WeakSPtr<buCoreDepthStencilView> _depthStencilView, 
+         WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+         WeakSPtr<buCoreVertexShader> _vertexShader,
+         WeakSPtr<buCoreInputLayout> _inputLayout,
+         WeakSPtr<buCorePixelShader> _pixelShader,
+         WeakSPtr<buCoreBuffer> _neverChanges,
+         WeakSPtr<buCoreBuffer> _changeOnResize,
+         WeakSPtr<buCoreBuffer> _ChangeEveryFrame,
+         WeakSPtr<buCoreTexture2D> _meshTexture,
+         WeakSPtr<buCoreSampler> _sampler) {};
+
+  /**
    * @brief 
-   * @param 
-   * @return 
-   * @bug 
+   */
+  virtual void 
+  initialize(void* _window, int32 _width, int32 _height) {};
+
+  /**
+   * @brief 
+   */
+  virtual bool 
+  createDeviceAndSwapChain(void* _window) { return false; };
+  /**
+   * @brief Virtal method that creates the backbuffer texture, this is a 
+   * very specific method for his implementation.
+   */
+  virtual bool 
+  createTextureForBackBuffer(WeakSPtr<buCoreTexture2D> _backbuffer)
+  { return false; }
+
+  /** 
+   * @brief Virtual method that creates a temporal reference to a viewport object.
+   * @return A smart pointer to the object.
    */
   virtual SPtr<buCoreViewport>
   createViewport() { return nullptr; }
 
   /**
-   * @brief
-   * @param
-   * @return
-   * @bug
+   * @brief Virtual method that creates a temporal reference to a texture2D object.
+   * @return A smart pointer to the object.
    */
   virtual SPtr<buCoreTexture2D>
   createTexture2D() { return nullptr; };
 
   /**
-   * @brief
-   * @param
-   * @return
-   * @bug
+   * @brief Virtual method that creates a temporal reference to a swap chain object.
+   * @return A smart pointer to the object.
    */
   virtual SPtr<buCoreSwapchain>
   createSwapchain() { return nullptr; };
 
   /**
-    * @brief
-    * @param
-    * @return
-    * @bug
-    */
+   * @brief Virtual method that creates a temporal reference to a vertex shader object.
+   * @return A smart pointer to the object.
+   */
   virtual SPtr<buCoreVertexShader>
   createVertexShader() { return nullptr; };
 
   /** 
-    * @brief 
-    * @param 
-    * @return 
-    * @bug 
+    * @brief Virtual method that creates a temporal reference to a pixel shader object.
+    * @return A smart pointer to the object.
     */
   virtual SPtr<buCorePixelShader>
   createPixelShader() { return nullptr; };
 
   /**
-   * @brief
-   * @param
-   * @return
-   * @bug
+   * @brief Virtual method that creates a temporal reference to a
+   * render target view object.
+   * @return A smart pointer to the object.
    */
   virtual SPtr<buCoreRenderTargetView>
   createRenderTargetView() { return nullptr; };
 
   /**
-   * @brief
-   * @param
-   * @return
-   * @bug
+   * @brief Virtual method that creates a temporal reference to a 
+   * input layout object.
+   * @return A smart pointer object.
    */
   virtual SPtr<buCoreInputLayout>
   createInputLayout() { return nullptr; };
 
   /** 
-    * @brief 
-    * @param 
-    * @return 
-    * @bug 
+    * @brief Virtual method that creates a temporal reference to a buffer object.
+    * @return A smart pointer object.
     */
    virtual SPtr<buCoreBuffer>
    createBuffer() { return nullptr; };
+
+   /** 
+    * @brief Virtual method that creates a temporal reference to a depth stencil
+    * view object.
+    * @return A smart pointer object.
+    */
+   virtual SPtr<buCoreDepthStencilView>
+   createDepthStencilView() { return nullptr; };
+
+   /**
+    * @brief Virtual method that creates a temporal reference to a sampler object.
+    * @return A smart pointer object
+    * @bug 
+    */
+   virtual SPtr<buCoreSampler>
+   createSampler() { return nullptr; };
+
+   /** 
+    * @brief Virtual method that creates a temporal reference to a vertex shader 
+    * object. 
+    * @return A smart pointer object.
+    */
+   virtual void
+   setVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader) {};
+
+   /** 
+    * @brief Virtual method that creates a temporal reference to a input layout 
+    * object.
+    * @return A smart pointer object.
+    */
+   virtual void
+   setInputLayout(WeakSPtr<buCoreInputLayout> _inputLayout) {};
+
+   /**
+    * @brief Virtual method that creates a temporal reference to a pixel shader
+    * object.
+    * @return A smart pointer object.
+    */
+   virtual void
+   setPixelhader(WeakSPtr<buCorePixelShader> _pixelShader) {};
+
+   /** 
+    * @brief Virtual method that draw the vertex or index data.
+    * @param _numVertices Vertex or index amount.
+    */
+   virtual void 
+   drawIndexed(uint32 _numVertices, 
+               uint32 _startIndexLocation, 
+               uint32 _baseVertexLocation) { (void)_numVertices; };
+   
+   /**
+    * @brief Virtual method that creates a texture from the graphics API 
+    * initialization. 
+    */
+   virtual bool
+   createTexture(WeakSPtr<buCoreTexture2D> _texture) { return false; };
+   
+   /**
+    * @brief Virtual method that creates the depth stencil texture from the 
+    * graphics API.
+    */
+   virtual bool 
+   createDepthStencilView(WeakSPtr<buCoreTexture2D> _texture,
+                          WeakSPtr<buCoreDepthStencilView> _depthStencilView) 
+                          { return false; }
+
+   /**
+    * @brief Virtual method that creates the render target view.
+    */
+   virtual bool
+   createRenderTargetView(WeakSPtr<buCoreTexture2D> _texture, 
+                          WeakSPtr<buCoreRenderTargetView> _renderTargetView)
+                          {return false;}
+
+   /**
+    * @brief Virtual method that creates the vertex shader.
+    */
+   virtual bool 
+   createVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader) { return false;}
+
+   /**
+    * @brief Virtual method that creates the input layout.
+    */
+   virtual bool
+   createInputLayout(WeakSPtr<buCoreVertexShader> _vertexShader, 
+                     WeakSPtr<buCoreInputLayout> _inputLayout) { return false; }
+   
+   /**
+    * @brief Virtual method that creates the vertex shader.
+    */
+   virtual bool
+   createPixelShader(WeakSPtr<buCorePixelShader> _pixelShader) { return false;}
+
+   /**
+    * @brief Virtual method that creates a buffer.
+    */
+   virtual bool
+   createBuffer(WeakSPtr<buCoreBuffer> _buffer) { return false; };
+
+   /**
+    * @brief Virtual Method that creates the sampler state.
+    */
+   virtual bool
+   createSamplerState(WeakSPtr<buCoreSampler> _sampler) { return false;};
+
+   /**
+    * @brief Virtual method that sets the vertex buffers.
+    */
+   virtual void
+   setVertexBuffers(WeakSPtr<buCoreBuffer> _buffer) { };
+   
+   /**
+    * @brief Virtual method that sets the index buffers.
+    */
+   virtual void
+   setIndexBuffer(WeakSPtr<buCoreBuffer> _buffer, uint32 _format, uint32 _offset) { };
+      
+   /*
+    * @brief Virtual method that sets the viewport
+    */
+   virtual void 
+   setViewport(WeakSPtr<buCoreViewport> _viewport) { }
+
+   /**
+    * @brief Virtual method that sets the render target
+    */
+   virtual void
+   setRenderTargets(int32 _numViews,
+                    WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+                    WeakSPtr<buCoreDepthStencilView> _depthStencilView) { };
+
+   /**
+    * @brief Virtual method that clears the render target view.
+    */
+   virtual void
+   clearRenderTargetView(WeakSPtr<buCoreRenderTargetView> _renderTargetView,
+                         float _color[4]) { };
+
+   /**
+    * @brief Virtual method that clears the depth stencil view.
+    */
+   virtual void
+   clearDepthStencilView(WeakSPtr<buCoreDepthStencilView> _depthStencilView, 
+                         uint32 _clearFlags, 
+                         float depth,
+                         int32 stencil) { };
+
+   /**
+    * @brief Method that sets the primitive topology of the object.
+    */
+   virtual void
+   setPrimitiveTopology(uint32 _topology) { };
+
+   /**
+    * @brief Virtual method that update the subresource of a buffer
+    */
+   virtual void
+   updateSubresource(WeakSPtr<buCoreBuffer> _buffer,
+                     uint32 DstSubresource,
+                     void *pDstBox,
+                     void *pSrcData,
+                     uint32 SrcRowPitch,
+                     uint32 SrcDepthPitch) {};
+
+   /**
+    * @brief Virtual method that sets the constant buffer.
+    */
+   virtual void
+   VSsetConstantBuffers(WeakSPtr<buCoreBuffer> _buffer, 
+                        uint32 _startSlot,    
+                        uint32 _numBuffers) { };
+
+   /**
+    * @brief Virtual method that sets the constant buffer.
+    */
+   virtual void
+   PSsetConstantBuffers(WeakSPtr<buCoreBuffer> _buffer, 
+                        uint32 _startSlot,    
+                        uint32 _numBuffers) { };
+
+   /**
+    * @brief Virtual method that sets the sampler.
+    */
+   virtual void
+   PSsetSamplers(WeakSPtr<buCoreSampler> _sampler, 
+                 uint32 _startSlot,
+                 uint32 _numSamplers) {};
+
+   /** 
+    * @brief Virtual method that presents the information on the screen.
+    */
+   virtual void
+   present(uint32 _syncInterval, uint32 _flag) {};
  private:
 
  };
-
+ /**
+  * @brief Export method for the class instance.
+  */
  BU_CORE_EXPORT buCoreGraphicsAPI&
  g_graphicsAPI();
 
+ /**
+  * @brief Specific member uses as a instance to the class.
+  */
  using fnGraphicsAPIProt = buCoreGraphicsAPI * (*)();
 }

@@ -1,9 +1,10 @@
 /**
-* @file 
-* @version 
-* @date 00/00/2020
+* @file buCoreRenderTargetView.h
+* @version 1.0
+* @date 13/07/2020
 * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
-* @brief 
+* @brief Class in charge of providing virtual methods for the
+* "buDXRenderTargetView" class.
 * @bug
 */
 #pragma once
@@ -14,15 +15,15 @@ namespace buEngineSDK {
 	{
 	public:
 		/**
-		 * @brief 
+		 * @brief Default constructor
 		 */
 		buCoreRenderTargetView() = default;
 		/**
-		 * @brief 
+		 * @brief Destructor
 		 */
 		~buCoreRenderTargetView() {};
 		/**
-		 * @brief 
+		 * @brief Method that initialize the object.
 		 */
 		virtual void 
 		init() = 0;

@@ -162,5 +162,57 @@ namespace buEngineSDK {
 		m_w1 = tmpMatrix.m_y3;
 		m_w2 = tmpMatrix.m_z3;
 		m_w3 = tmpMatrix.m_w3;
+
+		*this = tmpMatrix;
+	}
+
+	buMatrix4x4& buMatrix4x4::perspectiveMatrixfovLH(float _fovAngleY, float _aspectRatio,
+																						 float _nearZ, float _farZ)
+	{
+    float h = buMath::cos(_fovAngleY) / buMath::sin(_fovAngleY);
+    float w = h / _aspectRatio;
+    float fRange = _farZ / (_farZ - _nearZ);
+
+		*this = buMatrix4x4(w,				0,						0,											 0,
+											  0,        h,   					0,											 0,
+											  0,        0,					fRange,										 1,
+											  0,        0,		-fRange * _nearZ,								 0);
+		return *this;
+		// TODO: insert return statement here
+	}
+
+	buMatrix4x4& buMatrix4x4::lookAtMatrixLH(buVector3F& _eye, 
+																					 buVector3F& _at,
+																					 buVector3F& _up)
+	{
+		buVector3F zaxis = _at - _eye;
+		zaxis.normalize();
+		buVector3F UpCrosszaxis = _up.cross(zaxis);
+		UpCrosszaxis.normalize();
+		buVector3F xaxis = UpCrosszaxis;
+		buVector3F zaxisCrossxaxis = zaxis.cross(xaxis);
+		buVector3F yaxis = zaxisCrossxaxis;
+
+		*this = buMatrix4x4(
+			xaxis.x,           yaxis.x,           zaxis.x,          0,
+			xaxis.y,           yaxis.y,           zaxis.y,          0,
+			xaxis.z,           yaxis.z,           zaxis.z,          0,
+			-xaxis.dot(_eye), -yaxis.dot(_eye),   -zaxis.dot(_eye),  1);
+
+		return *this;
+	}
+
+	buMatrix4x4& buMatrix4x4::rotateMatrixY(float _angle)
+	{
+		float fSinAngle = sinf(_angle);
+		float fCosAngle = cosf(_angle);
+		*this = buMatrix4x4(fCosAngle,  0.0f, fSinAngle, 0.0f,
+												0.0f,				1.0f,	0.0f,			 0.0f,
+												-fSinAngle,	0.0f,	fCosAngle, 0.0f,
+												0.0f,				0.0f,	0.0f,			 1.0f);
+
+		return *this;
+
+
 	}
 }

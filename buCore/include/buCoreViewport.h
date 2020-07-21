@@ -5,7 +5,6 @@
  * @author Roberto Charreton Kaplun (idv17c.rcharreton@uartesdigitales.edu.mx)
  * @brief Class in charge of initialize the virtual methods for the buDXviewport
  * class.
- * @bug
  */
 #pragma once
 #include "buPrerequisitesCore.h"
@@ -14,24 +13,19 @@ namespace buEngineSDK {
  class buCoreViewport
  {
  public:
- 	/**
- 	 * @brief 
- 	 */
- 	buCoreViewport() = default;
   /**
-    * @brief
+    * @brief Default constructor
     */
-  buCoreViewport(float width, float height, float minDepth, float maxDepth,
-                  float topLeftX, float topLeftY);
+  buCoreViewport() = default;
  	/**
- 	 * @brief 
+ 	 * @brief Destructor
  	 */
  	~buCoreViewport() {};
   /**
-   * @brief 
+   * @brief Virtual method that initialize the object.
    */
   virtual void 
-  init(float width, float height, float minDepth, float maxDepth, 
+  init(int32 width, int32 height, float minDepth, float maxDepth, 
        float topLeftX, float topLeftY) = 0;
  private:
  };

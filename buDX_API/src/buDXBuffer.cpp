@@ -22,13 +22,15 @@ namespace buEngineSDK {
     m_descriptor.BindFlags = BindFlags;
     m_descriptor.CPUAccessFlags = CPUAccessFlags;
 
-
     if (bufferData != nullptr) {
       m_subresourceData.pSysMem = bufferData;
       m_startSlot = startSlot;
       m_numBuffers = numBuffers;
       m_stride = stride;
       m_offset = offset;
+    }
+    else {
+      m_bufferData = bufferData;
     }
   }
 }

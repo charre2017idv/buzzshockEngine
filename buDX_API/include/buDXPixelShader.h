@@ -27,7 +27,7 @@ namespace buEngineSDK {
 		* @brief 
 		*/
 		void
-		init(WString<WCHAR> _fileName, String _entryPoint, String _shaderModel) override;
+		init(WString _fileName, String _entryPoint, String _shaderModel) override;
 		/**
      * @brief
      * @param
@@ -35,7 +35,7 @@ namespace buEngineSDK {
      * @bug
      */
     bool
-    CompileShaderFromFile(WString<WCHAR> szFileName, String szEntryPoint,
+    CompileShaderFromFile(WString szFileName, String szEntryPoint,
                           String szShaderModel, ID3DBlob** ppBlobOut);
 	public:
 		/**

@@ -7,6 +7,7 @@
  * @bug
  */
 #pragma once
+#include <buPrerequisitesDX.h>
 #include <d3d11.h>
 #include "buCoreInputLayout.h"
 
@@ -29,7 +30,7 @@ namespace buEngineSDK {
 		 * @bug 
 		 */
 		void 
-	  init() override;
+	  init(INPUT_LAYOUT_DESC* _descriptor, uint32 _numElements) override;
 	public:
 		/**
 		 * @brief 

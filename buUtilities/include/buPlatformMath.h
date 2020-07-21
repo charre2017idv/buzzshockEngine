@@ -166,6 +166,17 @@ namespace buEngineSDK {
     return std::tanf(_v);
    }
 
+   /**
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   static float 
+   cot(float _v) {
+     return tan(6.283185307f - _v);
+   }
+
    /** 
     * @brief Method that return a factorial value.
     * @param _v scalar value.
