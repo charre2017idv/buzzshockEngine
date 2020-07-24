@@ -4,7 +4,9 @@ namespace buEngineSDK
 {
   buGameApp_UnitTest::buGameApp_UnitTest()
   {
-    
+    m_World = buMatrix4x4::IDENTITY;
+    m_view = buMatrix4x4::ZERO;
+    m_projection = buMatrix4x4::ZERO;
   } 
 
   buGameApp_UnitTest::~buGameApp_UnitTest()
@@ -199,7 +201,7 @@ namespace buEngineSDK
                                      0,
                                      0);
     // Initialize the projection matrix
-    m_projection.perspectiveMatrixfovLH(0.785398163f, 640 / 480, 0.01f, 100.0f);
+    m_projection.perspectiveMatrixfovLH(buDegrees(45).getRadians(), (float)m_screenWidth / (float)m_screenHeight, 0.01f, 100.0f);
     m_projection.transpose();
 
     CBChangeOnResize cbChangesOnResize;
@@ -283,7 +285,7 @@ namespace buEngineSDK
     // Set samplers
     m_graphicsAPI->PSsetSamplers(sampler, 0, 1);
     // Draw
-    m_graphicsAPI->drawIndexed(sizeof(int32) * m_numIndices, 0, 0);
+    m_graphicsAPI->drawIndexed(m_numIndices, 0, 0);
     // Present
     m_graphicsAPI->present(0, 0); 
   }

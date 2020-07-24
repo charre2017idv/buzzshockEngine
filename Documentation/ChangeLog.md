@@ -1,5 +1,9 @@
 # Change log
 
+## v1.0.0 Jun. 22, 2020
+**Added:**
+- Fix warnings form the project.
+
 ## v1.0.0 Jun. 21, 2020
 
 **Added:**

@@ -7,7 +7,7 @@ namespace buEngineSDK {
   buDXViewport::~buDXViewport()
   {
   }
-  void buDXViewport::init(int32 width, int32 height, float minDepth,
+  void buDXViewport::init(float width, float height, float minDepth,
                           float maxDepth, float topLeftX, float topLeftY)
   {
     m_width = width;

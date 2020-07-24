@@ -18,6 +18,7 @@
 #include <buVector3F.h>
 #include <buVector4F.h>
 #include <buMatrix4x4.h>
+#include <buDegrees.h>
 
 namespace buEngineSDK {
 	struct SimpleVertex
@@ -154,17 +155,17 @@ namespace buEngineSDK {
 		/**
 		 * @brief Member that sets the world matrix
 		 */
-		buMatrix4x4 m_World;
+		buMatrix4x4 m_World = buMatrix4x4::ZERO;
 
 		/**
 		 * @brief Member that sets the view matrix.
 		 */
-		buMatrix4x4 m_view;
+		buMatrix4x4 m_view = buMatrix4x4::ZERO;
 
 		/**
 		 * @brief Member that set the projection matrix. 
 		 */
-		buMatrix4x4 m_projection;
+		buMatrix4x4 m_projection = buMatrix4x4::ZERO;
 		
 		/**
 		 * @brief Member that sets the color of the mesh.

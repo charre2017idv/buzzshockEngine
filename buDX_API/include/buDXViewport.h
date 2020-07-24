@@ -29,7 +29,7 @@ namespace buEngineSDK {
    * @brief
    */
    void
-   init(int32 width, int32 height, float minDepth, float maxDepth,
+   init(float width, float height, float minDepth, float maxDepth,
       	float topLeftX, float topLeftY) override;
   public:
    /**

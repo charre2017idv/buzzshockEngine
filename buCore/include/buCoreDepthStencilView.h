@@ -25,7 +25,7 @@ namespace buEngineSDK {
 		 * @brief Virtual method that initialize the depth stencil object.
 		 */
 		virtual void 
-		init(uint32 _format, uint32 _viewDimension, uint32 _mipSlice) {};
+		init(uint32 /*_format*/, uint32 /*_viewDimension*/, uint32 /*_mipSlice*/) {};
 	private:
 
 	};

@@ -25,7 +25,7 @@ namespace buEngineSDK {
    * @brief Virtual method that initialize the object.
    */
   virtual void 
-  init(int32 width, int32 height, float minDepth, float maxDepth, 
+  init(float width, float height, float minDepth, float maxDepth, 
        float topLeftX, float topLeftY) = 0;
  private:
  };

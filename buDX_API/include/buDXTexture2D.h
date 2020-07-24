@@ -29,8 +29,8 @@ namespace buEngineSDK {
   * @bug
   */
   void
-  init(WString filepath, uint32 texFormat, uint32 usage, int32 width,
-       int32 height, int32 mipLevels, int32 arraysize, int32 samplerDescCount,
+  init(WString filepath, uint32 texFormat, uint32 usage, float width,
+       float height, int32 mipLevels, int32 arraysize, int32 samplerDescCount,
        int32 samplerDescQuality, uint32 bindflags, uint32 CPUAccessFlags,
        uint32 miscFlags) override;
 
@@ -70,11 +70,11 @@ namespace buEngineSDK {
    /**
    * @brief 
    */
-   int32 m_width;
+   float m_width;
    /**
     * @brief 
     */
-   int32 m_height;
+   float m_height;
    /**
     * @brief 
     */

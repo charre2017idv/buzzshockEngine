@@ -64,31 +64,6 @@ namespace buEngineSDK {
    void
    testFunc() override;
 
-   /** 
-    * @brief 
-    * @param 
-    * @return 
-    * @bug 
-    */
-   bool 
-   init(WeakSPtr<buCoreViewport> _viewport, 
-        WeakSPtr<buCoreTexture2D> _backBuffer,
-        WeakSPtr<buCoreTexture2D> _depthStencil,
-        WeakSPtr<buCoreDepthStencilView> _depthStencilView,
-        WeakSPtr<buCoreRenderTargetView> _renderTargetView,
-        WeakSPtr<buCoreVertexShader> _vertexShader,
-        WeakSPtr<buCoreInputLayout> _inputLayout,
-        WeakSPtr<buCorePixelShader> _pixelShader,
-        WeakSPtr<buCoreBuffer> _vertexBuffer, 
-        WeakSPtr<buCoreBuffer> _indexBuffer, 
-        WeakSPtr<buCoreBuffer> _neverChanges, 
-        WeakSPtr<buCoreBuffer> _changeOnResize, 
-        WeakSPtr<buCoreBuffer> _ChangeEveryFrame, 
-        WeakSPtr<buCoreTexture2D> _meshTexture,
-        WeakSPtr<buCoreSampler> _sampler,
-        void* _window) override;
-
-   
   /** 
    * @brief 
    * @param 
@@ -129,7 +104,7 @@ namespace buEngineSDK {
    * @brief 
    */
   void 
-  initialize(void* _window, int32 _width, int32 _height) override;
+  initialize(void* _window, float _width, float _height) override;
 
   /**
    * @brief 
@@ -425,17 +400,17 @@ namespace buEngineSDK {
    /**
     * @brief Device ID.
     */
-   ID3D11Device* m_device;
+   ID3D11Device* m_device = nullptr;
    
    /**
     * @brief Device Context ID.
     */
-   ID3D11DeviceContext* m_deviceContext;
+   ID3D11DeviceContext* m_deviceContext = nullptr;
    
    /**
     * @brief Swap Chain ID.
     */
-   IDXGISwapChain* m_swapchain;
+   IDXGISwapChain* m_swapchain = nullptr;
    
    /**
     * @brief Swap Chain descriptor.
@@ -455,12 +430,12 @@ namespace buEngineSDK {
    /**
     * @brief Member in charge of storing the screen width of the game.
     */
-   int32 m_width;
+   float m_width = 0.0f;
    
    /**
     * @brief Member in charge of storing the screen height of the game.
     */
-   int32 m_height;
+   float m_height = 0.0f;
 };
  
  /** 

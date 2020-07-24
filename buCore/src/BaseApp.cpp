@@ -91,7 +91,7 @@ namespace buEngineSDK {
 
     // Create window
     //m_instance = hInstance;
-    RECT rc = { 0, 0, m_screenWidth, m_screenHeight };
+    RECT rc = { 0, 0, (LONG)m_screenWidth, (LONG)m_screenHeight };
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
     m_window = CreateWindow("TutorialWindowClass",
                           "Buzz shock Engine",
@@ -108,6 +108,13 @@ namespace buEngineSDK {
       return false;
 
     ShowWindow(m_window, SW_SHOW);
+
+    RECT clientRect;
+    GetClientRect(m_window, &clientRect);
+
+    m_screenWidth =  (float)clientRect.right -  (float)clientRect.left;
+    m_screenHeight = (float)clientRect.bottom - (float)clientRect.top;
+
 
     return true;
   }

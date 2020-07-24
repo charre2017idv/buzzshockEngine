@@ -12,7 +12,7 @@ namespace buEngineSDK {
     SAFE_RELEASE(m_texture);
   }
   void buDXTexture2D::init(WString filepath, uint32 texFormat, uint32 usage, 
-                           int32 width, int32 height, int32 mipLevels, 
+                           float width, float height, int32 mipLevels, 
                            int32 arraysize, int32 samplerDescCount, 
                            int32 samplerDescQuality, uint32 bindflags,
                            uint32 CPUAccessFlags, uint32 miscFlags)
@@ -29,8 +29,8 @@ namespace buEngineSDK {
     m_CPUAccessFlags = CPUAccessFlags;
     m_miscFlags = miscFlags;
     
-    m_descriptor.Width = width;
-    m_descriptor.Height = height;
+    m_descriptor.Width = (UINT)width;
+    m_descriptor.Height = (UINT)height;
     m_descriptor.MipLevels = mipLevels;
     m_descriptor.ArraySize = arraysize;
     m_descriptor.Format = (DXGI_FORMAT)texFormat;

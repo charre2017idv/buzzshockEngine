@@ -15,12 +15,12 @@ namespace buEngineSDK
 	struct INPUT_LAYOUT_DESC
 	{
 		String semanticName;
-		uint32 semanticIndex;
-		uint32 format;
-		uint32 inputSlot;
-		uint32 alignedByteOffset;
-		uint32 inputSlotClass;
-		uint32 instanceDataStepRate;
+		uint32 semanticIndex = 0;
+		uint32 format = 0;
+		uint32 inputSlot = 0;
+		uint32 alignedByteOffset = 0;
+		uint32 inputSlotClass = 0;
+		uint32 instanceDataStepRate = 0;
 	};
 	class buCoreInputLayout
 	{
