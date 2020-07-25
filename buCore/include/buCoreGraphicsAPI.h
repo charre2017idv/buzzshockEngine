@@ -94,7 +94,7 @@ namespace buEngineSDK {
    * @brief 
    */
   virtual void 
-  initialize(void* /*_window*/, float /*_width*/, float /*_height*/) {};
+  initialize(void* /*_window*/, uint32 /*_width*/, uint32 /*_height*/) {};
 
   /**
    * @brief 

@@ -121,15 +121,9 @@ namespace buEngineSDK {
     buPluggin m_devILPlug;
 
 		/**
-		 * @brief Member that sets the instance address memory that will be used in
-		 * the graphics API. 
-		 */
-		void* m_instance = nullptr;
-
-		/**
 		* @brief Member that sets the window reference.
 		*/
-		HWND m_window = nullptr;
+		void* m_window = nullptr;
 
 		/**
 		 * @brief Member in charge of setting the name of the window.
@@ -139,12 +133,12 @@ namespace buEngineSDK {
 		/**
 		 * @brief Member in charge of setting the screen width of the game window.
 		 */
-		float m_screenWidth = 0;
+		uint32 m_screenWidth = 0;
 
 		/**
 		 * @brief Member in charge of setting the screen height of the game window.
 		 */
-		float m_screenHeight = 0;
+		uint32 m_screenHeight = 0;
 		/**
 		 * @brief Member in charge of storing the graphicsAPI context.
 		 */

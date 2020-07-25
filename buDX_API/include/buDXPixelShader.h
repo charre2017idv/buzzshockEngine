@@ -41,10 +41,10 @@ namespace buEngineSDK {
 		/**
 		 * @brief 
 		 */
-		ID3D11PixelShader* m_pixelShader;
+		ID3D11PixelShader* m_pixelShader = nullptr;
 		/**
 		 * @brief 
 		 */
-		ID3DBlob* m_compilePixelShader;
+		ID3DBlob* m_compilePixelShader = nullptr;
 	};
 }

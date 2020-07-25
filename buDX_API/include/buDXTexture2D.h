@@ -70,11 +70,11 @@ namespace buEngineSDK {
    /**
    * @brief 
    */
-   float m_width;
+   uint32 m_width;
    /**
     * @brief 
     */
-   float m_height;
+   uint32 m_height;
    /**
     * @brief 
     */

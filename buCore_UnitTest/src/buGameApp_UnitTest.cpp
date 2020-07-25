@@ -201,7 +201,11 @@ namespace buEngineSDK
                                      0,
                                      0);
     // Initialize the projection matrix
-    m_projection.perspectiveMatrixfovLH(buDegrees(45).getRadians(), (float)m_screenWidth / (float)m_screenHeight, 0.01f, 100.0f);
+    m_projection.perspectiveMatrixfovLH(buDegrees(45).getRadians(),
+                                        static_cast<float>(m_screenWidth) /
+                                        static_cast<float>(m_screenHeight),
+                                        0.01f,
+                                        100.0f);
     m_projection.transpose();
 
     CBChangeOnResize cbChangesOnResize;

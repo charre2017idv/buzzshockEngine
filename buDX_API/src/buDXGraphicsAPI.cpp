@@ -53,7 +53,7 @@ namespace buEngineSDK {
     
   }
 
-  void buDXGraphicsAPI::initialize(void* _window, float _width, float _height)
+  void buDXGraphicsAPI::initialize(void* _window, uint32 _width, uint32 _height)
   {
     m_width = _width;
     m_height = _height;
@@ -62,8 +62,8 @@ namespace buEngineSDK {
 
   bool buDXGraphicsAPI::createDeviceAndSwapChain(void* _window)
   {
-    bool hr = true;
-    UINT createDeviceFlags = 0;
+    HRESULT hr = true;
+    uint32 createDeviceFlags = 0;
 #ifdef _DEBUG
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
@@ -85,8 +85,8 @@ namespace buEngineSDK {
     DXGI_SWAP_CHAIN_DESC swapchainDesc;
     memset(&swapchainDesc, 0, sizeof(swapchainDesc));
     swapchainDesc.BufferCount = 1;
-    swapchainDesc.BufferDesc.Width = (UINT)m_width;
-    swapchainDesc.BufferDesc.Height = (UINT)m_height;
+    swapchainDesc.BufferDesc.Width = m_width;
+    swapchainDesc.BufferDesc.Height = m_height;
     swapchainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     swapchainDesc.BufferDesc.RefreshRate.Numerator = 60;
     swapchainDesc.BufferDesc.RefreshRate.Denominator = 1;
@@ -96,11 +96,12 @@ namespace buEngineSDK {
     swapchainDesc.SampleDesc.Quality = 0;
     swapchainDesc.Windowed = TRUE;
 
-    for (uint32 i = 0; i < driverTypes.size(); i++) {
-      g_driverType = driverTypes[i];
-      hr = static_cast<int>(D3D11CreateDeviceAndSwapChain(NULL,
-        g_driverType,
-        NULL,
+    D3D_FEATURE_LEVEL selectedFeatureLevel;
+
+    for (auto & driverType : driverTypes) {
+      hr = D3D11CreateDeviceAndSwapChain(nullptr,
+        driverType,
+        nullptr,
         (UINT)createDeviceFlags,
         featureLevels.data(),
         (UINT)featureLevels.size(),
@@ -108,9 +109,9 @@ namespace buEngineSDK {
         &swapchainDesc,
         &m_swapchain,
         &m_device,
-        &g_featureLevel,
-        &m_deviceContext));
-      if (static_cast<int>(hr)) {
+        &selectedFeatureLevel,
+        &m_deviceContext);
+      if (hr) {
         break;
       }
     }
@@ -285,12 +286,12 @@ namespace buEngineSDK {
     auto tmpRTV = reinterpret_cast<buDXRenderTargetView*>(RTVObj.get());
 
     return static_cast<int>(m_device->CreateRenderTargetView(texture->m_texture, 
-      NULL,
+      nullptr,
       &tmpRTV->m_renderTargetView));
   }
 
-  bool buDXGraphicsAPI::createVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader)
-  {
+  bool
+  buDXGraphicsAPI::createVertexShader(WeakSPtr<buCoreVertexShader> _vertexShader) {
     if (_vertexShader.expired()) {
       return false;
     }
@@ -298,11 +299,13 @@ namespace buEngineSDK {
     auto tmpVS = reinterpret_cast<buDXVertexShader*>(vsObj.get());
 
     // Create the vertex shader
-    return static_cast<int>(m_device->CreateVertexShader(
+    HRESULT hr = m_device->CreateVertexShader(
       tmpVS->m_compileVertexShader->GetBufferPointer(),
       tmpVS->m_compileVertexShader->GetBufferSize(),
-      NULL,
-      &tmpVS->m_vertexShader));
+      nullptr,
+      &tmpVS->m_vertexShader);
+
+    return hr == S_OK;
   }
 
   bool buDXGraphicsAPI::createInputLayout(

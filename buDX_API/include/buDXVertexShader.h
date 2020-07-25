@@ -18,7 +18,7 @@ namespace buEngineSDK {
   /**
    * @brief 
    */
-  buDXVertexShader();
+  buDXVertexShader() = default;
   /**
    * @brief 
    */
@@ -38,16 +38,16 @@ namespace buEngineSDK {
    * @bug
    */
   bool
-  CompileShaderFromFile(WString szFileName, String szEntryPoint,
+  compileShaderFromFile(WString szFileName, String szEntryPoint,
                         String szShaderModel, ID3DBlob** ppBlobOut);
   public:
   /**
    * @brief 
    */
-  ID3D11VertexShader* m_vertexShader;
+  ID3D11VertexShader* m_vertexShader = nullptr;
   /**
    * @brief 
    */
-  ID3DBlob* m_compileVertexShader;
+  ID3DBlob* m_compileVertexShader = nullptr;
  };
 }

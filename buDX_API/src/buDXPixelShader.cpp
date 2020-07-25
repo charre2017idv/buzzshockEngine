@@ -26,7 +26,7 @@ namespace buEngineSDK {
     HRESULT hr = S_OK;
 
     DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
-#if defined( DEBUG ) || defined( _DEBUG )
+#if BU_DEBUG_MODE
     // Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
     // Setting this flag improves the shader debugging experience, but still allows 
     // the shaders to be optimized and to run exactly the way they will run in 
@@ -34,7 +34,7 @@ namespace buEngineSDK {
     dwShaderFlags |= D3DCOMPILE_DEBUG;
 #endif
 
-    ID3DBlob* pErrorBlob;
+    ID3DBlob* pErrorBlob = nullptr;
 
     hr = D3DCompileFromFile(szFileName.c_str(),
       NULL,
@@ -47,13 +47,16 @@ namespace buEngineSDK {
       &pErrorBlob);
     if (FAILED(hr))
     {
-      if (pErrorBlob != NULL)
+      if (nullptr != pErrorBlob)
         //OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
-        if (pErrorBlob) pErrorBlob->Release();
-      return hr;
+        pErrorBlob->Release();
+      return false;
     }
-    if (pErrorBlob) pErrorBlob->Release();
 
-    return S_OK;
+    if (nullptr != pErrorBlob) {
+      pErrorBlob->Release();
+    }
+
+    return true;
   }
 }

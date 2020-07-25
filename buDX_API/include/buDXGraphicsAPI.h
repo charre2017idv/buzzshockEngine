@@ -8,10 +8,7 @@
  */
 #pragma once
 #include <buCoreGraphicsAPI.h>
-#include <d3d11.h>
-#include <d3dcompiler.h>
-#include <DDSTextureLoader.h> // External lib for loading textures
-#include <memory>
+//#include <DDSTextureLoader.h> // External lib for loading textures
 #include <buVector2F.h>
 #include <buVector3F.h>
 #include <buVector4F.h>
@@ -104,7 +101,7 @@ namespace buEngineSDK {
    * @brief 
    */
   void 
-  initialize(void* _window, float _width, float _height) override;
+  initialize(void* _window, uint32 _width, uint32 _height) override;
 
   /**
    * @brief 
@@ -113,7 +110,7 @@ namespace buEngineSDK {
   createDeviceAndSwapChain(void* _window) override;
 
   /**
-   * @brief Method that creates the backbuffer texture, this is a 
+   * @brief Method that creates the back buffer texture, this is a 
    * very specific method for his implementation.
    */
   bool 
@@ -362,7 +359,7 @@ namespace buEngineSDK {
    setPrimitiveTopology(uint32 _topology) override;
 
    /**
-    * @brief Method that update the subresource of a buffer.
+    * @brief Method that update the sub resource of a buffer.
     */
    void
    updateSubresource(WeakSPtr<buCoreBuffer> _buffer,
@@ -443,35 +440,24 @@ namespace buEngineSDK {
     * @brief Swap Chain descriptor.
     */
    
-   
-   /**
-    * @brief Member in charge of storing the driver type of the engine.
-    */
-   D3D_DRIVER_TYPE g_driverType = D3D_DRIVER_TYPE_NULL;
-   
-   /**
-    * @brief Member in charge of storing the feature level for the engine.
-    */
-   D3D_FEATURE_LEVEL g_featureLevel = D3D_FEATURE_LEVEL_11_0;
-   
    /**
     * @brief Member in charge of storing the screen width of the game.
     */
-   float m_width = 0.0f;
+   uint32 m_width = 0;
    
    /**
     * @brief Member in charge of storing the screen height of the game.
     */
-   float m_height = 0.0f;
+   uint32 m_height = 0;
 };
  
  /** 
   * @brief Plugging exportation data method. 
   * @return Instance of DX.
   */
- extern "C" BU_PLUGIN_EXPORT buDXGraphicsAPI *
+ extern "C" BU_PLUGIN_EXPORT buDXGraphicsAPI*
  createGraphicAPI() {
- 	buDXGraphicsAPI* pDX = new buDXGraphicsAPI();
+ 	auto pDX = new buDXGraphicsAPI();
  	return pDX;
  }
 }

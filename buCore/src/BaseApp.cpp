@@ -17,10 +17,10 @@ namespace buEngineSDK {
     onCreate();
 
     // Main loop
-    MSG msg = { 0 };
+    MSG msg = { nullptr };
     while (WM_QUIT != msg.message)
     {
-      if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+      if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
       {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
@@ -71,7 +71,8 @@ namespace buEngineSDK {
 
   bool BaseApp::createWindow()
   {
-    m_instance = m_directXPlug.m_instance;
+    auto hInstance = reinterpret_cast<HINSTANCE>(GetModuleHandle(nullptr));
+
     // Register class
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
@@ -79,11 +80,11 @@ namespace buEngineSDK {
     wcex.lpfnWndProc = handelWindowEvent;
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
-    wcex.hInstance = reinterpret_cast<HINSTANCE>(m_instance);
-    wcex.hIcon = LoadIcon(reinterpret_cast<HINSTANCE>(m_instance), (LPCTSTR)IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wcex.hInstance = hInstance;
+    wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_APPLICATION);
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
+    wcex.lpszMenuName = nullptr;
     wcex.lpszClassName = "TutorialWindowClass";
     wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_APPLICATION);
     if (!RegisterClassEx(&wcex))
@@ -91,30 +92,33 @@ namespace buEngineSDK {
 
     // Create window
     //m_instance = hInstance;
-    RECT rc = { 0, 0, (LONG)m_screenWidth, (LONG)m_screenHeight };
+    RECT rc = { 0, 0, m_screenWidth, m_screenHeight };
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-    m_window = CreateWindow("TutorialWindowClass",
+    
+    HWND hWd;
+    hWd = CreateWindow("TutorialWindowClass",
                           "Buzz shock Engine",
                           WS_OVERLAPPEDWINDOW,
                           CW_USEDEFAULT,
                           CW_USEDEFAULT, 
                           rc.right - rc.left,
                           rc.bottom - rc.top, 
-                          NULL,
-                          NULL, 
-                          reinterpret_cast<HINSTANCE>(m_instance),
-                          NULL);
-    if (!m_window)
+                          nullptr,
+                          nullptr,
+                          hInstance,
+                          nullptr);
+    if (!hWd)
       return false;
 
-    ShowWindow(m_window, SW_SHOW);
+    ShowWindow(hWd, SW_SHOW);
 
     RECT clientRect;
-    GetClientRect(m_window, &clientRect);
+    GetClientRect(hWd, &clientRect);
 
-    m_screenWidth =  (float)clientRect.right -  (float)clientRect.left;
-    m_screenHeight = (float)clientRect.bottom - (float)clientRect.top;
+    m_screenWidth =  clientRect.right - clientRect.left;
+    m_screenHeight = clientRect.bottom - clientRect.top;
 
+    m_window = reinterpret_cast<void*>(hWd);
 
     return true;
   }
