@@ -3,7 +3,7 @@
 namespace buEngineSDK {
   buDXGraphicsAPI::buDXGraphicsAPI()
   {
-    m_swapchainDesc;
+   // m_swapchainDesc;
     m_swapchain = nullptr;
     m_device = nullptr;
     m_deviceContext = nullptr;
@@ -82,19 +82,19 @@ namespace buEngineSDK {
         D3D_FEATURE_LEVEL_10_0,
     };
 
-
-    memset(&m_swapchainDesc, 0, sizeof(m_swapchainDesc));
-    m_swapchainDesc.BufferCount = 1;
-    m_swapchainDesc.BufferDesc.Width = (UINT)m_width;
-    m_swapchainDesc.BufferDesc.Height = (UINT)m_height;
-    m_swapchainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    m_swapchainDesc.BufferDesc.RefreshRate.Numerator = 60;
-    m_swapchainDesc.BufferDesc.RefreshRate.Denominator = 1;
-    m_swapchainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    m_swapchainDesc.OutputWindow = reinterpret_cast<HWND>(_window);
-    m_swapchainDesc.SampleDesc.Count = 1;
-    m_swapchainDesc.SampleDesc.Quality = 0;
-    m_swapchainDesc.Windowed = TRUE;
+    DXGI_SWAP_CHAIN_DESC swapchainDesc;
+    memset(&swapchainDesc, 0, sizeof(swapchainDesc));
+    swapchainDesc.BufferCount = 1;
+    swapchainDesc.BufferDesc.Width = (UINT)m_width;
+    swapchainDesc.BufferDesc.Height = (UINT)m_height;
+    swapchainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    swapchainDesc.BufferDesc.RefreshRate.Numerator = 60;
+    swapchainDesc.BufferDesc.RefreshRate.Denominator = 1;
+    swapchainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    swapchainDesc.OutputWindow = reinterpret_cast<HWND>(_window);
+    swapchainDesc.SampleDesc.Count = 1;
+    swapchainDesc.SampleDesc.Quality = 0;
+    swapchainDesc.Windowed = TRUE;
 
     for (uint32 i = 0; i < driverTypes.size(); i++) {
       g_driverType = driverTypes[i];
@@ -105,7 +105,7 @@ namespace buEngineSDK {
         featureLevels.data(),
         (UINT)featureLevels.size(),
         (UINT)D3D11_SDK_VERSION,
-        &m_swapchainDesc,
+        &swapchainDesc,
         &m_swapchain,
         &m_device,
         &g_featureLevel,
@@ -525,6 +525,21 @@ namespace buEngineSDK {
     auto samplerObj = _sampler.lock();
     auto tmpSampler = reinterpret_cast<buDXSampler*>(samplerObj.get());
     m_deviceContext->PSSetSamplers(_startSlot, _numSamplers, &tmpSampler->m_sampler);
+  }
+
+  void* buDXGraphicsAPI::getDevice()
+  {
+    return reinterpret_cast<ID3D11Device*> (m_device);
+  }
+
+  void* buDXGraphicsAPI::getDeviceContext()
+  {
+    return reinterpret_cast<ID3D11DeviceContext*> (m_deviceContext);
+  }
+
+  void* buDXGraphicsAPI::getSwapchain()
+  {
+    return reinterpret_cast<IDXGISwapChain*> (m_swapchain);
   }
 
 }   

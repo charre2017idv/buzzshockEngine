@@ -131,6 +131,34 @@ namespace buEngineSDK {
   
   LRESULT BaseApp::handelWindowEvent(HWND Hw, UINT Msg, WPARAM wParam, LPARAM lParam)
   {
+    /*auto pThis = (BaseApp*)GetWindowLongPtr(Hw, GWLP_USERDATA);
+    if (pThis != NULL) {
+      return pThis->CustomDialogProcInstance(Hw, Msg, wParam, lParam);*/
     return DefWindowProc(Hw, Msg, wParam, lParam);
   }
+  //LRESULT BaseApp::CustomDialogProcInstance(HWND Hw, UINT Msg, WPARAM wParam, LPARAM lParam)
+  //{
+  //  PAINTSTRUCT ps;
+  //  HDC hdc;
+  //  /*if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+  //  {
+  //    return true;
+  //  }*/
+  //  switch (Msg)
+  //  {
+  //  case WM_PAINT:
+  //    hdc = BeginPaint(Hw, &ps);
+  //    EndPaint(Hw, &ps);
+  //    break;
+
+  //  case WM_DESTROY:
+  //    PostQuitMessage(0);
+  //    break;
+  //  case WM_SIZE:
+  //  default:
+  //    return DefWindowProc(Hw, Msg, wParam, lParam);
+  //  }
+
+  //  return 0;
+  //}
 }

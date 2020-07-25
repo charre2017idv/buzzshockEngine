@@ -105,6 +105,10 @@ namespace buEngineSDK {
 		static LRESULT CALLBACK
 		handelWindowEvent(HWND Hw, UINT Msg, WPARAM wParam, LPARAM lParam);
 
+		/*LRESULT CALLBACK 
+	  CustomDialogProcInstance(HWND Hw, UINT Msg, WPARAM wParam, LPARAM lParam);*/
+
+
   protected:
 		/*
 		 * @brief Member in charge of getting the dll of directX.
@@ -141,11 +145,18 @@ namespace buEngineSDK {
 		 * @brief Member in charge of setting the screen height of the game window.
 		 */
 		float m_screenHeight = 0;
-
 		/**
 		 * @brief Member in charge of storing the graphicsAPI context.
 		 */
 		buCoreGraphicsAPI* m_graphicsAPI = nullptr;
+		/**
+		 * @brief Member that creates a depth stencil view object.
+		 */
+		SPtr<buCoreDepthStencilView> depthStencilView;
 
+		/**
+		 * @brief Member that creates a render target view object.
+		 */
+		SPtr<buCoreRenderTargetView> renderTargetView;
 	};
 }

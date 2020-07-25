@@ -361,6 +361,33 @@ namespace buEngineSDK {
     */
    virtual void
    present(uint32 /*_syncInterval*/, uint32 /*_flag*/) {};
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   virtual void*
+   getDevice() {return nullptr; };
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   virtual void*
+   getDeviceContext() {return nullptr; };
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   virtual void*
+   getSwapchain() {return nullptr; };
  private:
 
  };

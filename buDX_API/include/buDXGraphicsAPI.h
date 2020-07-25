@@ -396,6 +396,33 @@ namespace buEngineSDK {
                  uint32 _startSlot,
                  uint32 _numSamplers) override;
 
+    /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void*
+   getDevice() override;
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void*
+   getDeviceContext() override;
+
+   /** 
+    * @brief 
+    * @param 
+    * @return 
+    * @bug 
+    */
+   void*
+   getSwapchain() override;
+
   private:
    /**
     * @brief Device ID.
@@ -415,7 +442,7 @@ namespace buEngineSDK {
    /**
     * @brief Swap Chain descriptor.
     */
-   DXGI_SWAP_CHAIN_DESC m_swapchainDesc;
+   
    
    /**
     * @brief Member in charge of storing the driver type of the engine.
