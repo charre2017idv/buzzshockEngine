@@ -1,4 +1,5 @@
 #include "buGameApp_UnitTest.h"
+#include <buMath.h>
 
 namespace buEngineSDK
 {
@@ -231,9 +232,9 @@ namespace buEngineSDK
   {
     m_graphicsAPI->update();
     m_World.rotateMatrixY(_deltaTime);
-    m_meshColor.x = (sinf(_deltaTime * 1.0f) + 1.0f) * 0.5f;
-    m_meshColor.y = (cosf(_deltaTime * 3.0f) + 1.0f) * 0.5f;
-    m_meshColor.z = (sinf(_deltaTime * 5.0f) + 1.0f) * 0.5f;
+    m_meshColor.x = (buMath::sinf(_deltaTime * 1.0f) + 1.0f) * 0.5f;
+    m_meshColor.y = (buMath::cosf(_deltaTime * 3.0f) + 1.0f) * 0.5f;
+    m_meshColor.z = (buMath::sinf(_deltaTime * 5.0f) + 1.0f) * 0.5f;
   }
 
 

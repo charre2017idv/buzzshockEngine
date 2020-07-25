@@ -18,15 +18,12 @@ namespace buEngineSDK {
 
     // Main loop
     MSG msg = { nullptr };
-    while (WM_QUIT != msg.message)
-    {
-      if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-      {
+    while (WM_QUIT != msg.message) {
+      if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
       }
-      else
-      {
+      else {
         // Update the game time
         static float t = 0.0f;
         //if (g_driverType == D3D_DRIVER_TYPE_REFERENCE) {
