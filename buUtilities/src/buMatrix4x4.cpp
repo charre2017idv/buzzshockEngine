@@ -163,7 +163,7 @@ namespace buEngineSDK {
     m_w2 = tmpMatrix.m_z3;
     m_w3 = tmpMatrix.m_w3;
 
-    *this = tmpMatrix;
+    //*this = tmpMatrix;
   }
 
   buMatrix4x4& buMatrix4x4::perspectiveMatrixfovLH(float _fovAngleY,

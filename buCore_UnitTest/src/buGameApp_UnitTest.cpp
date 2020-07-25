@@ -191,7 +191,7 @@ namespace buEngineSDK
     buVector3F Up(0.0f, 1.0f, 0.0f);
 
     m_view.lookAtMatrixLH(Eye, At, Up);
-    m_view.transpose();
+    //m_view.transpose();
 
     CBNeverChanges cbNeverChanges;
     cbNeverChanges.mView = m_view;
@@ -207,7 +207,7 @@ namespace buEngineSDK
                                         static_cast<float>(m_screenHeight),
                                         0.01f,
                                         100.0f);
-    m_projection.transpose();
+    //m_projection.transpose();
 
     CBChangeOnResize cbChangesOnResize;
     cbChangesOnResize.mProjection = m_projection;
@@ -255,7 +255,7 @@ namespace buEngineSDK
     m_graphicsAPI->setPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     // Update variables that change once per frame
     CBChangesEveryFrame cb;
-    m_World.transpose();
+    //m_World.transpose();
     cb.mWorld = m_World;
     cb.vMeshColor = m_meshColor;
      
