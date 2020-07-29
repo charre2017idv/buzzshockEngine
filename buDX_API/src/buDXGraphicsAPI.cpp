@@ -378,6 +378,53 @@ namespace buEngineSDK {
     return static_cast<int>(m_device->CreateSamplerState(&tmpS->m_descriptor, &tmpS->m_sampler));
   }
 
+  bool buDXGraphicsAPI::createShaderResourceView(WeakSPtr<buCoreTexture2D> _texture)
+  {
+    if (_texture.expired()) {
+      return false;
+    }
+    auto textureObj = _texture.lock();
+    auto texture = reinterpret_cast<buDXTexture2D*>(textureObj.get());
+    return static_cast<int>(m_device->CreateShaderResourceView(texture->m_texture, nullptr, reinterpret_cast<ID3D11ShaderResourceView**>( texture->image)));
+  }
+
+  void buDXGraphicsAPI::PSSetShaderResources(WeakSPtr<buCoreTexture2D> _texture, uint32 _startSlot, uint32 _numViews)
+  {
+    if (_texture.expired()) {
+      return;
+    }
+    auto textureObj = _texture.lock();
+    auto texture = reinterpret_cast<buDXTexture2D*>(textureObj.get());
+
+    m_deviceContext->PSSetShaderResources(_startSlot, _numViews, &texture->m_shaderSubresource);
+  }
+
+  bool buDXGraphicsAPI::loadImageFromFile(WeakSPtr<buCoreTexture2D> _texture)
+  {
+    if (_texture.expired()) {
+      return false;
+    }
+    auto textureObj = _texture.lock();
+    auto texture = reinterpret_cast<buDXTexture2D*>(textureObj.get());
+
+    D3D11_SUBRESOURCE_DATA subResource;
+    subResource.pSysMem = texture->image;
+    subResource.SysMemPitch = texture->m_descriptor.Width * 4;
+    subResource.SysMemSlicePitch = 0;
+    m_device->CreateTexture2D(&texture->m_descriptor, &subResource, &texture->m_texture);
+
+    // Create texture view
+    D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+    memset(&srvDesc,0, sizeof(srvDesc));
+    srvDesc.Format = texture->m_descriptor.Format;
+    srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+    srvDesc.Texture2D.MipLevels = texture->m_descriptor.MipLevels;
+    srvDesc.Texture2D.MostDetailedMip = 0;
+    m_device->CreateShaderResourceView(texture->m_texture, &srvDesc, &texture->m_shaderSubresource);
+    texture->m_texture->Release();
+    return true;
+  }
+
   void buDXGraphicsAPI::setVertexBuffers(WeakSPtr<buCoreBuffer> _buffer)
   {
     if (_buffer.expired()) {

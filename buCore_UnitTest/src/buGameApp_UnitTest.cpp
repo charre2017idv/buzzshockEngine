@@ -24,7 +24,7 @@ namespace buEngineSDK
 
     // Create depth stencil texture
     depthStencil = graphMan.createTexture2D();
-    depthStencil->init(L"",
+    depthStencil->init("",
                        DXGI_FORMAT_D24_UNORM_S8_UINT,
                        D3D11_USAGE_DEFAULT,
                        m_screenWidth, 
@@ -141,7 +141,18 @@ namespace buEngineSDK
                            nullptr);
     // Mesh Texture
     meshTexture = graphMan.createTexture2D();
-    meshTexture->init(L"seafloor.dds");
+    meshTexture->init("Data/Textures/buzzshockEngine.png",
+                       DXGI_FORMAT_R8G8B8A8_UNORM,
+                       D3D11_USAGE_DEFAULT,
+                       m_screenWidth, 
+                       m_screenHeight,
+                       1,
+                       1,
+                       1,
+                       0,
+                       D3D11_BIND_SHADER_RESOURCE,
+                       0,
+                       0);
 
     // Sampler
     sampler = graphMan.createSampler();
@@ -180,6 +191,8 @@ namespace buEngineSDK
     // stb-image
     //hr = DirectX::CreateDDSTextureFromFile(m_device, tmpMT->m_filepath.c_str(), NULL, &tmpMT->m_shaderSubresource);
     // hr = D3DX11CreateShaderResourceViewFromFile(g_pd3dDevice, L"seafloor.dds", NULL, NULL, &g_pTextureRV, NULL);
+    //m_graphicsAPI->createShaderResourceView(meshTexture);
+    m_graphicsAPI->loadImageFromFile(meshTexture);
     // Create sampler
     m_graphicsAPI->createSamplerState(sampler);
     // Create view matrix
@@ -286,7 +299,7 @@ namespace buEngineSDK
     //auto tmpMT = reinterpret_cast<buDXTexture2D*>(MTObj.get());
     //m_deviceContext->PSSetShaderResources(0, 1, &tmpMT->m_shaderSubresource);
     // Set Sampler
-
+    m_graphicsAPI->PSSetShaderResources(meshTexture, 0, 1);
     // Set samplers
     m_graphicsAPI->PSsetSamplers(sampler, 0, 1);
     // Draw

@@ -309,6 +309,27 @@ namespace buEngineSDK {
    createSamplerState(WeakSPtr<buCoreSampler> _sampler) override;
 
    /**
+    * @brief Method that creates a texture from a shader resource view;
+    */
+   bool 
+   createShaderResourceView(WeakSPtr<buCoreTexture2D> _texture) override;
+   
+   /**
+    * @brief Method in charge of setting the subresource data for the 
+    * texture.
+    */
+   void 
+   PSSetShaderResources(WeakSPtr<buCoreTexture2D> _texture,
+                        uint32 _startSlot,
+                        uint32 _numViews) override;
+
+   /**
+    * @brief Method in charge of loading a texture from file
+    */
+   bool
+   loadImageFromFile(WeakSPtr<buCoreTexture2D> _texture) override;
+
+   /**
     * @brief Method that sets the vertex buffers.
     */
    void

@@ -7,9 +7,9 @@
  * @bug
  */
 #pragma once
+#include <buPrerequisitesDX.h>
 #include <d3d11.h>
 #include "buCoreTexture2D.h"
-
 namespace buEngineSDK {
  class buDXTexture2D : public buCoreTexture2D
  {
@@ -29,7 +29,7 @@ namespace buEngineSDK {
   * @bug
   */
   void
-  init(WString filepath, uint32 texFormat, uint32 usage, float width,
+  init(String filepath, uint32 texFormat, uint32 usage, float width,
        float height, int32 mipLevels, int32 arraysize, int32 samplerDescCount,
        int32 samplerDescQuality, uint32 bindflags, uint32 CPUAccessFlags,
        uint32 miscFlags) override;
@@ -41,7 +41,7 @@ namespace buEngineSDK {
    * @bug 
    */
   void 
-  init(WString _filepath) override;
+  init(String _filepath) override;
  public:
   /*
    * @brief 
@@ -58,7 +58,7 @@ namespace buEngineSDK {
    /**
     * @brief 
     */
-   WString m_filepath;
+   String m_filepath;
    /**
     * @brief 
     */
@@ -103,5 +103,9 @@ namespace buEngineSDK {
     * @brief 
     */
    uint32 m_miscFlags;
+   /**
+    * @brief 
+    */
+   unsigned char* image;
  };
 }

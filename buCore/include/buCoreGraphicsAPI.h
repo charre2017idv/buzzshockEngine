@@ -183,6 +183,26 @@ namespace buEngineSDK {
    virtual SPtr<buCoreSampler>
    createSampler() { return nullptr; };
 
+   /**
+    * @brief Virtual method that creates a texture from a shader resource view;
+    */
+   virtual bool
+   createShaderResourceView(WeakSPtr<buCoreTexture2D> /*_texture*/) { return false; };
+
+   /**
+    * @brief Virtual method in charge of loading a texture from file
+    */
+   virtual bool
+   loadImageFromFile(WeakSPtr<buCoreTexture2D> _texture) { return false; };
+   
+   /**
+    * @brief Virtual method in charge of setting the subresource data for the 
+    * texture.
+    */
+   virtual void 
+   PSSetShaderResources(WeakSPtr<buCoreTexture2D> /*_texture*/,
+                        uint32 /*_startSlot*/,
+                        uint32 /*_numViews*/) {};
    /** 
     * @brief Virtual method that creates a temporal reference to a vertex shader 
     * object. 

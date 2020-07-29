@@ -1,5 +1,6 @@
 #include "buDXTexture2D.h"
-
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 namespace buEngineSDK {
   buDXTexture2D::buDXTexture2D()
   {
@@ -9,14 +10,16 @@ namespace buEngineSDK {
 
   buDXTexture2D::~buDXTexture2D()
   {
+    stbi_image_free(image);
     SAFE_RELEASE(m_texture);
   }
-  void buDXTexture2D::init(WString filepath, uint32 texFormat, uint32 usage, 
+  void buDXTexture2D::init(String filepath, uint32 texFormat, uint32 usage, 
                            float width, float height, int32 mipLevels, 
                            int32 arraysize, int32 samplerDescCount, 
                            int32 samplerDescQuality, uint32 bindflags,
                            uint32 CPUAccessFlags, uint32 miscFlags)
   {
+    m_filepath = filepath;
     m_width = width;
     m_height = height;
     m_mipLevels = mipLevels;
@@ -29,6 +32,12 @@ namespace buEngineSDK {
     m_CPUAccessFlags = CPUAccessFlags;
     m_miscFlags = miscFlags;
     
+    if ("" != m_filepath) {
+      image = stbi_load(m_filepath.c_str(), &m_width, &m_height, NULL, 4);
+      if (image == NULL)
+        return;
+    }
+
     m_descriptor.Width = (UINT)width;
     m_descriptor.Height = (UINT)height;
     m_descriptor.MipLevels = mipLevels;
@@ -41,8 +50,10 @@ namespace buEngineSDK {
     m_descriptor.CPUAccessFlags = CPUAccessFlags;
     m_descriptor.MiscFlags = miscFlags;
   }
-  void buDXTexture2D::init(WString _filepath)
+  void buDXTexture2D::init(String _filepath)
   {
     m_filepath = _filepath;
+
+    
   }
 }
